@@ -30,19 +30,19 @@ Unser Ziel ist es, am Ende der Lernperiode ein vollständig spielbares und unter
 
 
 ## Faruk – CEO & Frontend
-- [ ] HTML-, CSS- und JavaScript-Grundstruktur erstellen. (index.html, style.css und script.js erstellen, Startseite mit Start-Button gestalten)
+- [x] HTML-, CSS- und JavaScript-Grundstruktur erstellen. (index.html, style.css und script.js erstellen, Startseite mit Start-Button gestalten)
 - [ ] Ersten Spielraum entwickeln. (Raum mit HTML/CSS gestalten, Objekte platzieren und anklickbar machen)
 - [ ] Timer und Benutzeroberfläche programmieren. (Countdown mit JavaScript umsetzen, verbleibende Zeit und gelöste Rätsel anzeigen)
 - [ ] Glitch-Modus visuell umsetzen. (Glitch-Button einbauen, visuelle Effekte erstellen, versteckte Hinweise ein- und ausblenden)
 
 ## Kaito – CTO & Spiellogik
-- [ ] GitHub-Repository und Projektstruktur einrichten. (Branches erstellen, Teammitglieder hinzufügen, Ordnerstruktur vorbereiten)
+- [x] GitHub-Repository und Projektstruktur einrichten. (Branches erstellen, Teammitglieder hinzufügen, Ordnerstruktur vorbereiten)
 - [ ] Spielzustände und Levelsteuerung programmieren. (Start-, Spiel-, Gewinn- und Verlustzustände definieren, Wechsel zwischen Zuständen ermöglichen)
 - [ ] Rätselsystem mit JavaScript entwickeln. (Rätselstatus verwalten, Lösungen überprüfen, gelöste Rätsel speichern)
 - [ ] Türmechanik und Gewinnbedingung programmieren. (Prüfen, ob alle drei Rätsel gelöst sind, Ausgang freischalten, Gewinnbildschirm anzeigen)
 
 ## Laurentiu – COO & Rätselentwicklung
-- [ ] Drei Rätsel für das erste Level planen. (Rätselideen sammeln, Hinweise und Lösungen definieren, Ablauf dokumentieren)
+- [x] Drei Rätsel für das erste Level planen. (Rätselideen sammeln, Hinweise und Lösungen definieren, Ablauf dokumentieren)
 - [ ] Erstes Rätsel als interaktives Zahlenschloss programmieren. (Code-Eingabe erstellen, eingegebenen Code überprüfen, Erfolgsmeldung anzeigen)
 - [ ] Zweites und drittes Rätsel programmieren. (Interaktive Rätsel umsetzen, Hinweise integrieren, richtige und falsche Lösungen behandeln)
 - [ ] Erstes Level testen und Fehler beheben. (Alle Rätsel durchspielen, Glitch-Modus und Timer überprüfen, gefundene Fehler korrigieren)
