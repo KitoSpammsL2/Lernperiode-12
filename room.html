@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLITCH – Level 1</title>
+    <link rel="stylesheet" href="room.css">
+</head>
+<body>
+
+    <header class="hud">
+        <h2>GLITCH // LEVEL 01</h2>
+
+        <div class="stats">
+            <span id="timer">05:00</span>
+            <span id="progress">Rätsel: 0/3</span>
+        </div>
+    </header>
+
+    <main class="game-room">
+
+        <h1>SIMULATION 01</h1>
+        <p class="subtitle">Finde die Hinweise und entkomme.</p>
+
+        <div class="objects">
+            <button class="object" data-object="terminal">
+                <span class="symbol">⌨</span>
+                <span>TERMINAL</span>
+            </button>
+
+            <button class="object" data-object="schrank">
+                <span class="symbol">▤</span>
+                <span>SCHRANK</span>
+            </button>
+
+            <button class="object" data-object="tuer">
+                <span class="symbol">🚪</span>
+                <span>AUSGANG</span>
+            </button>
+        </div>
+
+        <div class="control-panel">
+            <button id="glitchButton">GLITCH-MODUS</button>
+        </div>
+
+        <p id="message">System bereit. Untersuche den Raum.</p>
+    </main>
+
+    <script src="room.js"></script>
+</body>
+</html>
