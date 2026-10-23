@@ -48,6 +48,7 @@ Unser Ziel ist es, am Ende der Lernperiode ein vollständig spielbares und unter
 - [ ] Erstes Level testen und Fehler beheben. (Alle Rätsel durchspielen, Glitch-Modus und Timer überprüfen, gefundene Fehler korrigieren)
 
 
+
 ## 30.10
 ### Faruk – CEO & Frontend
 - [ ] Glitch-Modus visuell umsetzen und erweitern. (Glitch-Effekte verbessern, versteckte Hinweise beim Aktivieren sichtbar machen)
