@@ -1,0 +1,73 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #090914;
+  color: white;
+}
+
+main {
+  max-width: 750px;
+  margin: auto;
+  padding: 25px;
+}
+
+h1 {
+  color: cyan;
+  letter-spacing: 5px;
+}
+
+.puzzle {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #00ffff;
+  border-radius: 10px;
+}
+
+button, input[type="text"] {
+  padding: 10px;
+  margin: 7px 4px 7px 0;
+  border-radius: 6px;
+  border: 1px solid cyan;
+  font-size: 16px;
+}
+
+button {
+  background: #14212b;
+  color: cyan;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: #16434d;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.colors, .symbols, .switches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.colors span { padding: 8px; border: 1px solid currentColor; border-radius: 5px; }
+.red { color: #ff6666; }
+.blue { color: #55aaff; }
+.green { color: #55dd88; }
+.yellow { color: #ffe066; }
+
+.symbols button { font-size: 25px; min-width: 55px; }
+.switches label { display: block; padding: 8px; }
+
+.glitch-hint { display: none; color: #ff65d8; font-weight: bold; }
+body.glitch-on .glitch-hint { display: block; }
+body.glitch-on { box-shadow: inset 0 0 35px #b61ea6; }
+
+.message { min-height: 20px; }
+.success { color: #5effa6; }
+.error { color: #ff7777; }
+.puzzle.solved { border-color: #5effa6; }
+#door { font-weight: bold; font-size: 20px; }
