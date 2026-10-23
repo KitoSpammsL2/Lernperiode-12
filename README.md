@@ -43,6 +43,6 @@ Unser Ziel ist es, am Ende der Lernperiode ein vollständig spielbares und unter
 
 ## Laurentiu – COO & Rätselentwicklung
 - [x] Drei Rätsel für das erste Level planen. (Rätselideen sammeln, Hinweise und Lösungen definieren, Ablauf dokumentieren)
-- [ ] Erstes Rätsel als interaktives Zahlenschloss programmieren. (Code-Eingabe erstellen, eingegebenen Code überprüfen, Erfolgsmeldung anzeigen)
-- [ ] Zweites und drittes Rätsel programmieren. (Interaktive Rätsel umsetzen, Hinweise integrieren, richtige und falsche Lösungen behandeln)
+- [x] Erstes Rätsel als interaktives Zahlenschloss programmieren. (Code-Eingabe erstellen, eingegebenen Code überprüfen, Erfolgsmeldung anzeigen)
+- [x] Zweites und drittes Rätsel programmieren. (Interaktive Rätsel umsetzen, Hinweise integrieren, richtige und falsche Lösungen behandeln)
 - [ ] Erstes Level testen und Fehler beheben. (Alle Rätsel durchspielen, Glitch-Modus und Timer überprüfen, gefundene Fehler korrigieren)
