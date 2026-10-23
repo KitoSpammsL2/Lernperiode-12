@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLITCH – Laurentiu Rätsel</title>
+  <link rel="stylesheet" href="puzzles.css">
+</head>
+<body>
+  <main>
+    <h1>GLITCH</h1>
+    <p>Teste die drei Rätsel für Level 1.</p>
+
+    <button id="glitch-button" type="button">Glitch-Modus: AUS</button>
+    <p id="progress">Gelöste Rätsel: 0 / 3</p>
+
+    <section class="puzzle" id="puzzle1">
+      <h2>Rätsel 1 – Zahlenschloss</h2>
+      <p>Finde den vierstelligen Code. Die Reihenfolge ist Rot, Blau, Grün, Gelb.</p>
+      <div class="colors">
+        <span class="red">Rot</span><span class="blue">Blau</span>
+        <span class="green">Grün</span><span class="yellow">Gelb</span>
+      </div>
+      <p class="glitch-hint">Geheime Zahlen: Rot = 2, Blau = 0, Grün = 4, Gelb = 8</p>
+      <form id="code-form">
+        <label for="code">Code:</label>
+        <input id="code" type="text" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="4 Zahlen">
+        <button type="submit">Prüfen</button>
+      </form>
+      <p class="message" id="code-message" role="status"></p>
+    </section>
+
+    <section class="puzzle" id="puzzle2">
+      <h2>Rätsel 2 – Geheimschrift</h2>
+      <p>Klicke die Symbole für das Wort GLITCH in der richtigen Reihenfolge an.</p>
+      <p class="glitch-hint">★ = G, ▲ = L, ● = I, ◆ = T, ■ = C, ✚ = H</p>
+      <div class="symbols">
+        <button type="button" data-letter="H" aria-label="Plus">✚</button>
+        <button type="button" data-letter="I" aria-label="Kreis">●</button>
+        <button type="button" data-letter="L" aria-label="Dreieck">▲</button>
+        <button type="button" data-letter="G" aria-label="Stern">★</button>
+        <button type="button" data-letter="C" aria-label="Quadrat">■</button>
+        <button type="button" data-letter="T" aria-label="Raute">◆</button>
+      </div>
+      <p id="selected">Ausgewählt: 0 / 6</p>
+      <button id="symbols-reset" type="button">Auswahl löschen</button>
+      <p class="message" id="symbols-message" role="status"></p>
+    </section>
+
+    <section class="puzzle" id="puzzle3">
+      <h2>Rätsel 3 – Energieschalter</h2>
+      <p>Genau zwei Schalter müssen eingeschaltet sein.</p>
+      <p class="glitch-hint">Warnung: Schalter B ist kaputt und muss AUS bleiben!</p>
+      <div class="switches">
+        <label><input id="switch-a" type="checkbox"> Schalter A</label>
+        <label><input id="switch-b" type="checkbox"> Schalter B</label>
+        <label><input id="switch-c" type="checkbox"> Schalter C</label>
+      </div>
+      <button id="switch-submit" type="button">Schalter prüfen</button>
+      <p class="message" id="switch-message" role="status"></p>
+    </section>
+
+    <p id="door">Ausgangstür: GESPERRT</p>
+  </main>
+
+  <!-- Später nach dem Zusammenführen von Kaito aktivieren:
+  <script src="../puzzles.js"></script>
+  -->
+  <script src="puzzles-ui.js"></script>
+</body>
+</html>
