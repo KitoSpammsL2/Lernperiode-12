@@ -1,0 +1,144 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #080812;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid #00ffff55;
+    background: #101025;
+}
+
+.hud h2 {
+    color: #00ffff;
+    font-size: 18px;
+    letter-spacing: 3px;
+}
+
+.stats {
+    display: flex;
+    gap: 30px;
+    font-size: 20px;
+    color: #00ffff;
+}
+
+.game-room {
+    min-height: calc(100vh - 85px);
+    text-align: center;
+    padding: 60px 20px;
+    background:
+        radial-gradient(circle at center, #18183b, #080812 75%);
+}
+
+.game-room h1 {
+    color: #00ffff;
+    font-size: 45px;
+    letter-spacing: 6px;
+    text-shadow: 0 0 20px #00ffff;
+}
+
+.subtitle {
+    color: #aaa;
+}
+
+.objects {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin: 80px 0 55px;
+}
+
+.object {
+    width: 190px;
+    height: 200px;
+    background: #15152d;
+    border: 2px solid #41416b;
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    transition: 0.25s;
+}
+
+.object:hover {
+    border-color: #00ffff;
+    box-shadow: 0 0 25px #00ffff55;
+    transform: translateY(-5px);
+}
+
+.symbol {
+    font-size: 55px;
+    color: #00ffff;
+}
+
+.control-panel button {
+    padding: 15px 35px;
+    background: transparent;
+    border: 2px solid #ff00aa;
+    border-radius: 8px;
+    color: #ff00aa;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.control-panel button:hover {
+    background: #ff00aa;
+    color: white;
+}
+
+#message {
+    margin-top: 35px;
+    color: #aaa;
+    min-height: 25px;
+}
+
+/* Glitch-Modus */
+.glitch-active .game-room {
+    background:
+        repeating-linear-gradient(
+            0deg,
+            #14142c,
+            #14142c 3px,
+            #1c1034 4px
+        );
+}
+
+.glitch-active .object {
+    border-color: #ff00aa;
+}
+
+@media (max-width: 600px) {
+    .hud {
+        padding: 15px;
+        flex-direction: column;
+    }
+
+    .stats {
+        gap: 15px;
+    }
+
+    .objects {
+        gap: 15px;
+        margin: 40px 0;
+    }
+
+    .object {
+        width: 145px;
+        height: 160px;
+    }
+}
