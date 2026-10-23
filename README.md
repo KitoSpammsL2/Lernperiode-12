@@ -38,8 +38,8 @@ Unser Ziel ist es, am Ende der Lernperiode ein vollständig spielbares und unter
 ## Kaito – CTO & Spiellogik
 - [x] GitHub-Repository und Projektstruktur einrichten. (Branches erstellen, Teammitglieder hinzufügen, Ordnerstruktur vorbereiten)
 - [x] Spielzustände und Levelsteuerung programmieren. (Start-, Spiel-, Gewinn- und Verlustzustände definieren, Wechsel zwischen Zuständen ermöglichen)
-- [ ] Rätselsystem mit JavaScript entwickeln. (Rätselstatus verwalten, Lösungen überprüfen, gelöste Rätsel speichern)
-- [ ] Türmechanik und Gewinnbedingung programmieren. (Prüfen, ob alle drei Rätsel gelöst sind, Ausgang freischalten, Gewinnbildschirm anzeigen)
+- [x] Rätselsystem mit JavaScript entwickeln. (Rätselstatus verwalten, Lösungen überprüfen, gelöste Rätsel speichern)
+- [x] Türmechanik und Gewinnbedingung programmieren. (Prüfen, ob alle drei Rätsel gelöst sind, Ausgang freischalten, Gewinnbildschirm anzeigen)
 
 ## Laurentiu – COO & Rätselentwicklung
 - [x] Drei Rätsel für das erste Level planen. (Rätselideen sammeln, Hinweise und Lösungen definieren, Ablauf dokumentieren)
