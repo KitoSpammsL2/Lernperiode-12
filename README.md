@@ -31,8 +31,8 @@ Unser Ziel ist es, am Ende der Lernperiode ein vollständig spielbares und unter
 
 ## Faruk – CEO & Frontend
 - [x] HTML-, CSS- und JavaScript-Grundstruktur erstellen. (index.html, style.css und script.js erstellen)
-- [ ] Ersten Spielraum entwickeln. (Raum mit HTML/CSS gestalten, Objekte platzieren und anklickbar machen)
-- [ ] Timer und Benutzeroberfläche programmieren. (Countdown mit JavaScript umsetzen, verbleibende Zeit und gelöste Rätsel anzeigen)
+- [x] Ersten Spielraum entwickeln. (Raum mit HTML/CSS gestalten, Objekte platzieren und anklickbar machen)
+- [x] Timer und Benutzeroberfläche programmieren. (Countdown mit JavaScript umsetzen, verbleibende Zeit und gelöste Rätsel anzeigen)
 - [ ] Glitch-Modus visuell umsetzen. (Glitch-Button einbauen, visuelle Effekte erstellen, versteckte Hinweise ein- und ausblenden)
 
 ## Kaito – CTO & Spiellogik
