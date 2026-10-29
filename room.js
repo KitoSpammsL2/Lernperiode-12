@@ -65,6 +65,13 @@ function startTimer() {
     if (timerInterval !== null) return;
 
     timerInterval = setInterval(() => {
+        // Timer anhalten, sobald das Spiel gewonnen oder verloren ist
+        if (currentState !== GameState.PLAYING) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            return;
+        }
+
         if (remainingSeconds > 0) {
             remainingSeconds--;
             updateTimer();
@@ -73,6 +80,7 @@ function startTimer() {
             timerInterval = null;
             message.textContent =
                 "ZEIT ABGELAUFEN – SIMULATION FEHLGESCHLAGEN";
+            loseGame();
         }
     }, 1000);
 }
