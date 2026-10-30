@@ -51,7 +51,7 @@ Unser Ziel ist es, am Ende der Lernperiode ein vollständig spielbares und unter
 
 ## 30.10
 ### Faruk – CEO & Frontend
-- [ ] Glitch-Modus visuell umsetzen und erweitern. (Glitch-Effekte verbessern, versteckte Hinweise beim Aktivieren sichtbar machen)
+- [x] Glitch-Modus visuell umsetzen und erweitern. (Glitch-Effekte verbessern, versteckte Hinweise beim Aktivieren sichtbar machen)
 - [ ] Rätsel in den Spielraum integrieren. (Interaktive Objekte mit Laurentius Rätseln verbinden, Eingabefenster für Rätsel einbauen)
 - [ ] Benutzeroberfläche für Gewinn und Niederlage gestalten. (Gewinn- und Verlustbildschirm designen, Neustart-Button einbauen)
 
@@ -61,7 +61,7 @@ Unser Ziel ist es, am Ende der Lernperiode ein vollständig spielbares und unter
 - [ ] Levelsteuerung und Speichersystem erweitern. (Fortschritt pro Level speichern, Rätsel beim Neustart zurücksetzen)
 
 ### Laurentiu – COO & Rätselentwicklung
-- [ ] Erstes Level testen und Fehler beheben. (Alle Rätsel durchspielen, Glitch-Modus und Timer überprüfen, Fehler dokumentieren und korrigieren)
+- [x] Erstes Level testen und Fehler beheben. (Alle Rätsel durchspielen, Glitch-Modus und Timer überprüfen, Fehler dokumentieren und korrigieren)
 - [ ] Rätsel mit dem Glitch-Modus verbinden. (Versteckte Hinweise erstellen und nur bei aktiviertem Glitch-Modus anzeigen)
 - [ ] Schwierigkeitsgrad der Rätsel verbessern. (Rätsel abwechslungsreicher gestalten, Hinweise und Lösungen überarbeiten)
 
