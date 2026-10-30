@@ -57,7 +57,7 @@ Unser Ziel ist es, am Ende der Lernperiode ein vollständig spielbares und unter
 
 ### Kaito – CTO & Spiellogik
 - [x] Spielzustände mit dem Spielraum verbinden. (Start-, Spiel-, Gewinn- und Verlustzustände korrekt verwalten)
-- [ ] Rätselsystem und Türmechanik integrieren. (Gelöste Rätsel zählen, Ausgang nach drei richtigen Lösungen freischalten)
+- [x] Rätselsystem und Türmechanik integrieren. (Gelöste Rätsel zählen, Ausgang nach drei richtigen Lösungen freischalten)
 - [ ] Levelsteuerung und Speichersystem erweitern. (Fortschritt pro Level speichern, Rätsel beim Neustart zurücksetzen)
 
 ### Laurentiu – COO & Rätselentwicklung

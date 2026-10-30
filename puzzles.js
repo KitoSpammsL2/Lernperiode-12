@@ -9,7 +9,8 @@ const puzzles = {
         solved: false
     },
     puzzle3: {
-        solution: "SYSTEM",
+        // Schalter A an, B aus, C an
+        solution: "101",
         solved: false
     }
 };
@@ -68,6 +69,10 @@ function savePuzzles() {
         "glitchPuzzles",
         JSON.stringify(progress)
     );
+}
+
+function isPuzzleSolved(puzzleId) {
+    return puzzles[puzzleId] !== undefined && puzzles[puzzleId].solved;
 }
 
 function getSolvedCount() {
