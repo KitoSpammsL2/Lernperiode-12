@@ -13,6 +13,9 @@
 
     <button id="glitch-button" type="button">Glitch-Modus: AUS</button>
     <p id="progress">Gelöste Rätsel: 0 / 3</p>
+    <button id="reset-progress" type="button">
+    Spiel zurücksetzen
+</button>
 
     <section class="puzzle" id="puzzle1">
       <h2>Rätsel 1 – Zahlenschloss</h2>
@@ -21,7 +24,12 @@
         <span class="red">Rot</span><span class="blue">Blau</span>
         <span class="green">Grün</span><span class="yellow">Gelb</span>
       </div>
-      <p class="glitch-hint">Geheime Zahlen: Rot = 2, Blau = 0, Grün = 4, Gelb = 8</p>
+      <p class="glitch-hint">
+    ROT: 5 - 3 <br>
+    BLAU: 2 - 2 <br>
+    GRÜN: 2 + 2 <br>
+    GELB: 4 * 2
+</p>
       <form id="code-form">
         <label for="code">Code:</label>
         <input id="code" type="text" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="4 Zahlen">
@@ -32,8 +40,20 @@
 
     <section class="puzzle" id="puzzle2">
       <h2>Rätsel 2 – Geheimschrift</h2>
-      <p>Klicke die Symbole für das Wort GLITCH in der richtigen Reihenfolge an.</p>
-      <p class="glitch-hint">★ = G, ▲ = L, ● = I, ◆ = T, ■ = C, ✚ = H</p>
+      <p>
+    Finde das geheime Wort mit 6 Buchstaben.
+    Das Wort ist der Name unseres Spiels.
+    Klicke die passenden Symbole an.
+</p>
+      <p class="glitch-hint">
+    GEHEIME ZEICHEN:<br>
+    ● = I<br>
+    ✚ = H<br>
+    ★ = G<br>
+    ■ = C<br>
+    ◆ = T<br>
+    ▲ = L
+</p>
       <div class="symbols">
         <button type="button" data-letter="H" aria-label="Plus">✚</button>
         <button type="button" data-letter="I" aria-label="Kreis">●</button>
@@ -49,8 +69,16 @@
 
     <section class="puzzle" id="puzzle3">
       <h2>Rätsel 3 – Energieschalter</h2>
-      <p>Genau zwei Schalter müssen eingeschaltet sein.</p>
-      <p class="glitch-hint">Warnung: Schalter B ist kaputt und muss AUS bleiben!</p>
+      <p>
+    Das System braucht genau 5 Energie.
+    Genau zwei Schalter müssen eingeschaltet sein.
+</p>
+      <p class="glitch-hint">
+    ENERGIEWERTE:<br>
+    Schalter A = 2 Energie<br>
+    Schalter B = 7 Energie<br>
+    Schalter C = 3 Energie
+</p>
       <div class="switches">
         <label><input id="switch-a" type="checkbox"> Schalter A</label>
         <label><input id="switch-b" type="checkbox"> Schalter B</label>

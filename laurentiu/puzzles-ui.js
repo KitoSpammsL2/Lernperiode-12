@@ -73,8 +73,9 @@ function finishPuzzle(id, answer, messageId) {
 
 
 document.getElementById("glitch-button").addEventListener("click", function () {
-  const active = document.body.classList.toggle("glitch-on");
-  this.textContent = "Glitch-Modus: " + (active ? "AN" : "AUS");
+    const active = document.body.classList.toggle("glitch-active");
+
+    this.textContent = "Glitch-Modus: " + (active ? "AN" : "AUS");
 });
 
 document.getElementById("code-form").addEventListener("submit", function (event) {
@@ -122,6 +123,10 @@ document.getElementById("symbols-reset").addEventListener("click", function () {
 
 
 document.getElementById("switch-submit").addEventListener("click", function () {
+  if (isSolved("puzzle3")) {
+    showMessage("switch-message", "Dieses Rätsel ist schon gelöst.", true);
+    return;
+}
   const a = document.getElementById("switch-a").checked;
   const b = document.getElementById("switch-b").checked;
   const c = document.getElementById("switch-c").checked;
@@ -135,3 +140,7 @@ document.getElementById("switch-submit").addEventListener("click", function () {
 
 updateProgress();
 clearSelection();
+document.getElementById("reset-progress").addEventListener("click", function () {
+    localStorage.removeItem("glitchPuzzles");
+    location.reload();
+});
