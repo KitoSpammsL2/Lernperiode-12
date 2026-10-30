@@ -71,9 +71,10 @@ function changeState(newState) {
     announceState();
 }
 
-// Spiel starten und zum ersten Level wechseln
+// Neues Spiel: alten Rätselfortschritt löschen und zum ersten Level wechseln
 function startGame() {
     currentLevel = 1;
+    resetAllPuzzles();
     changeState(GameState.PLAYING);
     location.href = levelPages[0];
 }
