@@ -65,3 +65,21 @@ Unser Ziel ist es, am Ende der Lernperiode ein vollständig spielbares und unter
 - [ ] Rätsel mit dem Glitch-Modus verbinden. (Versteckte Hinweise erstellen und nur bei aktiviertem Glitch-Modus anzeigen)
 - [ ] Schwierigkeitsgrad der Rätsel verbessern. (Rätsel abwechslungsreicher gestalten, Hinweise und Lösungen überarbeiten)
 
+
+
+## 06.11
+### Faruk – CEO & Frontend
+- [ ] Rätselfenster und Endbildschirme gestalten. (Eigenes Design auf das Rätselfenster sowie den Gewinn- und Verlustbildschirm im gemeinsamen Spiel übertragen)
+- [ ] Zweiten Spielraum entwickeln. (Level 2 mit HTML/CSS gestalten, neue Objekte platzieren und anklickbar machen)
+- [ ] Hauptmenü mit Spielanleitung erweitern. (Kurze Anleitung zu Rätseln, Timer und Glitch-Modus im Hauptmenü anzeigen)
+
+### Kaito – CTO & Spiellogik
+- [ ] Zweites Level in die Levelsteuerung einbauen. (Level 2 in die Levelliste und das Rätselsystem eintragen, Wechsel nach dem Ausgang von Level 1 ermöglichen)
+- [ ] Timer mit dem Spielstand verbinden. (Restzeit speichern, damit der Timer beim Neuladen nicht neu startet, Timer pro Level zurücksetzen)
+- [ ] Bestzeit speichern und anzeigen. (Benötigte Zeit beim Gewinnen messen, persönliche Bestzeit speichern und auf dem Gewinnbildschirm anzeigen)
+
+### Laurentiu – COO & Rätselentwicklung
+- [ ] Ganzes erstes Level im gemeinsamen Spiel testen. (Rätsel, Glitch-Modus, Timer, Gewinn und Niederlage durchspielen, Testbericht ergänzen)
+- [ ] Drei Rätsel für das zweite Level planen. (Rätselideen sammeln, Hinweise und Lösungen definieren, Ablauf dokumentieren)
+- [ ] Rätsel für das zweite Level programmieren. (Rätsel interaktiv umsetzen, Glitch-Hinweise einbauen, richtige und falsche Lösungen behandeln)
+
