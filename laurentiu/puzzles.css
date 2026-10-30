@@ -62,9 +62,23 @@ button:disabled {
 .symbols button { font-size: 25px; min-width: 55px; }
 .switches label { display: block; padding: 8px; }
 
-.glitch-hint { display: none; color: #ff65d8; font-weight: bold; }
-body.glitch-on .glitch-hint { display: block; }
-body.glitch-on { box-shadow: inset 0 0 35px #b61ea6; }
+.glitch-hint {
+    display: none;
+    color: #ff65d8;
+    background: #25102d;
+    padding: 12px;
+    border: 1px dashed #ff65d8;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+body.glitch-active .glitch-hint {
+    display: block;
+}
+
+body.glitch-active {
+    box-shadow: inset 0 0 35px #b61ea6;
+}
 
 .message { min-height: 20px; }
 .success { color: #5effa6; }
