@@ -12,10 +12,17 @@ objects.forEach(object => {
     object.addEventListener("click", () => {
         const objectName = object.dataset.object;
 
-        if (objectName === "terminal") {
-            message.textContent =
-                "Das Terminal zeigt verschlüsselte Daten.";
-        }
+     
+if (objectName === "terminal") {
+    if (glitchActive) {
+        message.textContent =
+            "Geheimer Code entdeckt: 2048";
+    } else {
+        message.textContent =
+            "Das Terminal zeigt verschlüsselte Daten.";
+    }
+}
+
 
         if (objectName === "schrank") {
             message.textContent =

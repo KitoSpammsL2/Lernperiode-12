@@ -142,3 +142,194 @@ body {
         height: 160px;
     }
 }
+
+
+/* GLITCH-MODUS ERWEITERUNG */
+
+/* Geheime Hinweise standardmässig verstecken */
+.glitch-hint {
+    display: none;
+    color: #ff00aa;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px #ff00aa;
+}
+
+/* Hinweise im Glitch-Modus anzeigen */
+.glitch-active .glitch-hint {
+    display: block;
+    animation: hintAppear 0.5s ease-in-out;
+}
+
+/* Hintergrund im Glitch-Modus */
+.glitch-active .game-room {
+    background: repeating-linear-gradient(
+        0deg,
+        #101025 0px,
+        #101025 3px,
+        #241035 5px
+    );
+}
+
+/* Gegenstände bekommen einen Neon-Effekt */
+.glitch-active .object {
+    border-color: #ff00aa;
+    box-shadow: 0 0 25px #ff00aa77;
+}
+
+/* Titel bekommt eine Glitch-Animation */
+.glitch-active .game-room h1 {
+    animation: glitchEffect 1.2s infinite;
+}
+
+/* Glitch-Animation */
+@keyframes glitchEffect {
+    0%, 100% {
+        transform: translateX(0);
+        text-shadow: 2px 0 #ff00aa, -2px 0 #00ffff;
+    }
+
+    25% {
+        transform: translateX(-4px);
+        text-shadow: 4px 0 #ff00aa, -3px 0 #00ffff;
+    }
+
+    50% {
+        transform: translateX(3px);
+        text-shadow: -3px 0 #ff00aa, 4px 0 #00ffff;
+    }
+
+    75% {
+        transform: translateX(-2px);
+    }
+}
+
+/* Geheimer Hinweis erscheint */
+@keyframes hintAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animationen bei Bedarf reduzieren */
+@media (prefers-reduced-motion: reduce) {
+    .glitch-active .game-room h1,
+    .glitch-active .glitch-hint {
+        animation: none;
+    }
+}
+
+
+/* AP2: Rätsel-Fenster */
+
+.puzzle-modal[hidden] {
+    display: none;
+}
+
+.puzzle-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.puzzle-box {
+    background: #101025;
+    border: 2px solid #00ffff;
+    box-shadow: 0 0 25px #00ffff55;
+    padding: 35px;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 450px;
+    color: white;
+}
+
+.puzzle-box h2 {
+    color: #00ffff;
+}
+
+.puzzle-box input {
+    padding: 12px;
+    width: 90%;
+    margin: 15px 0;
+    background: #080812;
+    border: 1px solid #00ffff;
+    color: white;
+}
+
+.puzzle-box button {
+    padding: 10px 20px;
+    background: transparent;
+    color: #00ffff;
+    border: 1px solid #00ffff;
+    cursor: pointer;
+}
+
+#closePuzzle {
+    float: right;
+}
+
+#puzzleFeedback {
+    color: #ff00aa;
+}
+
+
+/* AP3: Endbildschirm */
+
+.end-screen[hidden] {
+    display: none;
+}
+
+.end-screen {
+    position: fixed;
+    inset: 0;
+    background: #080812;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.end-box {
+    text-align: center;
+    padding: 40px;
+    color: white;
+}
+
+.end-box h1 {
+    font-size: 55px;
+    color: #00ffff;
+    text-shadow: 0 0 25px #00ffff;
+}
+
+.end-box p {
+    font-size: 20px;
+    margin: 25px 0;
+}
+
+#restartGame {
+    padding: 15px 30px;
+    border: 2px solid #ff00aa;
+    background: transparent;
+    color: #ff00aa;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#restartGame:hover {
+    background: #ff00aa;
+    color: white;
+}
+
+
