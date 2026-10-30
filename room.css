@@ -226,3 +226,110 @@ body {
     }
 }
 
+
+/* AP2: Rätsel-Fenster */
+
+.puzzle-modal[hidden] {
+    display: none;
+}
+
+.puzzle-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.puzzle-box {
+    background: #101025;
+    border: 2px solid #00ffff;
+    box-shadow: 0 0 25px #00ffff55;
+    padding: 35px;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 450px;
+    color: white;
+}
+
+.puzzle-box h2 {
+    color: #00ffff;
+}
+
+.puzzle-box input {
+    padding: 12px;
+    width: 90%;
+    margin: 15px 0;
+    background: #080812;
+    border: 1px solid #00ffff;
+    color: white;
+}
+
+.puzzle-box button {
+    padding: 10px 20px;
+    background: transparent;
+    color: #00ffff;
+    border: 1px solid #00ffff;
+    cursor: pointer;
+}
+
+#closePuzzle {
+    float: right;
+}
+
+#puzzleFeedback {
+    color: #ff00aa;
+}
+
+
+/* AP3: Endbildschirm */
+
+.end-screen[hidden] {
+    display: none;
+}
+
+.end-screen {
+    position: fixed;
+    inset: 0;
+    background: #080812;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.end-box {
+    text-align: center;
+    padding: 40px;
+    color: white;
+}
+
+.end-box h1 {
+    font-size: 55px;
+    color: #00ffff;
+    text-shadow: 0 0 25px #00ffff;
+}
+
+.end-box p {
+    font-size: 20px;
+    margin: 25px 0;
+}
+
+#restartGame {
+    padding: 15px 30px;
+    border: 2px solid #ff00aa;
+    background: transparent;
+    color: #ff00aa;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#restartGame:hover {
+    background: #ff00aa;
+    color: white;
+}
+
+
