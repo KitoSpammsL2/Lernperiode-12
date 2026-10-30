@@ -31,19 +31,19 @@ function openDoor() {
     return true;
 }
 
-// Gewinnbildschirm erstellen
-function showWinScreen() {
-    let screen = document.getElementById("winScreen");
+// Vollbild für das Spielende erstellen (Gewinn oder Niederlage)
+function showEndScreen(id, color, html) {
+    let screen = document.getElementById(id);
 
     if (!screen) {
         screen = document.createElement("div");
-        screen.id = "winScreen";
+        screen.id = id;
 
         screen.style.cssText = `
             position: fixed;
             inset: 0;
             background: #090914;
-            color: #00ffff;
+            color: ${color};
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -55,11 +55,17 @@ function showWinScreen() {
         document.body.appendChild(screen);
     }
 
-    screen.innerHTML = `
+    screen.innerHTML = html;
+    return screen;
+}
+
+// Gewinnbildschirm erstellen
+function showWinScreen() {
+    const screen = showEndScreen("winScreen", "#00ffff", `
         <h1>SIMULATION ABGESCHLOSSEN</h1>
         <h2>Du bist entkommen!</h2>
         <button id="backToMenu">HAUPTMENÜ</button>
-    `;
+    `);
 
     document.getElementById("backToMenu")
         .addEventListener("click", () => {
@@ -68,9 +74,29 @@ function showWinScreen() {
         });
 }
 
-// Gewinnbildschirm bei Spielgewinn anzeigen
+// Verlustbildschirm erstellen
+function showLoseScreen() {
+    showEndScreen("loseScreen", "#ff00aa", `
+        <h1>ZEIT ABGELAUFEN</h1>
+        <h2>Die Simulation hat dich behalten.</h2>
+        <button id="restartGame">NEU STARTEN</button>
+        <button id="loseToMenu">HAUPTMENÜ</button>
+    `);
+
+    document.getElementById("restartGame")
+        .addEventListener("click", startGame);
+
+    document.getElementById("loseToMenu")
+        .addEventListener("click", returnToMenu);
+}
+
+// Passenden Bildschirm zum Spielzustand anzeigen
 document.addEventListener("gameStateChanged", (event) => {
     if (event.detail.state === GameState.WON) {
         showWinScreen();
+    }
+
+    if (event.detail.state === GameState.LOST) {
+        showLoseScreen();
     }
 });

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GLITCH – Level 1</title>
     <link rel="stylesheet" href="room.css">
+    <link rel="stylesheet" href="room-puzzles.css">
 </head>
 <body>
 
@@ -41,6 +42,11 @@
                 <span>SCHRANK</span>
             </button>
 
+            <button class="object" data-object="stromkasten">
+                <span class="symbol">⚡</span>
+                <span>STROMKASTEN</span>
+            </button>
+
             <button class="object" data-object="tuer">
                 <span class="symbol">🚪</span>
                 <span>AUSGANG</span>
@@ -54,10 +60,12 @@
         <p id="message">System bereit. Untersuche den Raum.</p>
     </main>
 
+    <script src="script.js"></script>
+    <script src="puzzles.js"></script>
+    <script src="door.js"></script>
     <script src="room.js"></script>
 
-
-
+<!-- AP2: Rätsel-Fenster -->
 <div id="puzzleModal" class="puzzle-modal" hidden>
     <div class="puzzle-box">
         <button id="closePuzzle" type="button">✕</button>
@@ -91,8 +99,7 @@
 </div>
 
 
-<script src="puzzles.js"></script>
-<script src="door.js"></script>
+<script src="room-puzzles.js"></script>
 <script src="room-integration.js"></script>
 <script src="end-screen.js"></script>
 

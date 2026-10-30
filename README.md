@@ -38,11 +38,30 @@ Unser Ziel ist es, am Ende der Lernperiode ein vollständig spielbares und unter
 ## Kaito – CTO & Spiellogik
 - [x] GitHub-Repository und Projektstruktur einrichten. (Branches erstellen, Teammitglieder hinzufügen, Ordnerstruktur vorbereiten)
 - [x] Spielzustände und Levelsteuerung programmieren. (Start-, Spiel-, Gewinn- und Verlustzustände definieren, Wechsel zwischen Zuständen ermöglichen)
-- [ ] Rätselsystem mit JavaScript entwickeln. (Rätselstatus verwalten, Lösungen überprüfen, gelöste Rätsel speichern)
-- [ ] Türmechanik und Gewinnbedingung programmieren. (Prüfen, ob alle drei Rätsel gelöst sind, Ausgang freischalten, Gewinnbildschirm anzeigen)
+- [x] Rätselsystem mit JavaScript entwickeln. (Rätselstatus verwalten, Lösungen überprüfen, gelöste Rätsel speichern)
+- [x] Türmechanik und Gewinnbedingung programmieren. (Prüfen, ob alle drei Rätsel gelöst sind, Ausgang freischalten, Gewinnbildschirm anzeigen)
 
 ## Laurentiu – COO & Rätselentwicklung
 - [x] Drei Rätsel für das erste Level planen. (Rätselideen sammeln, Hinweise und Lösungen definieren, Ablauf dokumentieren)
-- [ ] Erstes Rätsel als interaktives Zahlenschloss programmieren. (Code-Eingabe erstellen, eingegebenen Code überprüfen, Erfolgsmeldung anzeigen)
-- [ ] Zweites und drittes Rätsel programmieren. (Interaktive Rätsel umsetzen, Hinweise integrieren, richtige und falsche Lösungen behandeln)
+- [x] Erstes Rätsel als interaktives Zahlenschloss programmieren. (Code-Eingabe erstellen, eingegebenen Code überprüfen, Erfolgsmeldung anzeigen)
+- [x] Zweites und drittes Rätsel programmieren. (Interaktive Rätsel umsetzen, Hinweise integrieren, richtige und falsche Lösungen behandeln)
 - [ ] Erstes Level testen und Fehler beheben. (Alle Rätsel durchspielen, Glitch-Modus und Timer überprüfen, gefundene Fehler korrigieren)
+
+
+
+## 30.10
+### Faruk – CEO & Frontend
+- [x] Glitch-Modus visuell umsetzen und erweitern. (Glitch-Effekte verbessern, versteckte Hinweise beim Aktivieren sichtbar machen)
+- [ ] Rätsel in den Spielraum integrieren. (Interaktive Objekte mit Laurentius Rätseln verbinden, Eingabefenster für Rätsel einbauen)
+- [ ] Benutzeroberfläche für Gewinn und Niederlage gestalten. (Gewinn- und Verlustbildschirm designen, Neustart-Button einbauen)
+
+### Kaito – CTO & Spiellogik
+- [x] Spielzustände mit dem Spielraum verbinden. (Start-, Spiel-, Gewinn- und Verlustzustände korrekt verwalten)
+- [x] Rätselsystem und Türmechanik integrieren. (Gelöste Rätsel zählen, Ausgang nach drei richtigen Lösungen freischalten)
+- [x] Levelsteuerung und Speichersystem erweitern. (Fortschritt pro Level speichern, Rätsel beim Neustart zurücksetzen)
+
+### Laurentiu – COO & Rätselentwicklung
+- [x] Erstes Level testen und Fehler beheben. (Alle Rätsel durchspielen, Glitch-Modus und Timer überprüfen, Fehler dokumentieren und korrigieren)
+- [ ] Rätsel mit dem Glitch-Modus verbinden. (Versteckte Hinweise erstellen und nur bei aktiviertem Glitch-Modus anzeigen)
+- [ ] Schwierigkeitsgrad der Rätsel verbessern. (Rätsel abwechslungsreicher gestalten, Hinweise und Lösungen überarbeiten)
+
