@@ -79,7 +79,7 @@ Unser Ziel ist es, am Ende der Lernperiode ein vollständig spielbares und unter
 - [ ] Bestzeit speichern und anzeigen. (Benötigte Zeit beim Gewinnen messen, persönliche Bestzeit speichern und auf dem Gewinnbildschirm anzeigen)
 
 ### Laurentiu – COO & Rätselentwicklung
-- [ ] Ganzes erstes Level im gemeinsamen Spiel testen. (Rätsel, Glitch-Modus, Timer, Gewinn und Niederlage durchspielen, Testbericht ergänzen)
+- [ ] Zeitplan für die weiteren Levels erstellen. (Festlegen, bis wann Level 2 bis 5 fertig sein sollen, Meilensteine im README festhalten)
 - [ ] Drei Rätsel für das zweite Level planen. (Rätselideen sammeln, Hinweise und Lösungen definieren, Ablauf dokumentieren)
 - [ ] Rätsel für das zweite Level programmieren. (Rätsel interaktiv umsetzen, Glitch-Hinweise einbauen, richtige und falsche Lösungen behandeln)
 
