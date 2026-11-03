@@ -74,9 +74,9 @@ Unser Ziel ist es, am Ende der Lernperiode ein vollständig spielbares und unter
 - [ ] Hauptmenü mit Spielanleitung erweitern. (Kurze Anleitung zu Rätseln, Timer und Glitch-Modus im Hauptmenü anzeigen)
 
 ### Kaito – CTO & Spiellogik
-- [ ] Zweites Level in die Levelsteuerung einbauen. (Level 2 in die Levelliste und das Rätselsystem eintragen, Wechsel nach dem Ausgang von Level 1 ermöglichen)
-- [ ] Timer mit dem Spielstand verbinden. (Restzeit speichern, damit der Timer beim Neuladen nicht neu startet, Timer pro Level zurücksetzen)
-- [ ] Bestzeit speichern und anzeigen. (Benötigte Zeit beim Gewinnen messen, persönliche Bestzeit speichern und auf dem Gewinnbildschirm anzeigen)
+- [x] Zweites Level in die Levelsteuerung einbauen. (Level 2 in die Levelliste und das Rätselsystem eintragen, Wechsel nach dem Ausgang von Level 1 ermöglichen)
+- [x] Timer mit dem Spielstand verbinden. (Restzeit speichern, damit der Timer beim Neuladen nicht neu startet, Timer pro Level zurücksetzen)
+- [x] Bestzeit speichern und anzeigen. (Benötigte Zeit beim Gewinnen messen, persönliche Bestzeit speichern und auf dem Gewinnbildschirm anzeigen)
 
 ### Laurentiu – COO & Rätselentwicklung
 - [ ] Zeitplan für die weiteren Levels erstellen. (Festlegen, bis wann Level 2 bis 5 fertig sein sollen, Meilensteine im README festhalten)

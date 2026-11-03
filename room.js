@@ -62,13 +62,7 @@ let remainingSeconds = getTimeLeft();
 let timerInterval = null;
 
 function updateTimer() {
-    const minutes = Math.floor(remainingSeconds / 60);
-    const seconds = remainingSeconds % 60;
-
-    timerDisplay.textContent =
-        String(minutes).padStart(2, "0") +
-        ":" +
-        String(seconds).padStart(2, "0");
+    timerDisplay.textContent = formatTime(remainingSeconds);
 }
 
 function startTimer() {
