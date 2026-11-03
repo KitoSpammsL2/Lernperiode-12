@@ -3,15 +3,24 @@
 // und die Ausgangstür mit der Türmechanik (door.js).
 // Rätselideen und Hinweise: Laurentiu (Idee.MD, laurentiu/demo.html)
 
-// Welcher Gegenstand öffnet welches Rätsel
-const puzzleObjects = {
-    schrank: "puzzle1",
-    terminal: "puzzle2",
-    stromkasten: "puzzle3"
+// Welcher Gegenstand öffnet welches Rätsel, pro Level
+const levelObjects = {
+    1: {
+        schrank: "puzzle1",
+        terminal: "puzzle2",
+        stromkasten: "puzzle3"
+    },
+    2: {
+        konsole: "puzzle1",
+        tresor: "puzzle2",
+        server: "puzzle3"
+    }
 };
 
-// Inhalt und Steuerung der drei Rätsel
-const puzzleViews = {
+const puzzleObjects = levelObjects[currentLevel] || {};
+
+// Inhalt und Steuerung der drei Rätsel von Level 1
+const level1Views = {
     puzzle1: {
         title: "ZAHLENSCHLOSS",
         html: `
@@ -66,6 +75,27 @@ const puzzleViews = {
     }
 };
 
+// Platzhalter, bis Laurentius Rätsel für Level 2 fertig sind
+const level2Views = {
+    puzzle1: textPuzzle(
+        "KONSOLE",
+        "Die Konsole wartet auf den Befehl, der ein Programm beendet.",
+        "Der Befehl hat vier Buchstaben: EXIT"
+    ),
+    puzzle2: textPuzzle(
+        "TRESOR",
+        "Der Tresor fragt: Wie viele Rätsel hast du im ersten Raum gelöst?",
+        "Tippe die Zahl ein: 3"
+    ),
+    puzzle3: textPuzzle(
+        "SERVER",
+        "Der Server fragt nach dem Namen der Simulation.",
+        "Der Name steht im Hauptmenü: GLITCH"
+    )
+};
+
+const puzzleViews = { 1: level1Views, 2: level2Views }[currentLevel] || {};
+
 // Bereich, in dem das geöffnete Rätsel angezeigt wird
 const puzzleArea = document.createElement("section");
 puzzleArea.id = "puzzleArea";
@@ -100,7 +130,7 @@ function openPuzzle(puzzleId) {
     if (solved) {
         showPuzzleFeedback("Dieses Rätsel ist bereits gelöst.", true);
     } else {
-        view.setup();
+        view.setup(puzzleId);
     }
 
     puzzleArea.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -191,6 +221,30 @@ function setupSwitchPuzzle() {
             .join("");
 
         submitAnswer("puzzle3", answer);
+    });
+}
+
+// Rätsel mit freier Texteingabe
+function textPuzzle(title, question, hint) {
+    return {
+        title: title,
+        html: `
+            <p>${question}</p>
+            <p class="glitch-hint">${hint}</p>
+            <form id="textForm">
+                <input id="textInput" type="text" autocomplete="off"
+                       placeholder="Antwort" aria-label="Antwort">
+                <button type="submit">PRÜFEN</button>
+            </form>
+        `,
+        setup: setupTextPuzzle
+    };
+}
+
+function setupTextPuzzle(puzzleId) {
+    document.getElementById("textForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        submitAnswer(puzzleId, document.getElementById("textInput").value);
     });
 }
 

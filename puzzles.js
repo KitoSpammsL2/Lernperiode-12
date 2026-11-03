@@ -6,6 +6,12 @@ const levelPuzzles = {
         puzzle2: "GLITCH",
         // Schalter A an, B aus, C an
         puzzle3: "101"
+    },
+    // Platzhalter, bis Laurentius Rätsel für Level 2 fertig sind
+    2: {
+        puzzle1: "EXIT",
+        puzzle2: "3",
+        puzzle3: "GLITCH"
     }
 };
 
