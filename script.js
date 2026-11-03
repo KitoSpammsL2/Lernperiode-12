@@ -12,8 +12,14 @@ const maxLevels = levelPages.length;
 
 const stateStorageKey = "glitchGameState";
 
+// Zeit pro Level in Sekunden
+const levelSeconds = 300;
+
 let currentState = GameState.START;
 let currentLevel = 1;
+
+// Zeitpunkt, an dem die Zeit des aktuellen Levels abläuft (null = noch nicht gestartet)
+let levelEndTime = null;
 
 // Name der aktuellen Seite, z.B. "room.html"
 function getCurrentPage() {
@@ -29,7 +35,7 @@ function saveGameState() {
     try {
         sessionStorage.setItem(
             stateStorageKey,
-            JSON.stringify({ state: currentState, level: currentLevel })
+            JSON.stringify({ state: currentState, level: currentLevel, levelEndTime: levelEndTime })
         );
     } catch (error) {
         console.error("Spielzustand konnte nicht gespeichert werden.", error);
@@ -48,6 +54,10 @@ function loadGameState() {
         if (saved && saved.level >= 1 && saved.level <= maxLevels) {
             currentLevel = saved.level;
         }
+
+        if (saved && Number.isFinite(saved.levelEndTime)) {
+            levelEndTime = saved.levelEndTime;
+        }
     } catch (error) {
         console.error("Spielzustand konnte nicht geladen werden.", error);
     }
@@ -62,6 +72,21 @@ function announceState() {
     );
 }
 
+// Zeit des aktuellen Levels starten, nach dem Neuladen läuft die gespeicherte Zeit weiter
+function startLevelTime() {
+    if (levelEndTime === null && currentState === GameState.PLAYING) {
+        levelEndTime = Date.now() + levelSeconds * 1000;
+        saveGameState();
+    }
+}
+
+// Restzeit des aktuellen Levels in Sekunden
+function getTimeLeft() {
+    if (levelEndTime === null) return levelSeconds;
+
+    return Math.max(0, Math.ceil((levelEndTime - Date.now()) / 1000));
+}
+
 // Spielzustand ändern
 function changeState(newState) {
     currentState = newState;
@@ -74,6 +99,7 @@ function changeState(newState) {
 // Neues Spiel: alten Rätselfortschritt löschen und zum ersten Level wechseln
 function startGame() {
     currentLevel = 1;
+    levelEndTime = null;
     resetAllPuzzles();
     changeState(GameState.PLAYING);
     location.href = levelPages[0];
@@ -85,6 +111,7 @@ function completeLevel() {
 
     if (currentLevel < maxLevels) {
         currentLevel++;
+        levelEndTime = null;
         console.log("Level", currentLevel, "gestartet");
         changeState(GameState.PLAYING);
         location.href = levelPages[currentLevel - 1];
