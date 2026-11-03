@@ -59,11 +59,30 @@ function showEndScreen(id, color, html) {
     return screen;
 }
 
+// Zeilen mit der benötigten Zeit und der Bestzeit
+function getTimeLines() {
+    const lines = [];
+    const bestTime = getBestTime();
+
+    if (runSeconds !== null) {
+        lines.push("Deine Zeit: " + formatTime(runSeconds));
+    }
+
+    if (newBestTime) {
+        lines.push("Neue Bestzeit!");
+    } else if (bestTime !== null) {
+        lines.push("Bestzeit: " + formatTime(bestTime));
+    }
+
+    return lines.map(line => `<p>${line}</p>`).join("");
+}
+
 // Gewinnbildschirm erstellen
 function showWinScreen() {
     const screen = showEndScreen("winScreen", "#00ffff", `
         <h1>SIMULATION ABGESCHLOSSEN</h1>
         <h2>Du bist entkommen!</h2>
+        ${getTimeLines()}
         <button id="backToMenu">HAUPTMENÜ</button>
     `);
 
