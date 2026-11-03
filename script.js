@@ -7,7 +7,7 @@ const GameState = {
 
 // Seiten des Spiels: neue Levels werden hier der Reihe nach eingetragen
 const menuPage = "index.html";
-const levelPages = ["room.html"];
+const levelPages = ["room.html", "room2.html"];
 const maxLevels = levelPages.length;
 
 const stateStorageKey = "glitchGameState";
@@ -114,7 +114,17 @@ loadGameState();
 // Ein Level ohne gestartetes Spiel führt zurück ins Hauptmenü
 if (isLevelPage() && currentState === GameState.START) {
     location.replace(menuPage);
+} else if (isLevelPage() && getCurrentPage() !== levelPages[currentLevel - 1]) {
+    // Immer das aktuelle Level anzeigen, z.B. nach dem Zurück-Knopf des Browsers
+    location.replace(levelPages[currentLevel - 1]);
 }
+
+// Der Browser kann eine Seite samt altem Zustand aus dem Speicher wiederherstellen
+window.addEventListener("pageshow", (event) => {
+    if (event.persisted) {
+        location.reload();
+    }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
     const startButton = document.getElementById("startButton");
