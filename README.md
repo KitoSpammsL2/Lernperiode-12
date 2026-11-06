@@ -69,9 +69,9 @@ Unser Ziel ist es, am Ende der Lernperiode ein vollständig spielbares und unter
 
 ## 06.11
 ### Faruk – CEO & Frontend
-- [ ] Rätselfenster und Endbildschirme gestalten. (Eigenes Design auf das Rätselfenster sowie den Gewinn- und Verlustbildschirm im gemeinsamen Spiel übertragen)
-- [ ] Zweiten Spielraum entwickeln. (Level 2 mit HTML/CSS gestalten, neue Objekte platzieren und anklickbar machen)
-- [ ] Hauptmenü mit Spielanleitung erweitern. (Kurze Anleitung zu Rätseln, Timer und Glitch-Modus im Hauptmenü anzeigen)
+- [x] Rätselfenster und Endbildschirme gestalten. (Eigenes Design auf das Rätselfenster sowie den Gewinn- und Verlustbildschirm im gemeinsamen Spiel übertragen)
+- [x] Zweiten Spielraum entwickeln. (Level 2 mit HTML/CSS gestalten, neue Objekte platzieren und anklickbar machen)
+- [x] Hauptmenü mit Spielanleitung erweitern. (Kurze Anleitung zu Rätseln, Timer und Glitch-Modus im Hauptmenü anzeigen)
 
 ### Kaito – CTO & Spiellogik
 - [x] Zweites Level in die Levelsteuerung einbauen. (Level 2 in die Levelliste und das Rätselsystem eintragen, Wechsel nach dem Ausgang von Level 1 ermöglichen)
@@ -82,4 +82,23 @@ Unser Ziel ist es, am Ende der Lernperiode ein vollständig spielbares und unter
 - [ ] Zeitplan für die weiteren Levels erstellen. (Festlegen, bis wann Level 2 bis 5 fertig sein sollen, Meilensteine im README festhalten)
 - [ ] Drei Rätsel für das zweite Level planen. (Rätselideen sammeln, Hinweise und Lösungen definieren, Ablauf dokumentieren)
 - [ ] Rätsel für das zweite Level programmieren. (Rätsel interaktiv umsetzen, Glitch-Hinweise einbauen, richtige und falsche Lösungen behandeln)
+
+
+## 13.11
+
+### Faruk – CEO & Frontend
+- [ ] Benutzeroberfläche von Level 2 verbessern. (Bestehenden Spielraum überarbeiten, doppelte Elemente entfernen, Design und Anordnung der Objekte optimieren)
+- [ ] Glitch-Modus für Level 2 erweitern. (Visuelle Effekte integrieren, versteckte Hinweise anzeigen, Glitch-Modus mit den neuen Rätseln abstimmen)
+- [ ] Übergänge zwischen den Levels gestalten. (Animation beim Levelabschluss erstellen, Ladebildschirm für das nächste Level einbauen, einheitliches Design sicherstellen)
+
+### Kaito – CTO & Spiellogik
+- [ ] Spiellogik von Level 1 und 2 vollständig testen. (Levelwechsel, Timer, Rätselstatus und Speicherfunktion überprüfen, Fehler beheben)
+- [ ] Levelauswahl und Neustartfunktion entwickeln. (Abgeschlossene Levels freischalten, Neustart eines Levels ermöglichen, Spielstand korrekt zurücksetzen)
+- [ ] Grundlage für ein Backend vorbereiten. (Node.js und Express einrichten, erste API-Route erstellen, Verbindung zum Frontend testen)
+
+### Laurentiu – COO & Rätselentwicklung
+- [ ] Drei Rätsel von Level 2 fertigstellen und integrieren. (Platzhalter durch eigene Rätsel ersetzen, Lösungen überprüfen, Rätsel mit der vorhandenen Spiellogik verbinden)
+- [ ] Rätsel und Hinweise von Level 2 testen. (Alle Rätsel durchspielen, Glitch-Hinweise überprüfen, Fehler und unklare Lösungen korrigieren)
+- [ ] Rätselkonzept für Level 3 entwickeln. (Drei neue Rätsel planen, Lösungen und Hinweise definieren, Schwierigkeitsgrad gegenüber Level 2 erhöhen)
+
 
