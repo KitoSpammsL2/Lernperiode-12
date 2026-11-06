@@ -25,7 +25,8 @@
 }
 
 #puzzleArea button,
-#codeInput {
+#codeInput,
+#textInput {
     padding: 10px 18px;
     margin: 6px 6px 6px 0;
     background: transparent;
@@ -54,6 +55,11 @@
 #codeInput {
     width: 150px;
     letter-spacing: 6px;
+    cursor: text;
+}
+
+#textInput {
+    width: 220px;
     cursor: text;
 }
 

@@ -55,17 +55,14 @@ glitchButton.addEventListener("click", () => {
 
 const timerDisplay = document.getElementById("timer");
 
-let remainingSeconds = 300;
+// Die Restzeit kommt aus dem Spielstand (script.js), damit sie das Neuladen übersteht
+startLevelTime();
+
+let remainingSeconds = getTimeLeft();
 let timerInterval = null;
 
 function updateTimer() {
-    const minutes = Math.floor(remainingSeconds / 60);
-    const seconds = remainingSeconds % 60;
-
-    timerDisplay.textContent =
-        String(minutes).padStart(2, "0") +
-        ":" +
-        String(seconds).padStart(2, "0");
+    timerDisplay.textContent = formatTime(remainingSeconds);
 }
 
 function startTimer() {
@@ -79,10 +76,10 @@ function startTimer() {
             return;
         }
 
-        if (remainingSeconds > 0) {
-            remainingSeconds--;
-            updateTimer();
-        } else {
+        remainingSeconds = getTimeLeft();
+        updateTimer();
+
+        if (remainingSeconds === 0) {
             clearInterval(timerInterval);
             timerInterval = null;
             message.textContent =

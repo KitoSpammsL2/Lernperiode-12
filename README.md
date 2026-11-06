@@ -52,7 +52,7 @@ Unser Ziel ist es, am Ende der Lernperiode ein vollständig spielbares und unter
 ## 30.10
 ### Faruk – CEO & Frontend
 - [x] Glitch-Modus visuell umsetzen und erweitern. (Glitch-Effekte verbessern, versteckte Hinweise beim Aktivieren sichtbar machen)
-- [ ] Rätsel in den Spielraum integrieren. (Interaktive Objekte mit Laurentius Rätseln verbinden, Eingabefenster für Rätsel einbauen)
+- [x] Rätsel in den Spielraum integrieren. (Interaktive Objekte mit Laurentius Rätseln verbinden, Eingabefenster für Rätsel einbauen)
 - [ ] Benutzeroberfläche für Gewinn und Niederlage gestalten. (Gewinn- und Verlustbildschirm designen, Neustart-Button einbauen)
 
 ### Kaito – CTO & Spiellogik
@@ -62,6 +62,24 @@ Unser Ziel ist es, am Ende der Lernperiode ein vollständig spielbares und unter
 
 ### Laurentiu – COO & Rätselentwicklung
 - [x] Erstes Level testen und Fehler beheben. (Alle Rätsel durchspielen, Glitch-Modus und Timer überprüfen, Fehler dokumentieren und korrigieren)
-- [ ] Rätsel mit dem Glitch-Modus verbinden. (Versteckte Hinweise erstellen und nur bei aktiviertem Glitch-Modus anzeigen)
-- [ ] Schwierigkeitsgrad der Rätsel verbessern. (Rätsel abwechslungsreicher gestalten, Hinweise und Lösungen überarbeiten)
+- [x] Rätsel mit dem Glitch-Modus verbinden. (Versteckte Hinweise erstellen und nur bei aktiviertem Glitch-Modus anzeigen)
+- [x] Schwierigkeitsgrad der Rätsel verbessern. (Rätsel abwechslungsreicher gestalten, Hinweise und Lösungen überarbeiten)
+
+
+
+## 06.11
+### Faruk – CEO & Frontend
+- [ ] Rätselfenster und Endbildschirme gestalten. (Eigenes Design auf das Rätselfenster sowie den Gewinn- und Verlustbildschirm im gemeinsamen Spiel übertragen)
+- [ ] Zweiten Spielraum entwickeln. (Level 2 mit HTML/CSS gestalten, neue Objekte platzieren und anklickbar machen)
+- [ ] Hauptmenü mit Spielanleitung erweitern. (Kurze Anleitung zu Rätseln, Timer und Glitch-Modus im Hauptmenü anzeigen)
+
+### Kaito – CTO & Spiellogik
+- [x] Zweites Level in die Levelsteuerung einbauen. (Level 2 in die Levelliste und das Rätselsystem eintragen, Wechsel nach dem Ausgang von Level 1 ermöglichen)
+- [x] Timer mit dem Spielstand verbinden. (Restzeit speichern, damit der Timer beim Neuladen nicht neu startet, Timer pro Level zurücksetzen)
+- [x] Bestzeit speichern und anzeigen. (Benötigte Zeit beim Gewinnen messen, persönliche Bestzeit speichern und auf dem Gewinnbildschirm anzeigen)
+
+### Laurentiu – COO & Rätselentwicklung
+- [ ] Zeitplan für die weiteren Levels erstellen. (Festlegen, bis wann Level 2 bis 5 fertig sein sollen, Meilensteine im README festhalten)
+- [ ] Drei Rätsel für das zweite Level planen. (Rätselideen sammeln, Hinweise und Lösungen definieren, Ablauf dokumentieren)
+- [ ] Rätsel für das zweite Level programmieren. (Rätsel interaktiv umsetzen, Glitch-Hinweise einbauen, richtige und falsche Lösungen behandeln)
 
