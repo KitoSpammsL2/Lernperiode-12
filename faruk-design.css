@@ -1,0 +1,260 @@
+/* Rätsel-Fenster */
+#puzzleModal,
+.puzzle-modal,
+.puzzle-overlay,
+#puzzleOverlay {
+    background: rgba(3, 3, 15, 0.92);
+    backdrop-filter: blur(8px);
+}
+
+/* Inhalt des Rätsel-Fensters */
+.puzzle-box,
+.puzzle-dialog,
+.puzzle-content,
+.puzzle-modal .modal-content {
+    background: linear-gradient(145deg, #15152e, #080812);
+    color: white;
+    border: 2px solid #00ffff;
+    border-radius: 16px;
+    padding: 35px;
+    box-shadow: 0 0 35px #00ffff55;
+    max-width: 520px;
+    width: min(90vw, 520px);
+}
+
+/* Rätsel-Titel */
+#puzzleTitle,
+.puzzle-box h2,
+.puzzle-dialog h2 {
+    color: #00ffff;
+    text-shadow: 0 0 15px #00ffff;
+    letter-spacing: 2px;
+}
+
+/* Eingabefelder */
+.puzzle-box input,
+.puzzle-dialog input {
+    background: #090914;
+    border: 1px solid #00ffff;
+    color: white;
+    padding: 14px;
+    border-radius: 7px;
+    font-size: 16px;
+    max-width: 100%;
+}
+
+/* Buttons */
+.puzzle-box button,
+.puzzle-dialog button,
+.end-box button {
+    background: transparent;
+    border: 2px solid #00ffff;
+    border-radius: 8px;
+    color: #00ffff;
+    cursor: pointer;
+    padding: 12px 22px;
+    transition: 0.2s;
+}
+
+.puzzle-box button:hover,
+.puzzle-dialog button:hover,
+.end-box button:hover {
+    background: #00ffff;
+    color: #090914;
+    box-shadow: 0 0 20px #00ffff80;
+}
+
+/* Gewinn- und Verlustbildschirme */
+#winScreen,
+#loseScreen,
+#endScreen,
+.win-screen,
+.lose-screen,
+.end-screen {
+    background: #080812;
+    color: white;
+    text-align: center;
+}
+
+/* Titel */
+#winScreen h1,
+#loseScreen h1,
+#endScreen h1,
+.end-box h1 {
+    color: #00ffff;
+    text-shadow: 0 0 25px #00ffff;
+    font-size: clamp(30px, 5vw, 55px);
+}
+
+/* Game-Over-Darstellung */
+#loseScreen h1,
+.lose-screen h1 {
+    color: #ff0055;
+    text-shadow: 0 0 25px #ff0055;
+}
+
+/* Versteckte Fenster bleiben versteckt */
+#puzzleModal[hidden],
+#endScreen[hidden],
+.puzzle-modal[hidden],
+.end-screen[hidden] {
+    display: none !important;
+}
+
+
+
+/* ===================================
+   FARUK – AP2: LEVEL 2
+=================================== */
+
+.faruk-room2 {
+    min-height: 85vh;
+    padding: 65px 25px;
+    background:
+        radial-gradient(circle at 50% 35%,
+            #202044 0%, #080812 75%);
+    text-align: center;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.faruk-room2-header h1 {
+    color: #00ffff;
+    font-size: clamp(28px, 5vw, 48px);
+    letter-spacing: 5px;
+    text-shadow: 0 0 25px #00ffff;
+}
+
+.faruk-room2-header p {
+    color: #b7b7cc;
+    margin-top: 20px;
+}
+
+.faruk-level-badge {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #ff00aa;
+    border-radius: 30px;
+    color: #ff00aa;
+    letter-spacing: 3px;
+}
+
+.faruk-room2-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 230px));
+    justify-content: center;
+    gap: 25px;
+    margin: 65px auto 40px;
+}
+
+.faruk-room2-object {
+    min-height: 190px;
+    background: #15152e;
+    border: 2px solid #393962;
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    transition: 0.25s;
+}
+
+.faruk-room2-object:hover {
+    transform: translateY(-6px);
+    border-color: #00ffff;
+    box-shadow: 0 0 25px #00ffff55;
+}
+
+.faruk-room2-object:focus-visible {
+    outline: 3px solid #00ffff;
+    outline-offset: 3px;
+}
+
+.faruk-object-icon {
+    font-size: 50px;
+    color: #00ffff;
+}
+
+.faruk-room2-object small {
+    color: #9999aa;
+}
+
+.faruk-room2-door {
+    border-color: #ff00aa;
+}
+
+.faruk-room2-message {
+    border: 1px solid #41416b;
+    background: #101025;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: auto;
+    color: #00ffff;
+    min-height: 65px;
+}
+
+/* Auch auf kleineren Bildschirmen */
+@media (max-width: 550px) {
+    .faruk-room2-grid {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+    }
+}
+
+
+.glitch-guide {
+    width: min(90%, 550px);
+    margin: 30px auto 15px;
+    color: white;
+    text-align: left;
+}
+
+.glitch-guide summary {
+    padding: 16px;
+    border: 2px solid #ff00aa;
+    border-radius: 8px;
+    color: #ff00aa;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    list-style-position: inside;
+    transition: 0.2s;
+}
+
+.glitch-guide summary:hover {
+    background: #ff00aa;
+    color: white;
+}
+
+.glitch-guide-content {
+    background: #101025;
+    border: 1px solid #37375c;
+    border-radius: 10px;
+    padding: 22px;
+    margin-top: 12px;
+    max-height: 45vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.glitch-guide-content h3 {
+    color: #00ffff;
+    text-align: center;
+}
+
+.glitch-guide-content h4 {
+    color: #ff00aa;
+    margin-top: 20px;
+}
+
+.glitch-guide-content p {
+    color: #ccccdd;
+    line-height: 1.6;
+    font-size: 14px;
+    text-align: left;
+}

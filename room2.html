@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLITCH – Level 2</title>
+    <link rel="stylesheet" href="room.css">
+    <link rel="stylesheet" href="room-puzzles.css">
+    <link rel="stylesheet" href="faruk-design.css">
+</head>
+<body>
+
+    <header class="hud">
+        <h2>GLITCH // LEVEL 02</h2>
+
+        <div class="stats">
+            <span id="timer">05:00</span>
+            <span id="progress">Rätsel: 0/3</span>
+        </div>
+    </header>
+
+    <main class="game-room">
+
+        <h1>SIMULATION 02</h1>
+        <p class="subtitle">Der nächste Raum. Finde auch hier den Ausgang.</p>
+
+        <div class="objects">
+            <button class="object" data-object="konsole">
+                <span class="symbol">▣</span>
+                <span>KONSOLE</span>
+            </button>
+
+            <button class="object" data-object="tresor">
+                <span class="symbol">▦</span>
+                <span>TRESOR</span>
+            </button>
+
+            <button class="object" data-object="server">
+                <span class="symbol">▥</span>
+                <span>SERVER</span>
+            </button>
+
+            <button class="object" data-object="tuer">
+                <span class="symbol">🚪</span>
+                <span>AUSGANG</span>
+            </button>
+        </div>
+
+        <div class="control-panel">
+            <button id="glitchButton">GLITCH-MODUS</button>
+        </div>
+
+        <p id="message">System bereit. Untersuche den Raum.</p>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="puzzles.js"></script>
+    <script src="door.js"></script>
+    <script src="room.js"></script>
+    <script src="room-puzzles.js"></script>
+    <script src="faruk-room2.js"></script>
+
+    
+<section class="faruk-room2" id="farukRoom2">
+
+    <div class="faruk-room2-header">
+        <span class="faruk-level-badge">LEVEL 02</span>
+        <h1>DER VERLORENE SEKTOR</h1>
+        <p>
+            Die Simulation ist instabil.
+            Untersuche die Gegenstände und finde den Ausgang.
+        </p>
+    </div>
+
+    <div class="faruk-room2-grid">
+
+        <button class="faruk-room2-object"
+                data-faruk-object="konsole">
+            <span class="faruk-object-icon">⌨</span>
+            <strong>DATENKONSOLE</strong>
+            <small>Verschlüsselte Daten</small>
+        </button>
+
+        <button class="faruk-room2-object"
+                data-faruk-object="energie">
+            <span class="faruk-object-icon">⚡</span>
+            <strong>ENERGIEKERN</strong>
+            <small>Instabile Energiequelle</small>
+        </button>
+
+        <button class="faruk-room2-object"
+                data-faruk-object="speicher">
+            <span class="faruk-object-icon">▣</span>
+            <strong>SPEICHERMODUL</strong>
+            <small>Beschädigte Dateien</small>
+        </button>
+
+        <button class="faruk-room2-object faruk-room2-door"
+                data-faruk-object="ausgang">
+            <span class="faruk-object-icon">🚪</span>
+            <strong>AUSGANG</strong>
+            <small>Sicherheitsverriegelung</small>
+        </button>
+
+    </div>
+
+    <div class="faruk-room2-message"
+         id="farukRoom2Message"
+         aria-live="polite">
+        SYSTEM ONLINE – Wähle ein Objekt aus.
+    </div>
+
+</section>
+
+<script src="faruk-room2.js"></script>
+
+</body>
+</html>
