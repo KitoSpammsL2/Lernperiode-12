@@ -75,23 +75,51 @@ const level1Views = {
     }
 };
 
-// Platzhalter, bis Laurentius Rätsel für Level 2 fertig sind
+// Laurentius Rätsel für Level 2; die bestehende Objektgruppe bleibt erhalten.
 const level2Views = {
     puzzle1: textPuzzle(
-        "KONSOLE",
-        "Die Konsole wartet auf den Befehl, der ein Programm beendet.",
-        "Der Befehl hat vier Buchstaben: EXIT"
+        "KONSOLE – VERSCHOBENE DATEN",
+        "Die Konsole zeigt UHVHW. Entschlüssle den Befehl aus fünf Buchstaben.",
+        "Jeder Buchstabe wurde im Alphabet um 3 Stellen nach vorne verschoben. " +
+        "Gehe zum Entschlüsseln 3 Stellen zurück (D → A, E → B)."
     ),
-    puzzle2: textPuzzle(
-        "TRESOR",
-        "Der Tresor fragt: Wie viele Rätsel hast du im ersten Raum gelöst?",
-        "Tippe die Zahl ein: 3"
-    ),
-    puzzle3: textPuzzle(
-        "SERVER",
-        "Der Server fragt nach dem Namen der Simulation.",
-        "Der Name steht im Hauptmenü: GLITCH"
-    )
+    puzzle2: {
+        title: "TRESOR – DATENFRAGMENTE",
+        html: `
+            <p>Vier Fragmente enthalten je eine Ziffer des Tresorcodes.
+               Bringe die Fragmente in die ursprüngliche Reihenfolge.</p>
+            <div class="color-code" aria-label="Datenfragmente">
+                <span class="color">A = 8</span>
+                <span class="color">B = 2</span>
+                <span class="color">C = 6</span>
+                <span class="color">D = 4</span>
+            </div>
+            <p class="glitch-hint">Wiederhergestellte Reihenfolge: C → A → D → B</p>
+            <form id="codeForm">
+                <input id="codeInput" type="text" inputmode="numeric" maxlength="4"
+                       autocomplete="off" placeholder="4 Zahlen" aria-label="Tresorcode">
+                <button type="submit">PRÜFEN</button>
+            </form>
+        `,
+        setup: setupCodeLock
+    },
+    puzzle3: {
+        title: "SERVER – SICHERER NEUSTART",
+        html: `
+            <p>Aktiviere genau zwei intakte Module und prüfe die Auswahl.
+               Beschädigte Module müssen ausgeschaltet bleiben.</p>
+            <p class="glitch-hint">Diagnose: A ist beschädigt. B ist intakt.
+               C ist beschädigt. D ist intakt.</p>
+            <div class="switches">
+                <label><input type="checkbox" data-module="A"> Modul A</label>
+                <label><input type="checkbox" data-module="B"> Modul B</label>
+                <label><input type="checkbox" data-module="C"> Modul C</label>
+                <label><input type="checkbox" data-module="D"> Modul D</label>
+            </div>
+            <button type="button" id="moduleSubmit">PRÜFEN</button>
+        `,
+        setup: setupServerPuzzle
+    }
 };
 
 const puzzleViews = { 1: level1Views, 2: level2Views }[currentLevel] || {};
@@ -172,7 +200,7 @@ function submitAnswer(puzzleId, answer) {
 }
 
 // Rätsel 1: vierstelliger Code
-function setupCodeLock() {
+function setupCodeLock(puzzleId) {
     document.getElementById("codeForm").addEventListener("submit", (event) => {
         event.preventDefault();
         const code = document.getElementById("codeInput").value.trim();
@@ -182,7 +210,7 @@ function setupCodeLock() {
             return;
         }
 
-        submitAnswer("puzzle1", code);
+        submitAnswer(puzzleId, code);
     });
 }
 
@@ -221,6 +249,17 @@ function setupSwitchPuzzle() {
             .join("");
 
         submitAnswer("puzzle3", answer);
+    });
+}
+
+// Level 2: vier Servermodule in der festen Reihenfolge A, B, C, D prüfen.
+function setupServerPuzzle(puzzleId) {
+    document.getElementById("moduleSubmit").addEventListener("click", () => {
+        const answer = ["A", "B", "C", "D"]
+            .map(name => puzzleArea.querySelector(`[data-module="${name}"]`).checked ? "1" : "0")
+            .join("");
+
+        submitAnswer(puzzleId, answer);
     });
 }
 

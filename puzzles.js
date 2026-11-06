@@ -7,11 +7,11 @@ const levelPuzzles = {
         // Schalter A an, B aus, C an
         puzzle3: "101"
     },
-    // Platzhalter, bis Laurentius Rätsel für Level 2 fertig sind
+    // Level 2: Caesar-Code, sortierte Datenfragmente, intakte Servermodule
     2: {
-        puzzle1: "EXIT",
-        puzzle2: "3",
-        puzzle3: "GLITCH"
+        puzzle1: "RESET",
+        puzzle2: "6842",
+        puzzle3: "0101"
     }
 };
 
@@ -35,7 +35,13 @@ function loadProgress() {
 // Rätsel des aktuellen Levels vorbereiten und dessen Fortschritt laden
 function loadPuzzles() {
     const solutions = levelPuzzles[currentLevel] || {};
-    const levelProgress = loadProgress()["level" + currentLevel] || {};
+    let levelProgress = loadProgress()["level" + currentLevel] || {};
+
+    // Alte Platzhalterlösungen zählen nicht für die neuen Rätsel von Level 2.
+    // Der Fortschritt von Level 1 bleibt erhalten.
+    if (currentLevel === 2 && levelProgress.version !== 2) {
+        levelProgress = {};
+    }
 
     puzzles = {};
 
@@ -81,6 +87,10 @@ function savePuzzles() {
 
     for (const id in puzzles) {
         levelProgress[id] = puzzles[id].solved;
+    }
+
+    if (currentLevel === 2) {
+        levelProgress.version = 2;
     }
 
     progress["level" + currentLevel] = levelProgress;

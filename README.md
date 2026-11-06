@@ -79,10 +79,37 @@ Unser Ziel ist es, am Ende der Lernperiode ein vollständig spielbares und unter
 - [x] Bestzeit speichern und anzeigen. (Benötigte Zeit beim Gewinnen messen, persönliche Bestzeit speichern und auf dem Gewinnbildschirm anzeigen)
 
 ### Laurentiu – COO & Rätselentwicklung
-- [ ] Zeitplan für die weiteren Levels erstellen. (Festlegen, bis wann Level 2 bis 5 fertig sein sollen, Meilensteine im README festhalten)
-- [ ] Drei Rätsel für das zweite Level planen. (Rätselideen sammeln, Hinweise und Lösungen definieren, Ablauf dokumentieren)
-- [ ] Rätsel für das zweite Level programmieren. (Rätsel interaktiv umsetzen, Glitch-Hinweise einbauen, richtige und falsche Lösungen behandeln)
+- [x] Zeitplan für die weiteren Levels erstellen. (Festlegen, bis wann Level 2 bis 5 fertig sein sollen, Meilensteine im README festhalten)
+- [x] Drei Rätsel für das zweite Level planen. (Rätselideen sammeln, Hinweise und Lösungen definieren, Ablauf dokumentieren)
+- [x] Rätsel für das zweite Level programmieren. (Rätsel interaktiv umsetzen, Glitch-Hinweise einbauen, richtige und falsche Lösungen behandeln)
 
+Umsetzung und Lösungen: [Rätselplanung Level 2](laurentiu/level2-raetsel.md).
+Die neuen Rätsel sind in der bestehenden Objektgruppe spielbar. Die gemeinsame
+Abstimmung mit Faruks zusätzlichem Raum bleibt für den 13.11 vorgesehen.
+Prüfergebnisse und offene Probleme: [Testbericht](Testbericht.md).
+
+
+## Zeitplan bis 18.12.2026
+
+Planung von Laurentiu vom 06.11.2026. Wir arbeiten jeden Freitag. Die folgenden
+Meilensteine sind der Zeitplan für die weitere Entwicklung; spätere Aufgaben
+werden im Team verteilt. Die bestehenden persönlichen Arbeitspakete bleiben bestehen.
+
+| Freitag | Meilenstein | Woran wir die Fertigstellung erkennen |
+|---|---|---|
+| 06.11.2026 | Drei Rätsel für Level 2 planen und in der bestehenden Objektgruppe programmieren | Eigene Lösungen, interaktive Eingaben und Glitch-Hinweise sind vorhanden. |
+| 13.11.2026 | Level 2 gemeinsam fertigstellen; Level 3 planen | Endgültige Oberfläche, Rätsel, Timer und Levelwechsel sind zusammen getestet; drei Rätselideen für Level 3 sind dokumentiert. |
+| 20.11.2026 | Level 3 fertigstellen; Level 4 planen | Raum und drei Rätsel sind spielbar und getestet; der Übergang von Level 2 funktioniert. |
+| 27.11.2026 | Level 4 fertigstellen; Level 5 planen | Drei weitere Rätsel, Glitch-Hinweise und Levelwechsel funktionieren; Konzept für das letzte Level steht. |
+| 04.12.2026 | Level 5 fertigstellen | Alle fünf Levels sind vom Hauptmenü bis zum letzten Ausgang durchspielbar. |
+| 11.12.2026 | Gesamttest und Fehlerbehebung; Zusatzfunktionen abschliessen | Speicherstand, Bestzeit, Neustart, Timer und geplantes Inventar sind geprüft; keine neuen grossen Funktionen mehr beginnen. |
+| 18.12.2026 | Abschlusstest und Abgabe | Kritische Fehler behoben, README und Testbericht aktuell, Präsentation und lauffähige Endversion bereit. |
+
+Ab 11.12 reservieren wir Zeit für Fehler und die Abgabe. Falls ein Level länger
+braucht, hat das durchspielbare Spiel Vorrang vor zusätzlichen Funktionen.
+
+Die heutigen Rätselideen, Hinweise und Lösungen stehen in
+[Laurentius Rätselplanung für Level 2](laurentiu/level2-raetsel.md).
 
 ## 13.11
 
