@@ -1,0 +1,160 @@
+/* Level 2: nur Darstellung; gemeinsame Raum- und Rätsellogik bleibt erhalten. */
+.level-two {
+    --cyan: #00ffff;
+    --pink: #ff00aa;
+    background: #070910;
+    color: #edf5ff;
+    line-height: 1.5;
+    color-scheme: dark;
+}
+.level-two .hud {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    gap: 16px;
+    padding: 16px max(20px, calc((100vw - 1120px) / 2));
+    background: #090e1bf5;
+    border-bottom: 1px solid #00ffff40;
+    box-shadow: 0 8px 32px #0005;
+}
+.level-two .hud h2 { margin: 0; font-size: 15px; letter-spacing: 2px; }
+.level-two .stats { gap: 12px; font-size: 20px; }
+.level-two .stats > span {
+    display: grid;
+    gap: 2px;
+    padding: 6px 16px;
+    border: 1px solid #294352;
+    border-radius: 8px;
+    background: #101a27;
+    white-space: nowrap;
+}
+.level-two .stat-label { color: #b5c5d5; font-size: 10px; letter-spacing: 2px; }
+.level-two #timer { font-variant-numeric: tabular-nums; font-weight: bold; }
+.level-two .game-room {
+    padding: clamp(28px, 5vw, 64px) 24px 40px;
+    min-height: calc(100svh - 96px);
+    background: radial-gradient(ellipse at 15% 20%, #00ffff0b, transparent 60%),
+        radial-gradient(ellipse at 90% 60%, #ff00aa0c, transparent 55%), #070910;
+}
+.level-two .sector-label { margin: 0 0 14px; color: #ff78cf; font-size: 11px; letter-spacing: 3px; }
+.level-two .game-room h1 {
+    margin: 0 auto 16px;
+    max-width: 1000px;
+    font-size: clamp(26px, 4.2vw, 48px);
+    letter-spacing: clamp(2px, .5vw, 6px);
+    line-height: 1.15;
+    text-shadow: 0 0 30px #00ffff40;
+}
+.level-two .subtitle { max-width: 620px; margin: auto; color: #b5c5d5; }
+.level-two .objects {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    max-width: 1120px;
+    gap: 18px;
+    margin: 36px auto 28px;
+}
+.level-two .object {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 246px;
+    padding: 20px 16px;
+    gap: 12px;
+    border: 1px solid #36505e;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #142131, #0c111e);
+    font: inherit;
+    transition: transform .2s, border-color .2s, box-shadow .2s;
+}
+.level-two .object-index { align-self: flex-start; color: #9fb7c8; font-size: 10px; letter-spacing: 2px; }
+.level-two .symbol { font-size: 44px; line-height: 1.2; }
+.level-two .object strong { letter-spacing: 2px; font-size: 15px; }
+.level-two .object-description { color: #b5c5d5; font-size: 13px; }
+.level-two .object-status { color: var(--cyan); font-size: 12px; margin-top: auto; }
+.level-two .object[data-object="tuer"] { border-color: #ff00aa70; }
+.level-two .object[data-object="tuer"] .object-status { color: #ff78cf; }
+.level-two .object:hover,
+.level-two .object[aria-expanded="true"] { border-color: var(--cyan); box-shadow: 0 0 24px #00ffff20; }
+.level-two .object:hover { transform: translateY(-4px); }
+.level-two .object.solved,
+.level-two .object.unlocked { border-color: #5effa6; }
+.level-two .object.solved .object-status,
+.level-two .object.unlocked .object-status { color: #5effa6; }
+.level-two .control-panel button,
+.level-two #puzzleArea button,
+.level-two #winScreen button,
+.level-two #loseScreen button {
+    min-height: 44px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font: inherit;
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    background: #0e1a27;
+    cursor: pointer;
+    transition: background .2s, box-shadow .2s;
+}
+.level-two .control-panel button { border-color: var(--pink); color: #ff78cf; }
+.level-two .control-panel button:hover,
+.level-two .control-panel button[aria-pressed="true"] { background: #ff00aa24; box-shadow: 0 0 20px #ff00aa30; }
+.level-two .control-hint { color: #b5c5d5; font-size: 12px; margin: 12px 0 0; }
+.level-two #message {
+    max-width: 700px;
+    margin: 24px auto 0;
+    padding: 14px 18px;
+    border: 1px solid #294352;
+    border-left: 3px solid var(--cyan);
+    border-radius: 8px;
+    background: #0e1622;
+    color: #c4d6e5;
+    text-align: left;
+}
+.level-two #puzzleArea {
+    max-width: 700px;
+    padding: clamp(16px, 3vw, 28px);
+    border-width: 1px;
+    border-radius: 12px;
+    background: #0e1622;
+    scroll-margin-top: 130px;
+    overflow-wrap: anywhere;
+}
+.level-two .puzzle-head { gap: 12px; align-items: flex-start; }
+.level-two .puzzle-head h3 { font-size: 16px; letter-spacing: 1px; }
+.level-two #closePuzzle { float: none; flex-shrink: 0; }
+.level-two #puzzleArea input { max-width: 100%; color: #edf5ff; background: #080f19; }
+.level-two #puzzleArea .switches input { accent-color: var(--cyan); }
+.level-two #puzzleArea .glitch-hint { color: #ff78cf; }
+.level-two :is(button, input):focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+.level-two #puzzleArea button:disabled { cursor: default; opacity: .55; }
+.level-two.glitch-active .game-room {
+    background: repeating-linear-gradient(0deg, #0d101e 0, #0d101e 3px, #1b1027 4px);
+}
+.level-two :is(#winScreen, #loseScreen) { padding: 24px; overflow-y: auto; }
+.level-two :is(#winScreen, #loseScreen) h1 { overflow-wrap: anywhere; }
+.level-two :is(#winScreen, #loseScreen) button { margin: 8px; }
+@media (max-width: 900px) {
+    .level-two .objects { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 650px; }
+}
+@media (max-width: 600px) {
+    .level-two .hud { padding: 12px 16px; gap: 10px; }
+    .level-two .stats { width: 100%; justify-content: center; font-size: 18px; }
+    .level-two .stats > span { flex: 1; max-width: 200px; padding: 5px 12px; }
+    .level-two .game-room { padding: 28px 16px; }
+    .level-two .objects { gap: 12px; margin: 28px auto 24px; }
+    .level-two .object { min-height: 224px; padding: 16px 10px; gap: 10px; }
+    .level-two .object strong { font-size: 13px; letter-spacing: 1px; }
+    .level-two .sector-label { letter-spacing: 1px; }
+    .level-two #puzzleArea { scroll-margin-top: 145px; }
+}
+@media (max-width: 359px) {
+    .level-two .objects { grid-template-columns: 1fr; }
+    .level-two .object { min-height: 200px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .level-two *, .level-two *::before, .level-two *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+    .level-two .object:hover { transform: none; }
+}

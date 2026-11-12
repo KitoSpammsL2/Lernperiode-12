@@ -84,8 +84,9 @@ Unser Ziel ist es, am Ende der Lernperiode ein vollständig spielbares und unter
 - [x] Rätsel für das zweite Level programmieren. (Rätsel interaktiv umsetzen, Glitch-Hinweise einbauen, richtige und falsche Lösungen behandeln)
 
 Umsetzung und Lösungen: [Rätselplanung Level 2](laurentiu/level2-raetsel.md).
-Die neuen Rätsel sind in der bestehenden Objektgruppe spielbar. Die gemeinsame
-Abstimmung mit Faruks zusätzlichem Raum bleibt für den 13.11 vorgesehen.
+Die neuen Rätsel sind in der bestehenden Objektgruppe spielbar. Seit Faruks AP1
+vom 13.11 verwendet Level 2 ausschliesslich diesen Hauptspielraum; die zusätzliche
+Objektgruppe wurde entfernt.
 Prüfergebnisse und offene Probleme: [Testbericht](Testbericht.md).
 
 
@@ -114,9 +115,11 @@ Die heutigen Rätselideen, Hinweise und Lösungen stehen in
 ## 13.11
 
 ### Faruk – CEO & Frontend
-- [ ] Benutzeroberfläche von Level 2 verbessern. (Bestehenden Spielraum überarbeiten, doppelte Elemente entfernen, Design und Anordnung der Objekte optimieren)
+- [x] Benutzeroberfläche von Level 2 verbessern. (Bestehenden Spielraum überarbeiten, doppelte Elemente entfernen, Design und Anordnung der Objekte optimieren)
 - [ ] Glitch-Modus für Level 2 erweitern. (Visuelle Effekte integrieren, versteckte Hinweise anzeigen, Glitch-Modus mit den neuen Rätseln abstimmen)
 - [ ] Übergänge zwischen den Levels gestalten. (Animation beim Levelabschluss erstellen, Ladebildschirm für das nächste Level einbauen, einheitliches Design sicherstellen)
+
+Umsetzung und automatische Browser-Tests von AP1: [Testbericht Level-2-Oberfläche](Testbericht-Level2-UI.md).
 
 ### Kaito – CTO & Spiellogik
 - [x] Spiellogik von Level 1 und 2 vollständig testen. (Levelwechsel, Timer, Rätselstatus und Speicherfunktion überprüfen, Fehler beheben)
