@@ -19,6 +19,9 @@ const levelSeconds = 300;
 let currentState = GameState.START;
 let currentLevel = 1;
 
+// Verhindert, dass ein Doppelklick auf den Ausgang zwei Levels auf einmal abschliesst
+let levelChanging = false;
+
 // Zeitpunkt, an dem die Zeit des aktuellen Levels abläuft (null = noch nicht gestartet)
 let levelEndTime = null;
 
@@ -64,7 +67,7 @@ function loadGameState() {
             currentState = saved.state;
         }
 
-        if (saved && saved.level >= 1 && saved.level <= maxLevels) {
+        if (saved && Number.isInteger(saved.level) && saved.level >= 1 && saved.level <= maxLevels) {
             currentLevel = saved.level;
         }
 
@@ -170,9 +173,10 @@ function startGame() {
 
 // Level abschliessen: nächstes Level laden oder gewinnen
 function completeLevel() {
-    if (currentState !== GameState.PLAYING) return;
+    if (currentState !== GameState.PLAYING || levelChanging) return;
 
     if (currentLevel < maxLevels) {
+        levelChanging = true;
         currentLevel++;
         levelEndTime = null;
         console.log("Level", currentLevel, "gestartet");
