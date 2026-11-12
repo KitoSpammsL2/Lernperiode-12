@@ -25,7 +25,7 @@ let puzzles = {};
 function loadProgress() {
     try {
         const saved = JSON.parse(localStorage.getItem(progressStorageKey));
-        return saved && typeof saved === "object" ? saved : {};
+        return saved && typeof saved === "object" && !Array.isArray(saved) ? saved : {};
     } catch (error) {
         console.error("Spielstand konnte nicht geladen werden.", error);
         return {};
