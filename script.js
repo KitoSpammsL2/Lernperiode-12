@@ -67,7 +67,7 @@ function loadGameState() {
             currentState = saved.state;
         }
 
-        if (saved && saved.level >= 1 && saved.level <= maxLevels) {
+        if (saved && Number.isInteger(saved.level) && saved.level >= 1 && saved.level <= maxLevels) {
             currentLevel = saved.level;
         }
 
