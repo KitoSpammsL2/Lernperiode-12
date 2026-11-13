@@ -158,3 +158,51 @@
     }
     .level-two .object:hover { transform: none; }
 }
+
+/* Level 2: Hinweisscan ohne flackernde Dauereffekte. */
+.level-two .game-room { position: relative; isolation: isolate; }
+.level-two .game-room::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+    background: linear-gradient(90deg, #ff00aa08 1px, transparent 1px),
+        linear-gradient(#00ffff09 1px, transparent 1px);
+    background-size: 48px 48px;
+    transition: opacity .25s ease-out;
+}
+.level-two.glitch-active .game-room::before { opacity: 1; }
+.level-two.glitch-active .game-room h1 {
+    animation: none;
+    text-shadow: 2px 0 #ff00aa, -2px 0 #00ffff;
+}
+.level-two.glitch-switching .game-room h1 { animation: scanShift .36s ease-out; }
+.level-two .scan-status { color: #b5c5d5; font-size: 12px; letter-spacing: 1px; margin: 16px 0 0; }
+.level-two.glitch-active .scan-status { color: #ff78cf; }
+.level-two .glitch-signal { display: none; color: #ff91d9; font-size: 10px; letter-spacing: 1px; }
+.level-two.glitch-active .object:not(.solved) .glitch-signal { display: block; }
+.level-two.glitch-active .object:not(.solved):not([data-object="tuer"]) { background: linear-gradient(145deg, #25172f, #0c1826); }
+.level-two.glitch-active #puzzleArea { border-color: #ff00aa; box-shadow: 0 0 28px #ff00aa25; }
+.level-two.glitch-active #puzzleArea p.glitch-hint {
+    padding: 14px 16px;
+    border: 1px solid #ff00aa70;
+    border-left: 3px solid #ff00aa;
+    border-radius: 8px;
+    background: #ff00aa0c;
+    font-size: 14px;
+    line-height: 1.6;
+    letter-spacing: normal;
+    text-shadow: none;
+    animation: none;
+}
+@keyframes scanShift {
+    0%, 100% { transform: translateX(0); }
+    35% { transform: translateX(2px); }
+    65% { transform: translateX(-2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .level-two.glitch-switching .game-room h1 { animation: none; }
+    .level-two .game-room::before { transition: none; }
+}

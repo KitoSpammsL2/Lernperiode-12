@@ -38,6 +38,7 @@ if (objectName === "terminal") {
 
 // Glitch-Modus aktivieren
 glitchButton.addEventListener("click", () => {
+    if (currentState !== GameState.PLAYING || levelChanging) return;
     glitchActive = !glitchActive;
 
     document.body.classList.toggle(
@@ -69,8 +70,8 @@ function startTimer() {
     if (timerInterval !== null) return;
 
     timerInterval = setInterval(() => {
-        // Timer anhalten, sobald das Spiel gewonnen oder verloren ist
-        if (currentState !== GameState.PLAYING) {
+        // Beim Levelwechsel sowie nach Gewinn oder Niederlage anhalten
+        if (currentState !== GameState.PLAYING || levelChanging) {
             clearInterval(timerInterval);
             timerInterval = null;
             return;

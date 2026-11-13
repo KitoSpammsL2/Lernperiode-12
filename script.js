@@ -216,7 +216,12 @@ function completeLevel() {
         unlockLevel(currentLevel);
         console.log("Level", currentLevel, "gestartet");
         changeState(GameState.PLAYING);
-        location.href = levelPages[currentLevel - 1];
+        const nextPage = levelPages[currentLevel - 1];
+        if (typeof showLevelTransition === "function") {
+            showLevelTransition(currentLevel - 1, currentLevel, () => { location.href = nextPage; });
+        } else {
+            location.href = nextPage;
+        }
     } else {
         saveRunTime();
         changeState(GameState.WON);

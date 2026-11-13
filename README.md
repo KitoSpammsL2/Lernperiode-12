@@ -116,17 +116,14 @@ Die heutigen Rätselideen, Hinweise und Lösungen stehen in
 
 ### Faruk – CEO & Frontend
 - [x] Benutzeroberfläche von Level 2 verbessern. (Bestehenden Spielraum überarbeiten, doppelte Elemente entfernen, Design und Anordnung der Objekte optimieren)
-- [ ] Glitch-Modus für Level 2 erweitern. (Visuelle Effekte integrieren, versteckte Hinweise anzeigen, Glitch-Modus mit den neuen Rätseln abstimmen)
-- [ ] Übergänge zwischen den Levels gestalten. (Animation beim Levelabschluss erstellen, Ladebildschirm für das nächste Level einbauen, einheitliches Design sicherstellen)
-
-Umsetzung und automatische Browser-Tests von AP1: [Testbericht Level-2-Oberfläche](Testbericht-Level2-UI.md).
+- [x] Glitch-Modus für Level 2 erweitern. (Visuelle Effekte integrieren, versteckte Hinweise anzeigen, Glitch-Modus mit den neuen Rätseln abstimmen)
+- [x] Übergänge zwischen den Levels gestalten. (Animation beim Levelabschluss erstellen, Ladebildschirm für das nächste Level einbauen, einheitliches Design sicherstellen)
 
 ### Kaito – CTO & Spiellogik
 - [x] Spiellogik von Level 1 und 2 vollständig testen. (Levelwechsel, Timer, Rätselstatus und Speicherfunktion überprüfen, Fehler beheben)
 - [x] Levelauswahl und Neustartfunktion entwickeln. (Abgeschlossene Levels freischalten, Neustart eines Levels ermöglichen, Spielstand korrekt zurücksetzen)
 - [x] Grundlage für ein Backend vorbereiten. (Node.js und Express einrichten, erste API-Route erstellen, Verbindung zum Frontend testen)
 
-Testergebnisse und behobene Fehler: [Testbericht Spiellogik](Testbericht-Spiellogik.md).
 Backend starten und API: [Backend-Anleitung](backend/README.md).
 
 ### Laurentiu – COO & Rätselentwicklung

@@ -1,0 +1,43 @@
+/* Gleicher Übergang für beide Spielräume. */
+.level-transition {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    overflow-y: auto;
+    background: #070910;
+    color: #edf5ff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+.transition-card {
+    width: min(100%, 620px);
+    padding: clamp(24px, 5vw, 48px);
+    border: 1px solid #00ffff70;
+    border-radius: 16px;
+    background: radial-gradient(circle at top, #12313b, #0c111e 75%);
+    box-shadow: 0 0 64px #00ffff18;
+    overflow-wrap: anywhere;
+    animation: sectorFadeIn .24s ease-out both;
+}
+.transition-eyebrow { color: #ff78cf; font-size: 11px; letter-spacing: 3px; }
+.transition-symbol { display: block; color: #00ffff; font-size: 64px; line-height: 1.4; }
+.transition-card h1 { margin: 16px 0; color: #00ffff; font-size: clamp(20px, 4vw, 36px); letter-spacing: 1px; }
+.transition-card p { line-height: 1.6; }
+.transition-card > p:not(.transition-eyebrow) { color: #c4d6e5; }
+.transition-loader { height: 3px; margin: 32px 0 20px; background: #203241; overflow: hidden; border-radius: 4px; }
+.transition-loader span { display: block; width: 100%; height: 100%; background: linear-gradient(90deg, #00ffff, #ff00aa); transform-origin: left; animation: sectorLoad 1s ease-out both; }
+#transitionStatus { font-size: 12px; letter-spacing: 2px; }
+.level-leaving { overflow: hidden; }
+.level-leaving .game-room { animation: sectorExit .3s ease-in both; }
+body:not(.level-leaving) .game-room { animation: sectorFadeIn .35s ease-out both; }
+#winScreen { animation: sectorFadeIn .35s ease-out both; }
+@keyframes sectorFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes sectorExit { to { opacity: 0; transform: scale(.98); } }
+@keyframes sectorLoad { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) {
+    .level-transition, .transition-card, .transition-loader span, .level-leaving .game-room,
+    body:not(.level-leaving) .game-room, #winScreen { animation: none; }
+}

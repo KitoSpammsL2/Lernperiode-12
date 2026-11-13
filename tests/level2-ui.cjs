@@ -67,17 +67,30 @@ const server = http.createServer((req,res) => {
     await object('terminal'); for(const letter of 'GLITCH') await click(`[data-letter="${letter}"]`);
     await object('stromkasten'); await click('#switchA'); await click('#switchC'); await click('#switchSubmit');
     await check('getSolvedCount()===3','Level 1 weiterhin lösbar');
-    await object('tuer'); await waitFor("location.pathname.endsWith('room2.html') && !!document.querySelector('.level-two') && typeof puzzlePanel === 'undefined' && document.readyState==='complete'");
+    await object('tuer');
+    await check("!!document.getElementById('levelTransition') && document.querySelector('.game-room').inert && document.activeElement.id==='levelTransition'", 'Abschluss- und Ladebildschirm sperrt den alten Raum');
+    await check("currentLevel===2 && JSON.parse(sessionStorage.getItem(stateStorageKey)).level===2 && getUnlockedLevel()===2", 'nächstes Level vor Animation gespeichert und freigeschaltet');
+    await check("openDoor()===false && submitAnswer('puzzle1','2048')===false && currentState===GameState.PLAYING", 'Doppelklick und Antworten während Übergang gesperrt');
+    if(process.env.SCREENSHOT_PATH) {
+        await pause(300);
+        const shot=await cdp('Page.captureScreenshot',{format:'png'});
+        fs.writeFileSync(process.env.SCREENSHOT_PATH.replace(/\.png$/, '-transition.png'),Buffer.from(shot.data,'base64'));
+    }
+    await waitFor("location.pathname.endsWith('room2.html') && !!document.querySelector('.level-two') && typeof puzzlePanel === 'undefined' && document.readyState==='complete'");
     await check("getSolvedCount()===0 && getTimeLeft()>=295",'Levelwechsel setzt Level-2-Fortschritt und Timer korrekt');
     await check("document.querySelectorAll('.game-room').length===1 && document.querySelectorAll('.object').length===4 && !document.querySelector('[data-faruk-object]')",'genau ein Raum mit vier Originalobjekten');
     await check("new Set([...document.scripts].map(s=>s.src)).size===document.scripts.length",'keine doppelten Skripte');
-    await check("document.styleSheets.length===4 && [...document.styleSheets].every(s=>s.cssRules.length>0)",'alle vier Stylesheets geladen');
+    await check("document.styleSheets.length===5 && [...document.styleSheets].every(s=>s.cssRules.length>0)",'alle fünf Stylesheets geladen');
     await object('tuer'); await check("!document.getElementById('winScreen') && document.getElementById('message').textContent.includes('0/3')",'Tür bleibt bei 0/3 gesperrt');
     await object('konsole');
     await check("getComputedStyle(document.querySelector('#puzzleArea .glitch-hint')).display==='none'",'Hinweis zunächst verborgen');
     await click('#glitchButton');
     await check("document.body.classList.contains('glitch-active') && document.getElementById('glitchButton').getAttribute('aria-pressed')==='true' && getComputedStyle(document.querySelector('#puzzleArea .glitch-hint')).display!=='none'",'Glitch-Modus zeigt Hinweise und gedrückten Zustand');
-    await fill('#textInput','UHVHW'); await click('#textForm button');
+    await check("document.getElementById('glitchStatus').textContent.includes('HINWEISSCAN AKTIV') && [...document.querySelectorAll('.glitch-signal')].every(e=>getComputedStyle(e).display!=='none')", 'Scan-Anzeige und Signale an den drei Rätselobjekten sichtbar');
+    await fill('#textInput','UHVHW');
+    await click('#glitchButton');
+    await check("document.getElementById('textInput').value==='UHVHW' && getComputedStyle(document.querySelector('#puzzleArea .glitch-hint')).display==='none' && document.getElementById('glitchStatus').textContent.includes('deaktiviert')", 'Scan ausschalten erhält Eingabe und verbirgt Hinweise');
+    await click('#glitchButton'); await click('#textForm button');
     await check("getSolvedCount()===0 && document.getElementById('puzzleFeedback').textContent.includes('Verschiebung')",'Konsole erklärt falschen Befehl');
     await fill('#textInput',' reset '); await click('#textForm button');
     await check("getSolvedCount()===1 && document.querySelector('[data-object=konsole]').classList.contains('solved')",'Konsole gelöst und Karte aktualisiert');
@@ -151,6 +164,38 @@ const server = http.createServer((req,res) => {
     assert.equal(await evaluate('localStorage.getItem("glitchBestTime")'),best);
     await click('#restartGame'); await waitFor("location.pathname.endsWith('room.html') && document.readyState==='complete'");
     await check('currentLevel===1 && getSolvedCount()===0 && getTimeLeft()>=295','Neustart nach Niederlage');
+    // Levelauswahl aus Kaitos aktuellem Stand bleibt bedienbar.
+    await evaluate('returnToMenu()');
+    await waitFor("location.pathname.endsWith('index.html') && document.readyState==='complete' && document.querySelector('[data-level]')");
+    await click('[data-level="2"]');
+    await waitFor("location.pathname.endsWith('room2.html') && document.readyState==='complete'");
+    await check('currentLevel===2 && getSolvedCount()===0 && gameStartTime===null', 'freigeschaltetes Level 2 direkt starten');
+    await evaluate("returnToMenu()");
+    await waitFor("location.pathname.endsWith('index.html') && document.readyState==='complete'");
+    await click('#startButton');
+    await waitFor("location.pathname.endsWith('room.html') && document.readyState==='complete'");
+    // Für die weiteren Navigationsfälle bereits separat geprüfte Rätsel abkürzen.
+    await evaluate("Object.values(puzzles).forEach(p=>p.solved=true);savePuzzles();updateDoor()");
+    await object('tuer');
+    await waitFor("location.pathname.endsWith('room2.html') && document.readyState==='complete'");
+    await check('currentLevel===2 && getSolvedCount()===0', 'Levelwechsel auch mit reduzierter Bewegung');
+    await cdp('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'no-preference'}]});
+    await evaluate('returnToMenu()');
+    await waitFor("location.pathname.endsWith('index.html') && document.readyState==='complete'");
+    await click('#startButton');
+    await waitFor("location.pathname.endsWith('room.html') && document.readyState==='complete'");
+    await evaluate("Object.values(puzzles).forEach(p=>p.solved=true);savePuzzles();updateDoor()");
+    await cdp('Emulation.setDeviceMetricsOverride',{width:320,height:700,deviceScaleFactor:1,mobile:false});
+    await object('tuer');
+    await check("document.getElementById('levelTransition').scrollWidth<=innerWidth && getComputedStyle(document.querySelector('.transition-loader span')).animationName==='sectorLoad'", 'Ladebildschirm auf 320px ohne Überlauf und mit Animation');
+    if(process.env.SCREENSHOT_PATH) {
+        await pause(250);
+        const shot=await cdp('Page.captureScreenshot',{format:'png'});
+        fs.writeFileSync(process.env.SCREENSHOT_PATH.replace(/\.png$/, '-transition-mobile.png'),Buffer.from(shot.data,'base64'));
+    }
+    await cdp('Page.reload');
+    await waitFor("location.pathname.endsWith('room2.html') && document.readyState==='complete'");
+    await check("currentLevel===2 && getSolvedCount()===0 && !document.getElementById('levelTransition') && !document.querySelector('.game-room').inert", 'Neuladen während Übergang erreicht spielbares Level 2');
     assert.deepEqual(errors,[],'keine Browser- oder Konsolenfehler'); assert.deepEqual(failed,[],'keine fehlgeschlagenen Ressourcen');
     console.log('PASS keine Browserfehler oder fehlgeschlagenen Ressourcen');
 })().catch(err=>{console.error(err);process.exitCode=1;}).finally(async()=>{

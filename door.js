@@ -16,7 +16,7 @@ function checkDoor() {
 
 // Spieler versucht, die Tür zu öffnen
 function openDoor() {
-    if (currentState !== GameState.PLAYING) {
+    if (currentState !== GameState.PLAYING || levelChanging) {
         console.log("Das Spiel läuft noch nicht.");
         return false;
     }

@@ -141,7 +141,7 @@ function showRoomMessage(text) {
 
 // Rätsel eines Gegenstands öffnen
 function openPuzzle(puzzleId) {
-    if (currentState !== GameState.PLAYING) return;
+    if (currentState !== GameState.PLAYING || levelChanging) return;
 
     const view = puzzleViews[puzzleId];
     const solved = isPuzzleSolved(puzzleId);
@@ -186,7 +186,7 @@ function lockPuzzleInputs() {
 
 // Antwort vom Rätselsystem prüfen lassen und den Raum aktualisieren
 function submitAnswer(puzzleId, answer) {
-    if (currentState !== GameState.PLAYING) return false;
+    if (currentState !== GameState.PLAYING || levelChanging) return false;
 
     const correct = checkPuzzle(puzzleId, answer);
 

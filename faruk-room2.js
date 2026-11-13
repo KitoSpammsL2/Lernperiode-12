@@ -48,8 +48,22 @@
     document.addEventListener('keydown', event => {
         if (event.key === 'Escape' && !puzzlePanel.hidden) closePuzzle();
     });
+    const scanStatus = document.getElementById('glitchStatus');
+    let scanAnimation = null;
     glitchToggle.addEventListener('click', () => {
-        glitchToggle.setAttribute('aria-pressed', String(document.body.classList.contains('glitch-active')));
+        if (currentState !== GameState.PLAYING || levelChanging) return;
+        const scanning = document.body.classList.contains('glitch-active');
+        glitchToggle.setAttribute('aria-pressed', String(scanning));
+        glitchToggle.textContent = scanning ? 'NORMALANSICHT' : 'GLITCH-MODUS';
+        scanStatus.textContent = scanning
+            ? 'HINWEISSCAN AKTIV · Untersuche die markierten Systeme'
+            : 'NORMALANSICHT · Hinweisscan deaktiviert';
+        clearTimeout(scanAnimation);
+        document.body.classList.remove('glitch-switching');
+        // Die kurze Umschaltanimation bei jedem bewussten Wechsel neu starten.
+        void room.offsetWidth;
+        document.body.classList.add('glitch-switching');
+        scanAnimation = setTimeout(() => document.body.classList.remove('glitch-switching'), 360);
     });
     syncObjects();
 })();
