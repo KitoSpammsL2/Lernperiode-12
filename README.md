@@ -87,7 +87,6 @@ Umsetzung und Lösungen: [Rätselplanung Level 2](laurentiu/level2-raetsel.md).
 Die neuen Rätsel sind in der bestehenden Objektgruppe spielbar. Seit Faruks AP1
 vom 13.11 verwendet Level 2 ausschliesslich diesen Hauptspielraum; die zusätzliche
 Objektgruppe wurde entfernt.
-Prüfergebnisse und offene Probleme: [Testbericht](Testbericht.md).
 
 
 ## Zeitplan bis 18.12.2026
@@ -104,7 +103,7 @@ werden im Team verteilt. Die bestehenden persönlichen Arbeitspakete bleiben bes
 | 27.11.2026 | Level 4 fertigstellen; Level 5 planen | Drei weitere Rätsel, Glitch-Hinweise und Levelwechsel funktionieren; Konzept für das letzte Level steht. |
 | 04.12.2026 | Level 5 fertigstellen | Alle fünf Levels sind vom Hauptmenü bis zum letzten Ausgang durchspielbar. |
 | 11.12.2026 | Gesamttest und Fehlerbehebung; Zusatzfunktionen abschliessen | Speicherstand, Bestzeit, Neustart, Timer und geplantes Inventar sind geprüft; keine neuen grossen Funktionen mehr beginnen. |
-| 18.12.2026 | Abschlusstest und Abgabe | Kritische Fehler behoben, README und Testbericht aktuell, Präsentation und lauffähige Endversion bereit. |
+| 18.12.2026 | Abschlusstest und Abgabe | Kritische Fehler behoben, README aktuell, Präsentation und lauffähige Endversion bereit. |
 
 Ab 11.12 reservieren wir Zeit für Fehler und die Abgabe. Falls ein Level länger
 braucht, hat das durchspielbare Spiel Vorrang vor zusätzlichen Funktionen.
@@ -124,15 +123,12 @@ Die heutigen Rätselideen, Hinweise und Lösungen stehen in
 - [x] Levelauswahl und Neustartfunktion entwickeln. (Abgeschlossene Levels freischalten, Neustart eines Levels ermöglichen, Spielstand korrekt zurücksetzen)
 - [x] Grundlage für ein Backend vorbereiten. (Node.js und Express einrichten, erste API-Route erstellen, Verbindung zum Frontend testen)
 
-Backend starten und API: [Backend-Anleitung](backend/README.md).
-
 ### Laurentiu – COO & Rätselentwicklung
 - [x] Drei Rätsel von Level 2 fertigstellen und integrieren. (Platzhalter durch eigene Rätsel ersetzen, Lösungen überprüfen, Rätsel mit der vorhandenen Spiellogik verbinden)
 - [x] Rätsel und Hinweise von Level 2 testen. (Alle Rätsel durchspielen, Glitch-Hinweise überprüfen, Fehler und unklare Lösungen korrigieren)
 - [ ] Rätselkonzept für Level 3 entwickeln. (Drei neue Rätsel planen, Lösungen und Hinweise definieren, Schwierigkeitsgrad gegenüber Level 2 erhöhen)
 
 Konsole, Tresor und Server wurden in der überarbeiteten Oberfläche durchgespielt.
-Hinweise und Rückmeldungen sind präzisiert. Ergebnisse stehen im
-[Testbericht](Testbericht.md#prüfung-vom-13112026--level-2-in-der-überarbeiteten-oberfläche).
+Hinweise und Rückmeldungen sind präzisiert.
 
 
