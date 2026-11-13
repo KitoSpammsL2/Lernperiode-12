@@ -114,7 +114,7 @@ Die heutigen Rätselideen, Hinweise und Lösungen stehen in
 ## 13.11
 
 ### Faruk – CEO & Frontend
-- [ ] Benutzeroberfläche von Level 2 verbessern. (Bestehenden Spielraum überarbeiten, doppelte Elemente entfernen, Design und Anordnung der Objekte optimieren)
+- [x] Benutzeroberfläche von Level 2 verbessern. (Bestehenden Spielraum überarbeiten, doppelte Elemente entfernen, Design und Anordnung der Objekte optimieren)
 - [ ] Glitch-Modus für Level 2 erweitern. (Visuelle Effekte integrieren, versteckte Hinweise anzeigen, Glitch-Modus mit den neuen Rätseln abstimmen)
 - [ ] Übergänge zwischen den Levels gestalten. (Animation beim Levelabschluss erstellen, Ladebildschirm für das nächste Level einbauen, einheitliches Design sicherstellen)
 
