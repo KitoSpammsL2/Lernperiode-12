@@ -1,0 +1,40 @@
+/* Levelauswahl im Hauptmenü (level-select.js) */
+
+.level-select {
+    margin-top: 30px;
+}
+
+.level-select h3 {
+    margin: 0;
+    color: #ff00aa;
+    letter-spacing: 4px;
+    font-size: 16px;
+}
+
+.level-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.level-buttons button {
+    margin-top: 15px;
+    padding: 10px 24px;
+    font-size: 16px;
+}
+
+.level-buttons button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.level-buttons button:disabled:hover {
+    background: transparent;
+    color: #00ffff;
+}
+
+.level-note {
+    margin-top: 12px;
+    font-size: 13px;
+}
