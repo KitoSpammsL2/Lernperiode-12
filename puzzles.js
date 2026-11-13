@@ -128,6 +128,22 @@ function resetPuzzles() {
     console.log("Rätsel von Level " + currentLevel + " wurden zurückgesetzt.");
 }
 
+// Fortschritt eines einzelnen Levels löschen, z.B. beim Neustart dieses Levels
+function resetLevelProgress(level) {
+    const progress = loadProgress();
+    delete progress["level" + level];
+
+    try {
+        localStorage.setItem(progressStorageKey, JSON.stringify(progress));
+    } catch (error) {
+        console.error("Spielstand konnte nicht gespeichert werden.", error);
+    }
+
+    if (level === currentLevel) {
+        loadPuzzles();
+    }
+}
+
 // Fortschritt aller Levels löschen, z.B. bei einem neuen Spiel
 function resetAllPuzzles() {
     try {

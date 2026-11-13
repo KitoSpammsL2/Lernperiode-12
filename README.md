@@ -123,7 +123,7 @@ Umsetzung und automatische Browser-Tests von AP1: [Testbericht Level-2-Oberfläc
 
 ### Kaito – CTO & Spiellogik
 - [x] Spiellogik von Level 1 und 2 vollständig testen. (Levelwechsel, Timer, Rätselstatus und Speicherfunktion überprüfen, Fehler beheben)
-- [ ] Levelauswahl und Neustartfunktion entwickeln. (Abgeschlossene Levels freischalten, Neustart eines Levels ermöglichen, Spielstand korrekt zurücksetzen)
+- [x] Levelauswahl und Neustartfunktion entwickeln. (Abgeschlossene Levels freischalten, Neustart eines Levels ermöglichen, Spielstand korrekt zurücksetzen)
 - [ ] Grundlage für ein Backend vorbereiten. (Node.js und Express einrichten, erste API-Route erstellen, Verbindung zum Frontend testen)
 
 Testergebnisse und behobene Fehler: [Testbericht Spiellogik](Testbericht-Spiellogik.md).

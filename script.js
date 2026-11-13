@@ -12,6 +12,7 @@ const maxLevels = levelPages.length;
 
 const stateStorageKey = "glitchGameState";
 const bestTimeKey = "glitchBestTime";
+const unlockedLevelKey = "glitchUnlockedLevel";
 
 // Zeit pro Level in Sekunden
 const levelSeconds = 300;
@@ -159,16 +160,49 @@ function changeState(newState) {
     announceState();
 }
 
-// Neues Spiel: alten Rätselfortschritt löschen und zum ersten Level wechseln
-function startGame() {
-    currentLevel = 1;
+// Höchstes freigeschaltetes Level lesen (Level 1 ist immer frei)
+function getUnlockedLevel() {
+    try {
+        const saved = Number(localStorage.getItem(unlockedLevelKey));
+        return Number.isInteger(saved) && saved >= 1 ? Math.min(saved, maxLevels) : 1;
+    } catch (error) {
+        console.error("Freigeschaltete Levels konnten nicht geladen werden.", error);
+        return 1;
+    }
+}
+
+// Level dauerhaft freischalten, sobald das Level davor abgeschlossen ist
+function unlockLevel(level) {
+    if (level <= getUnlockedLevel()) return;
+
+    try {
+        localStorage.setItem(unlockedLevelKey, String(level));
+    } catch (error) {
+        console.error("Level konnte nicht freigeschaltet werden.", error);
+    }
+}
+
+// Neues Spiel ab einem freigeschalteten Level, alter Rätselfortschritt wird gelöscht.
+// Die Bestzeit zählt nur bei einem Start in Level 1.
+function startGame(level = 1) {
+    if (!Number.isInteger(level) || level < 1 || level > getUnlockedLevel()) return;
+
+    currentLevel = level;
     levelEndTime = null;
-    gameStartTime = Date.now();
+    gameStartTime = level === 1 ? Date.now() : null;
     runSeconds = null;
     newBestTime = false;
     resetAllPuzzles();
     changeState(GameState.PLAYING);
-    location.href = levelPages[0];
+    location.href = levelPages[level - 1];
+}
+
+// Aktuelles Level neu starten: nur dessen Rätsel und Zeit zurücksetzen
+function restartLevel() {
+    resetLevelProgress(currentLevel);
+    levelEndTime = null;
+    changeState(GameState.PLAYING);
+    location.href = levelPages[currentLevel - 1];
 }
 
 // Level abschliessen: nächstes Level laden oder gewinnen
@@ -179,6 +213,7 @@ function completeLevel() {
         levelChanging = true;
         currentLevel++;
         levelEndTime = null;
+        unlockLevel(currentLevel);
         console.log("Level", currentLevel, "gestartet");
         changeState(GameState.PLAYING);
         location.href = levelPages[currentLevel - 1];
@@ -230,7 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
             returnToMenu();
         }
 
-        startButton.addEventListener("click", startGame);
+        startButton.addEventListener("click", () => startGame());
     }
 
     // Nach einem Neuladen den gespeicherten Zustand erneut anzeigen
