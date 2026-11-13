@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="room-puzzles.css">
     <link rel="stylesheet" href="faruk-design.css">
     <link rel="stylesheet" href="room2.css">
+    <link rel="stylesheet" href="level-transitions.css">
 </head>
 <body class="level-two">
 
@@ -32,6 +33,7 @@
                 <span class="symbol" aria-hidden="true">▣</span>
                 <strong>KONSOLE</strong>
                 <span class="object-description">Verschobene Daten</span>
+                <span class="glitch-signal" aria-hidden="true">SIGNAL ENTDECKT</span>
                 <span class="object-status">Untersuchen →</span>
             </button>
 
@@ -40,6 +42,7 @@
                 <span class="symbol" aria-hidden="true">▦</span>
                 <strong>TRESOR</strong>
                 <span class="object-description">Verstreute Datenfragmente</span>
+                <span class="glitch-signal" aria-hidden="true">SIGNAL ENTDECKT</span>
                 <span class="object-status">Untersuchen →</span>
             </button>
 
@@ -48,6 +51,7 @@
                 <span class="symbol" aria-hidden="true">▥</span>
                 <strong>SERVER</strong>
                 <span class="object-description">Sicherer Neustart</span>
+                <span class="glitch-signal" aria-hidden="true">SIGNAL ENTDECKT</span>
                 <span class="object-status">Untersuchen →</span>
             </button>
 
@@ -62,12 +66,14 @@
 
         <div class="control-panel">
             <button type="button" id="glitchButton" aria-pressed="false">GLITCH-MODUS</button>
-            <p class="control-hint">Wechsle die Ansicht, um verborgene Hinweise zu sehen.</p>
+            <p id="glitchStatus" class="scan-status" role="status">NORMALANSICHT · Hinweisscan deaktiviert</p>
+            <p class="control-hint">Untersuche ein Objekt und aktiviere den Scan für seine verborgenen Hinweise.</p>
         </div>
 
         <p id="message" role="status">System bereit. Untersuche den Raum.</p>
     </main>
 
+    <script src="level-transitions.js"></script>
     <script src="script.js"></script>
     <script src="puzzles.js"></script>
     <script src="door.js"></script>
