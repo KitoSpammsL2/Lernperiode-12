@@ -98,12 +98,16 @@ function showLoseScreen() {
     showEndScreen("loseScreen", "#ff00aa", `
         <h1>ZEIT ABGELAUFEN</h1>
         <h2>Die Simulation hat dich behalten.</h2>
-        <button id="restartGame">NEU STARTEN</button>
+        <button id="restartLevel">LEVEL NEU STARTEN</button>
+        <button id="restartGame">NEUES SPIEL</button>
         <button id="loseToMenu">HAUPTMENÜ</button>
     `);
 
+    document.getElementById("restartLevel")
+        .addEventListener("click", restartLevel);
+
     document.getElementById("restartGame")
-        .addEventListener("click", startGame);
+        .addEventListener("click", () => startGame());
 
     document.getElementById("loseToMenu")
         .addEventListener("click", returnToMenu);
