@@ -130,7 +130,11 @@ Testergebnisse und behobene Fehler: [Testbericht Spiellogik](Testbericht-Spiello
 
 ### Laurentiu – COO & Rätselentwicklung
 - [x] Drei Rätsel von Level 2 fertigstellen und integrieren. (Platzhalter durch eigene Rätsel ersetzen, Lösungen überprüfen, Rätsel mit der vorhandenen Spiellogik verbinden)
-- [ ] Rätsel und Hinweise von Level 2 testen. (Alle Rätsel durchspielen, Glitch-Hinweise überprüfen, Fehler und unklare Lösungen korrigieren)
+- [x] Rätsel und Hinweise von Level 2 testen. (Alle Rätsel durchspielen, Glitch-Hinweise überprüfen, Fehler und unklare Lösungen korrigieren)
 - [ ] Rätselkonzept für Level 3 entwickeln. (Drei neue Rätsel planen, Lösungen und Hinweise definieren, Schwierigkeitsgrad gegenüber Level 2 erhöhen)
+
+Konsole, Tresor und Server wurden in der überarbeiteten Oberfläche durchgespielt.
+Hinweise und Rückmeldungen sind präzisiert. Ergebnisse stehen im
+[Testbericht](Testbericht.md#prüfung-vom-13112026--level-2-in-der-überarbeiteten-oberfläche).
 
 

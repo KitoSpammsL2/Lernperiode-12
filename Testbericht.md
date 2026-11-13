@@ -137,3 +137,24 @@ funktioniert trotz des dokumentierten Skriptfehlers.
 6. Server mit falscher Auswahl testen, dann ausschliesslich B und D aktivieren.
 7. Bei jedem Rätsel den Glitch-Modus ein- und ausschalten und zwischendurch neu laden.
 8. Bei 3/3 den oberen Ausgang anklicken und Zeit sowie Bestzeit prüfen.
+
+## Prüfung vom 13.11.2026 – Level 2 in der überarbeiteten Oberfläche
+
+Für Laurentius Arbeitspakete wurden die drei Rätsel nach Faruks Umbau
+erneut geprüft. Der Raum hat jetzt eine Objektgruppe. Konsole, Tresor
+und Server öffnen die vorgesehenen Rätsel. Der Ausgang verwendet den
+gemeinsamen Rätselstatus.
+
+| Prüfung | Ergebnis |
+|---|---|
+| Konsole | Verschobenen Text als Antwort abgelehnt, entschlüsselten Befehl akzeptiert. Der Hinweis erklärt die Richtung der Verschiebung pro Buchstabe. |
+| Tresor | Zu kurze Eingabe und falschen vierstelligen Code mit unterschiedlichen Meldungen abgelehnt. Den korrekten Code akzeptiert. Der Hinweis erklärt, in welcher Reihenfolge die Ziffern gelesen werden. |
+| Server | Falsche Auswahl abgelehnt. Nur die beiden intakten Module eingeschaltet ergibt eine gültige Lösung. Der Hinweis erklärt, was der Haken bewirkt. |
+| Glitch-Modus | Hinweise sind bei ausgeschaltetem Modus verborgen und lassen sich einblenden. Beim Tresor und Server auch das erneute Ausblenden geprüft. |
+| Fortschritt und Ausgang | Gelöste Rätsel bleiben nach Neuladen gespeichert und zählen nur einmal. Nach allen drei Lösungen wird der Ausgang freigeschaltet. |
+| Vollständiger Durchlauf | Wechsel von Level 1 zu Level 2, Gewinn, Bestzeit, Zeitablauf und Neustart bestanden. Keine JavaScript-Fehler oder fehlgeschlagenen Ressourcen. |
+
+Die Prüfung lief mit `node tests/level2-ui.cjs` in Microsoft Edge unter
+Windows. Der vorhandene Test prüft auch die Breiten 1440, 768, 390 und 320
+Pixel. Die neuen Fälle prüfen zusätzlich die Hinweise und Fehlermeldungen
+der einzelnen Rätsel.

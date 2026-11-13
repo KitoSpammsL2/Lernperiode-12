@@ -81,7 +81,8 @@ const level2Views = {
         "KONSOLE – VERSCHOBENE DATEN",
         "Die Konsole zeigt UHVHW. Entschlüssle den Befehl aus fünf Buchstaben.",
         "Jeder Buchstabe wurde im Alphabet um 3 Stellen nach vorne verschoben. " +
-        "Gehe zum Entschlüsseln 3 Stellen zurück (D → A, E → B)."
+        "Gehe für jeden angezeigten Buchstaben 3 Stellen zurück (D → A, E → B).",
+        "Die Konsole akzeptiert den Befehl nicht. Prüfe die Verschiebung für jeden Buchstaben."
     ),
     puzzle2: {
         title: "TRESOR – DATENFRAGMENTE",
@@ -94,22 +95,23 @@ const level2Views = {
                 <span class="color">C = 6</span>
                 <span class="color">D = 4</span>
             </div>
-            <p class="glitch-hint">Wiederhergestellte Reihenfolge: C → A → D → B</p>
+            <p class="glitch-hint">Reihenfolge: C → A → D → B. Lies die Ziffern in dieser Reihenfolge ab.</p>
             <form id="codeForm">
                 <input id="codeInput" type="text" inputmode="numeric" maxlength="4"
                        autocomplete="off" placeholder="4 Zahlen" aria-label="Tresorcode">
                 <button type="submit">PRÜFEN</button>
             </form>
         `,
-        setup: setupCodeLock
+        setup: setupCodeLock,
+        incorrect: "Der Tresor bleibt gesperrt. Prüfe die Reihenfolge der Fragmente."
     },
     puzzle3: {
         title: "SERVER – SICHERER NEUSTART",
         html: `
             <p>Aktiviere genau zwei intakte Module und prüfe die Auswahl.
                Beschädigte Module müssen ausgeschaltet bleiben.</p>
-            <p class="glitch-hint">Diagnose: A ist beschädigt. B ist intakt.
-               C ist beschädigt. D ist intakt.</p>
+            <p class="glitch-hint">Diagnose: A und C sind beschädigt. B und D sind intakt.
+               Ein gesetzter Haken schaltet das Modul ein.</p>
             <div class="switches">
                 <label><input type="checkbox" data-module="A"> Modul A</label>
                 <label><input type="checkbox" data-module="B"> Modul B</label>
@@ -118,7 +120,8 @@ const level2Views = {
             </div>
             <button type="button" id="moduleSubmit">PRÜFEN</button>
         `,
-        setup: setupServerPuzzle
+        setup: setupServerPuzzle,
+        incorrect: "Der Server startet nicht. Lass nur die beiden intakten Module eingeschaltet."
     }
 };
 
@@ -149,7 +152,7 @@ function openPuzzle(puzzleId) {
             <button type="button" id="closePuzzle" aria-label="Rätsel schliessen">✕</button>
         </div>
         ${solved ? "" : view.html}
-        <p class="puzzle-feedback" id="puzzleFeedback"></p>
+        <p class="puzzle-feedback" id="puzzleFeedback" role="status"></p>
     `;
     puzzleArea.hidden = false;
 
@@ -193,7 +196,7 @@ function submitAnswer(puzzleId, answer) {
         updateProgress();
         updateDoor();
     } else {
-        showPuzzleFeedback("Leider falsch. Versuche es nochmals.", false);
+        showPuzzleFeedback(puzzleViews[puzzleId].incorrect ?? "Leider falsch. Versuche es nochmals.", false);
     }
 
     return correct;
@@ -264,7 +267,7 @@ function setupServerPuzzle(puzzleId) {
 }
 
 // Rätsel mit freier Texteingabe
-function textPuzzle(title, question, hint) {
+function textPuzzle(title, question, hint, incorrect) {
     return {
         title: title,
         html: `
@@ -276,7 +279,8 @@ function textPuzzle(title, question, hint) {
                 <button type="submit">PRÜFEN</button>
             </form>
         `,
-        setup: setupTextPuzzle
+        setup: setupTextPuzzle,
+        incorrect
     };
 }
 
