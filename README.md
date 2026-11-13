@@ -129,7 +129,7 @@ Umsetzung und automatische Browser-Tests von AP1: [Testbericht Level-2-Oberfläc
 Testergebnisse und behobene Fehler: [Testbericht Spiellogik](Testbericht-Spiellogik.md).
 
 ### Laurentiu – COO & Rätselentwicklung
-- [ ] Drei Rätsel von Level 2 fertigstellen und integrieren. (Platzhalter durch eigene Rätsel ersetzen, Lösungen überprüfen, Rätsel mit der vorhandenen Spiellogik verbinden)
+- [x] Drei Rätsel von Level 2 fertigstellen und integrieren. (Platzhalter durch eigene Rätsel ersetzen, Lösungen überprüfen, Rätsel mit der vorhandenen Spiellogik verbinden)
 - [ ] Rätsel und Hinweise von Level 2 testen. (Alle Rätsel durchspielen, Glitch-Hinweise überprüfen, Fehler und unklare Lösungen korrigieren)
 - [ ] Rätselkonzept für Level 3 entwickeln. (Drei neue Rätsel planen, Lösungen und Hinweise definieren, Schwierigkeitsgrad gegenüber Level 2 erhöhen)
 
