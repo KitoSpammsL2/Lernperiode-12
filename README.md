@@ -108,9 +108,6 @@ werden im Team verteilt. Die bestehenden persönlichen Arbeitspakete bleiben bes
 Ab 11.12 reservieren wir Zeit für Fehler und die Abgabe. Falls ein Level länger
 braucht, hat das durchspielbare Spiel Vorrang vor zusätzlichen Funktionen.
 
-Die heutigen Rätselideen, Hinweise und Lösungen stehen in
-[Laurentius Rätselplanung für Level 2](laurentiu/level2-raetsel.md).
-
 ## 13.11
 
 ### Faruk – CEO & Frontend
@@ -128,7 +125,25 @@ Die heutigen Rätselideen, Hinweise und Lösungen stehen in
 - [x] Rätsel und Hinweise von Level 2 testen. (Alle Rätsel durchspielen, Glitch-Hinweise überprüfen, Fehler und unklare Lösungen korrigieren)
 - [ ] Rätselkonzept für Level 3 entwickeln. (Drei neue Rätsel planen, Lösungen und Hinweise definieren, Schwierigkeitsgrad gegenüber Level 2 erhöhen)
 
-Konsole, Tresor und Server wurden in der überarbeiteten Oberfläche durchgespielt.
-Hinweise und Rückmeldungen sind präzisiert.
+
+## 20.11
+
+### Faruk – CEO & Frontend
+- [ ] Feedback vom Marketplace im Frontend umsetzen. (Rückmeldungen der Tester auswerten, unübersichtliche Elemente verbessern, Bedienung des Spielraums vereinfachen)
+- [ ] Visuelles Feedback für gelöste Rätsel einbauen. (Erfolgreich gelöste Rätsel farblich markieren, Fortschrittsanzeige verbessern, verständliche Erfolgs- und Fehlermeldungen gestalten)
+- [ ] Grunddesign für Level 3 entwickeln. (Neuen Spielraum mit HTML/CSS gestalten, passende Objekte platzieren, einheitliches Design der bisherigen Levels übernehmen)
+
+### Kaito – CTO & Spiellogik
+- [ ] Level 3 in die bestehende Levelsteuerung integrieren. (Levelwechsel von Level 2 zu Level 3 ermöglichen, Rätselstatus für das neue Level vorbereiten, Timer korrekt zurücksetzen)
+- [ ] Backend um eine Speicherfunktion erweitern. (Express-API für Bestzeiten und Spielstände vorbereiten, Daten vom Frontend an den Server senden, Speicherung testen)
+- [ ] Spielfortschritt und Levelwechsel auf Fehler überprüfen. (Speicherfunktion, Neustart und Freischaltung der Levels testen, gefundene Fehler beheben)
+
+### Laurentiu – COO & Rätselentwicklung
+- [ ] Rätsel von Level 2 anhand des Feedbacks verbessern. (Schwierigkeit überprüfen, unklare Hinweise überarbeiten, falsche und richtige Eingaben testen)
+- [ ] Drei unterschiedliche Rätsel für Level 3 entwickeln. (Neue Rätselideen umsetzen, passende Codes und Lösungen definieren, versteckte Glitch-Hinweise integrieren)
+- [ ] Rätsel von Level 3 mit der Spiellogik verbinden. (Neue Rätsel im bestehenden System registrieren, Lösungen überprüfen, Fortschritt speichern und Rätsel testen)
+
+
+
 
 
