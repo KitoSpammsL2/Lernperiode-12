@@ -150,6 +150,10 @@ const server = http.createServer((req,res) => {
         fs.writeFileSync(process.env.SCREENSHOT_PATH,Buffer.from(shot.data,'base64'));
     }
     await evaluate("puzzles.puzzle3.solved=true"); await object('tuer');
+    await waitFor("location.pathname.endsWith('room3.html') && document.readyState==='complete' && typeof puzzleArea !== 'undefined'");
+    await check("currentLevel===3 && getUnlockedLevel()===3 && getSolvedCount()===0 && getTimeLeft()>=295",'Level 2 führt zu Level 3 mit neuem Timer');
+    await object('tuer'); await check("currentState===GameState.PLAYING && !document.getElementById('winScreen')",'Level-3-Ausgang bleibt bei 0/3 gesperrt');
+    await evaluate("Object.keys(puzzles).forEach(id=>checkPuzzle(id,levelPuzzles[3][id])); updateDoor()"); await object('tuer');
     await check("currentState===GameState.WON && !!document.getElementById('winScreen') && getBestTime()>0",'Gewinnbildschirm und Bestzeit');
     await click('#backToMenu'); await waitFor("location.pathname.endsWith('index.html') && document.readyState==='complete'");
     const best=await evaluate('localStorage.getItem("glitchBestTime")');
