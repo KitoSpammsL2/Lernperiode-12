@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLITCH – Level 3</title>
+    <link rel="stylesheet" href="room.css">
+    <link rel="stylesheet" href="room-puzzles.css">
+    <link rel="stylesheet" href="faruk-design.css">
+    <link rel="stylesheet" href="room2.css">
+    <link rel="stylesheet" href="level-transitions.css">
+</head>
+<!-- Grundgerüst für Level 3: übernimmt vorerst das Design von Level 2 (Klasse level-two) -->
+<body class="level-two level-three">
+
+    <header class="hud">
+        <h2>GLITCH // LEVEL 03</h2>
+
+        <div class="stats">
+            <span class="timer-stat"><span class="stat-label">RESTZEIT</span><span id="timer" role="timer" aria-label="Verbleibende Zeit">05:00</span></span>
+            <span class="progress-stat"><span class="stat-label">FORTSCHRITT</span><span id="progress" role="status">Rätsel: 0/3</span></span>
+        </div>
+    </header>
+
+    <main class="game-room">
+
+        <p class="sector-label">SEKTOR 03 / QUARANTÄNE</p>
+        <h1>DER QUARANTÄNESEKTOR</h1>
+        <p class="subtitle">Der Sektor ist isoliert. Stelle die Zugriffsrechte wieder her, repariere die Daten und finde die Route nach draussen.</p>
+
+        <div class="objects" role="group" aria-label="Interaktive Objekte">
+            <button type="button" class="object" data-object="zugriff">
+                <span class="object-index" aria-hidden="true">01 / SYSTEM</span>
+                <span class="symbol" aria-hidden="true">▣</span>
+                <strong>ZUGRIFFSTERMINAL</strong>
+                <span class="object-description">Berechtigungen sortieren</span>
+                <span class="glitch-signal" aria-hidden="true">SIGNAL ENTDECKT</span>
+                <span class="object-status">Untersuchen →</span>
+            </button>
+
+            <button type="button" class="object" data-object="puffer">
+                <span class="object-index" aria-hidden="true">02 / SYSTEM</span>
+                <span class="symbol" aria-hidden="true">▦</span>
+                <strong>DATENPUFFER</strong>
+                <span class="object-description">Defektes Bit reparieren</span>
+                <span class="glitch-signal" aria-hidden="true">SIGNAL ENTDECKT</span>
+                <span class="object-status">Untersuchen →</span>
+            </button>
+
+            <button type="button" class="object" data-object="route">
+                <span class="object-index" aria-hidden="true">03 / SYSTEM</span>
+                <span class="symbol" aria-hidden="true">▥</span>
+                <strong>ROUTENPULT</strong>
+                <span class="object-description">Weg durch die Quarantäne</span>
+                <span class="glitch-signal" aria-hidden="true">SIGNAL ENTDECKT</span>
+                <span class="object-status">Untersuchen →</span>
+            </button>
+
+            <button type="button" class="object" data-object="tuer">
+                <span class="object-index" aria-hidden="true">04 / EXIT</span>
+                <span class="symbol" aria-hidden="true">🚪</span>
+                <strong>AUSGANG</strong>
+                <span class="object-description">Drei Rätsel öffnen die Tür</span>
+                <span class="object-status">Gesperrt</span>
+            </button>
+        </div>
+
+        <div class="control-panel">
+            <button type="button" id="glitchButton" aria-pressed="false">GLITCH-MODUS</button>
+            <p id="glitchStatus" class="scan-status" role="status">NORMALANSICHT · Hinweisscan deaktiviert</p>
+            <p class="control-hint">Untersuche ein Objekt und aktiviere den Scan für seine verborgenen Hinweise.</p>
+        </div>
+
+        <p id="message" role="status">System bereit. Untersuche den Raum.</p>
+    </main>
+
+    <script src="level-transitions.js"></script>
+    <script src="script.js"></script>
+    <script src="puzzles.js"></script>
+    <script src="door.js"></script>
+    <script src="room.js"></script>
+    <script src="room-puzzles.js"></script>
+    <script src="faruk-room2.js"></script>
+</body>
+</html>

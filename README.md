@@ -134,7 +134,7 @@ braucht, hat das durchspielbare Spiel Vorrang vor zusätzlichen Funktionen.
 - [ ] Grunddesign für Level 3 entwickeln. (Neuen Spielraum mit HTML/CSS gestalten, passende Objekte platzieren, einheitliches Design der bisherigen Levels übernehmen)
 
 ### Kaito – CTO & Spiellogik
-- [ ] Level 3 in die bestehende Levelsteuerung integrieren. (Levelwechsel von Level 2 zu Level 3 ermöglichen, Rätselstatus für das neue Level vorbereiten, Timer korrekt zurücksetzen)
+- [x] Level 3 in die bestehende Levelsteuerung integrieren. (Levelwechsel von Level 2 zu Level 3 ermöglichen, Rätselstatus für das neue Level vorbereiten, Timer korrekt zurücksetzen)
 - [ ] Backend um eine Speicherfunktion erweitern. (Express-API für Bestzeiten und Spielstände vorbereiten, Daten vom Frontend an den Server senden, Speicherung testen)
 - [ ] Spielfortschritt und Levelwechsel auf Fehler überprüfen. (Speicherfunktion, Neustart und Freischaltung der Levels testen, gefundene Fehler beheben)
 
