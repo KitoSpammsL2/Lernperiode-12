@@ -14,6 +14,11 @@ const levelObjects = {
         konsole: "puzzle1",
         tresor: "puzzle2",
         server: "puzzle3"
+    },
+    3: {
+        zugriff: "puzzle1",
+        puffer: "puzzle2",
+        route: "puzzle3"
     }
 };
 
@@ -125,7 +130,26 @@ const level2Views = {
     }
 };
 
-const puzzleViews = { 1: level1Views, 2: level2Views }[currentLevel] || {};
+// Platzhalter, bis Laurentius Rätsel für Level 3 fertig sind
+const level3Views = {
+    puzzle1: textPuzzle(
+        "ZUGRIFFSTERMINAL",
+        "Das Terminal fragt, in welchem Level du bist.",
+        "Tippe die Zahl ein: 3"
+    ),
+    puzzle2: textPuzzle(
+        "DATENPUFFER",
+        "Der Puffer wartet auf den Befehl, der die Daten repariert.",
+        "Der Befehl heisst REPAIR"
+    ),
+    puzzle3: textPuzzle(
+        "ROUTENPULT",
+        "Das Pult fragt nach dem Ziel der Route.",
+        "Das Ziel heisst EXIT"
+    )
+};
+
+const puzzleViews = { 1: level1Views, 2: level2Views, 3: level3Views }[currentLevel] || {};
 
 // Bereich, in dem das geöffnete Rätsel angezeigt wird
 const puzzleArea = document.createElement("section");

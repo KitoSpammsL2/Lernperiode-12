@@ -12,6 +12,12 @@ const levelPuzzles = {
         puzzle1: "RESET",
         puzzle2: "6842",
         puzzle3: "0101"
+    },
+    // Platzhalter, bis Laurentius Rätsel für Level 3 fertig sind
+    3: {
+        puzzle1: "3",
+        puzzle2: "REPAIR",
+        puzzle3: "EXIT"
     }
 };
 
