@@ -144,6 +144,19 @@ braucht, hat das durchspielbare Spiel Vorrang vor zusätzlichen Funktionen.
 - [ ] Rätsel von Level 3 mit der Spiellogik verbinden. (Neue Rätsel im bestehenden System registrieren, Lösungen überprüfen, Fortschritt speichern und Rätsel testen)
 
 
+## 27.11
 
+### Faruk – CEO & Frontend
+- [ ] Design von Level 3 fertigstellen. (Spielraum an Laurentius Rätsel anpassen, Glitch-Effekte und Hinweise abstimmen, Darstellung auf dem Handy prüfen)
+- [ ] Grunddesign für Level 4 entwickeln. (Neuen Spielraum mit HTML/CSS gestalten, passende Objekte platzieren, einheitliches Design übernehmen)
+- [ ] Rangliste und Inventar gestalten. (Rangliste im Hauptmenü und Inventaranzeige im Spielraum entwerfen, mit der Spiellogik abstimmen)
 
+### Kaito – CTO & Spiellogik
+- [ ] Level 4 in die Levelsteuerung integrieren. (Levelwechsel von Level 3 zu Level 4 ermöglichen, Rätselstatus vorbereiten, Freischaltung und Timer prüfen)
+- [ ] Rangliste mit Bestzeiten einbauen. (Bestzeiten über die Express-API laden und speichern, Spielernamen abfragen, Rangliste im Hauptmenü anzeigen)
+- [ ] Inventarsystem vorbereiten. (Gefundene Gegenstände speichern, Inventar im Spielraum anzeigen, Gegenstände in Rätseln verwenden)
 
+### Laurentiu – COO & Rätselentwicklung
+- [ ] Level 3 testen und verbessern. (Alle drei Rätsel durchspielen, Hinweise und Schwierigkeit anpassen, Fehler mit dem Team beheben)
+- [ ] Drei Rätsel für Level 4 entwickeln und integrieren. (Rätsel planen und programmieren, Glitch-Hinweise einbauen, mit der Spiellogik verbinden)
+- [ ] Rätselkonzept für Level 5 entwickeln. (Drei abschliessende Rätsel planen, Lösungen und Hinweise definieren, Schwierigkeit weiter steigern)
