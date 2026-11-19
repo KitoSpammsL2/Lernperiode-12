@@ -13,11 +13,11 @@ const levelPuzzles = {
         puzzle2: "6842",
         puzzle3: "0101"
     },
-    // Platzhalter, bis Laurentius Rätsel für Level 3 fertig sind
+    // Quarantäne: Chipfolge, repariertes Datenpaket, günstigste Route
     3: {
-        puzzle1: "3",
-        puzzle2: "REPAIR",
-        puzzle3: "EXIT"
+        puzzle1: "97624",
+        puzzle2: "6:1011",
+        puzzle3: "SBCDZ"
     }
 };
 
@@ -46,6 +46,11 @@ function loadPuzzles() {
     // Alte Platzhalterlösungen zählen nicht für die neuen Rätsel von Level 2.
     // Der Fortschritt von Level 1 bleibt erhalten.
     if (currentLevel === 2 && levelProgress.version !== 2) {
+        levelProgress = {};
+    }
+
+    // Erfolge der Level-3-Platzhalter zählen nicht für die neuen Aufgaben.
+    if (currentLevel === 3 && levelProgress.version !== 1) {
         levelProgress = {};
     }
 
@@ -97,6 +102,10 @@ function savePuzzles() {
 
     if (currentLevel === 2) {
         levelProgress.version = 2;
+    }
+
+    if (currentLevel === 3) {
+        levelProgress.version = 1;
     }
 
     progress["level" + currentLevel] = levelProgress;

@@ -140,7 +140,7 @@ braucht, hat das durchspielbare Spiel Vorrang vor zusätzlichen Funktionen.
 
 ### Laurentiu – COO & Rätselentwicklung
 - [ ] Rätsel von Level 2 anhand des Feedbacks verbessern. (Schwierigkeit überprüfen, unklare Hinweise überarbeiten, falsche und richtige Eingaben testen)
-- [ ] Drei unterschiedliche Rätsel für Level 3 entwickeln. (Neue Rätselideen umsetzen, passende Codes und Lösungen definieren, versteckte Glitch-Hinweise integrieren)
+- [x] Drei unterschiedliche Rätsel für Level 3 entwickeln. (Neue Rätselideen umsetzen, passende Codes und Lösungen definieren, versteckte Glitch-Hinweise integrieren)
 - [ ] Rätsel von Level 3 mit der Spiellogik verbinden. (Neue Rätsel im bestehenden System registrieren, Lösungen überprüfen, Fortschritt speichern und Rätsel testen)
 
 
