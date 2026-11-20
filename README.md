@@ -176,3 +176,21 @@ Laurentius Integration unverändert.
 - [ ] Level 3 testen und verbessern. (Alle drei Rätsel durchspielen, Hinweise und Schwierigkeit anpassen, Fehler mit dem Team beheben)
 - [ ] Drei Rätsel für Level 4 entwickeln und integrieren. (Rätsel planen und programmieren, Glitch-Hinweise einbauen, mit der Spiellogik verbinden)
 - [ ] Rätselkonzept für Level 5 entwickeln. (Drei abschliessende Rätsel planen, Lösungen und Hinweise definieren, Schwierigkeit weiter steigern)
+
+
+## 04.12
+
+### Faruk – CEO & Frontend
+- [ ] Grunddesign für Level 5 entwickeln. (Letzten Spielraum mit HTML/CSS gestalten, passende Objekte platzieren, einheitliches Design übernehmen)
+- [ ] Abschlussbildschirm für das ganze Spiel gestalten. (Gewinnbildschirm nach Level 5 mit Zeit und Rangliste gestalten, Neustart und Hauptmenü einbauen)
+- [ ] Design aller Levels vereinheitlichen. (Farben, Schriften und Abstände in allen fünf Räumen angleichen, Darstellung auf dem Handy prüfen)
+
+### Kaito – CTO & Spiellogik
+- [ ] Level 5 in die Levelsteuerung integrieren. (Levelwechsel von Level 4 zu Level 5 ermöglichen, Level 5 als Spielende festlegen, Rätselstatus und Timer prüfen)
+- [ ] Spielstand und Rangliste vom Server laden. (Gespeicherten Spielstand beim Start übernehmen, Rangliste aktualisieren, Verhalten ohne Server prüfen)
+- [ ] Automatische Tests auf alle fünf Levels erweitern. (Tests für Levelwechsel, Speicherfunktion und Neustart ergänzen, gefundene Fehler beheben)
+
+### Laurentiu – COO & Rätselentwicklung
+- [ ] Drei Rätsel für Level 5 entwickeln und integrieren. (Abschliessende Rätsel programmieren, Glitch-Hinweise einbauen, mit der Spiellogik verbinden)
+- [ ] Rätsel von Level 4 testen und verbessern. (Alle Rätsel durchspielen, Hinweise und Schwierigkeit anpassen, Fehler beheben)
+- [ ] Gesamttest von Level 1 bis 5 vorbereiten. (Testablauf für alle Levels planen, Testpersonen organisieren, Rückmeldungen sammeln)
