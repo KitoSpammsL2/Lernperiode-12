@@ -146,8 +146,7 @@ Neuladen wieder angezeigt.
 
 Level 3 hat ein eigenes Quarantäne-Grunddesign mit Zugriffsterminal, Datenpuffer,
 Routenpult und einem separaten Ausgang. Die Anordnung passt sich an kleine
-Bildschirme an. Die vorhandenen Level-3-Platzhalterrätsel bleiben bis zu
-Laurentius Integration unverändert.
+Bildschirme an. Die drei Quarantäne-Rätsel sind mit dieser Oberfläche verbunden.
 
 ### Kaito – CTO & Spiellogik
 - [x] Level 3 in die bestehende Levelsteuerung integrieren. (Levelwechsel von Level 2 zu Level 3 ermöglichen, Rätselstatus für das neue Level vorbereiten, Timer korrekt zurücksetzen)
@@ -155,9 +154,15 @@ Laurentius Integration unverändert.
 - [x] Spielfortschritt und Levelwechsel auf Fehler überprüfen. (Speicherfunktion, Neustart und Freischaltung der Levels testen, gefundene Fehler beheben)
 
 ### Laurentiu – COO & Rätselentwicklung
-- [ ] Rätsel von Level 2 anhand des Feedbacks verbessern. (Schwierigkeit überprüfen, unklare Hinweise überarbeiten, falsche und richtige Eingaben testen)
-- [ ] Drei unterschiedliche Rätsel für Level 3 entwickeln. (Neue Rätselideen umsetzen, passende Codes und Lösungen definieren, versteckte Glitch-Hinweise integrieren)
-- [ ] Rätsel von Level 3 mit der Spiellogik verbinden. (Neue Rätsel im bestehenden System registrieren, Lösungen überprüfen, Fortschritt speichern und Rätsel testen)
+- [x] Rätsel von Level 2 anhand des Feedbacks verbessern. (Schwierigkeit überprüfen, unklare Hinweise überarbeiten, falsche und richtige Eingaben testen)
+- [x] Drei unterschiedliche Rätsel für Level 3 entwickeln. (Neue Rätselideen umsetzen, passende Codes und Lösungen definieren, versteckte Glitch-Hinweise integrieren)
+- [x] Rätsel von Level 3 mit der Spiellogik verbinden. (Neue Rätsel im bestehenden System registrieren, Lösungen überprüfen, Fortschritt speichern und Rätsel testen)
+
+Für Level 2 lagen keine konkreten Kritikpunkte vor. Bei der eigenen Prüfung
+wurden leere Befehle und eine falsche Anzahl aktivierter Servermodule mit
+gezielten Eingabemeldungen ergänzt. Richtige und falsche Antworten sind getestet.
+Level 3 verwendet die gemeinsame Lösungsprüfung, Fortschrittsanzeige,
+Speicherung und Türfreigabe. Neuladen und Level-Neustart sind geprüft.
 
 
 ## 27.11

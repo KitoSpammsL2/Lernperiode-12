@@ -1,0 +1,30 @@
+.level-three .game-room h1 {
+    overflow-wrap: anywhere;
+}
+
+.level-three #payload {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #00ffff;
+    border-radius: 8px;
+    font: inherit;
+    letter-spacing: 4px;
+}
+
+.level-three #puzzleArea .symbol-buttons button {
+    min-width: 44px;
+    font-size: 18px;
+}
+
+.level-three #puzzleArea [aria-pressed="true"] {
+    outline: 2px solid #ff78cf;
+    outline-offset: 2px;
+}
+
+.level-three #puzzleArea button {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}

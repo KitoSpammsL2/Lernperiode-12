@@ -53,7 +53,7 @@ const server = http.createServer((req,res) => {
     };
     const waitFor=async expression=>{
         for(let i=0;i<100;i++) {try{if(await evaluate(expression))return;}catch{} await pause(50);}
-        throw new Error('Timeout: '+expression);
+        throw new Error('Timeout: '+expression+' '+JSON.stringify(await evaluate('({url:location.href,state:typeof currentState, errors:document.readyState})')));
     };
     const click=async selector=>evaluate(`document.querySelector(${JSON.stringify(selector)}).click()`);
     const fill=async(selector,value)=>evaluate(`document.querySelector(${JSON.stringify(selector)}).value=${JSON.stringify(value)}`);
@@ -107,6 +107,8 @@ const server = http.createServer((req,res) => {
     await check("document.styleSheets.length===5 && [...document.styleSheets].every(s=>s.cssRules.length>0)",'alle fünf Stylesheets geladen');
     await object('tuer'); await check("!document.getElementById('winScreen') && document.getElementById('message').textContent.includes('0/3')",'Tür bleibt bei 0/3 gesperrt');
     await object('konsole');
+    await fill('#textInput','   '); await click('#textForm button');
+    await check("getSolvedCount()===0 && document.getElementById('puzzleFeedback').textContent.includes('zuerst einen Befehl')", 'leerer Level-2-Befehl erklärt');
     await check("getComputedStyle(document.querySelector('#puzzleArea .glitch-hint')).display==='none'",'Hinweis zunächst verborgen');
     await click('#glitchButton');
     await check("document.body.classList.contains('glitch-active') && document.getElementById('glitchButton').getAttribute('aria-pressed')==='true' && getComputedStyle(document.querySelector('#puzzleArea .glitch-hint')).display!=='none'",'Glitch-Modus zeigt Hinweise und gedrückten Zustand');
@@ -142,6 +144,8 @@ const server = http.createServer((req,res) => {
     await fill('#codeInput','6842'); await click('#codeForm button');
     await check("!document.getElementById('backToObjects').disabled && !document.getElementById('puzzleGlitchButton').disabled", 'Navigation und Hinweissteuerung nach Lösung weiter bedienbar');
     await object('server');
+    await click('#moduleSubmit');
+    await check("getSolvedCount()===2 && document.getElementById('puzzleFeedback').textContent.includes('genau zwei')", 'Server erklärt fehlende Modulauswahl');
     await check(hintHidden, 'Server-Hinweis bei ausgeschaltetem Glitch-Modus verborgen');
     await click('#glitchButton');
     await check(`!(${hintHidden}) && document.querySelector('#puzzleArea .glitch-hint').textContent.includes('B und D sind intakt')`, 'Server-Hinweis zeigt intakte Module');
@@ -184,9 +188,60 @@ const server = http.createServer((req,res) => {
     await waitFor("location.pathname.endsWith('room3.html') && document.readyState==='complete' && typeof puzzleArea !== 'undefined'");
     await check("currentLevel===3 && getUnlockedLevel()===3 && getSolvedCount()===0 && getTimeLeft()>=295",'Level 2 führt zu Level 3 mit neuem Timer');
     await object('tuer'); await check("currentState===GameState.PLAYING && !document.getElementById('winScreen')",'Level-3-Ausgang bleibt bei 0/3 gesperrt');
-    await object('zugriff'); await click('#puzzleGlitchButton');
-    await check("document.body.classList.contains('glitch-active') && document.getElementById('puzzleGlitchButton').getAttribute('aria-pressed')==='true'", 'gemeinsame Hinweissteuerung funktioniert auch in Level 3');
-    await click('#backToObjects');
+    await evaluate("const oldProgress=loadProgress();oldProgress.level3={puzzle1:true,puzzle2:true,puzzle3:true};localStorage.setItem(progressStorageKey,JSON.stringify(oldProgress))");
+    await cdp('Page.reload');
+    await waitFor("document.readyState==='complete' && typeof puzzleArea!=='undefined'");
+    await check("getSolvedCount()===0 && loadProgress().level2.puzzle1===true", 'alte Level-3-Erfolge verworfen und Level 2 erhalten');
+    await object('zugriff');
+    await check("getComputedStyle(document.querySelector('#puzzleArea .glitch-hint')).display==='none'", 'Level-3-Regeln zunächst verborgen');
+    await click('#glitchButton');
+    await check("getComputedStyle(document.querySelector('#puzzleArea .glitch-hint')).display!=='none'", 'Level-3-Regeln im Scan sichtbar');
+    await click('#chipCheck');
+    await check("getSolvedCount()===0 && document.getElementById('puzzleFeedback').textContent.includes('fünf')", 'unvollständige Chipfolge abgelehnt');
+    for(const chip of '69742') await click(`[data-chip="${chip}"]`);
+    await click('#chipCheck');
+    await check('getSolvedCount()===0', 'Chipfolge mit falschen Nachbarn abgelehnt');
+    for(let i=0;i<5;i++) await click('#chipUndo');
+    for(const chip of '97624') await click(`[data-chip="${chip}"]`);
+    await click('#chipCheck');
+    await check("getSolvedCount()===1 && document.getElementById('chipUndo').disabled", 'Chipfolge gelöst und Eingaben gesperrt');
+    await cdp('Page.reload');
+    await waitFor("document.readyState==='complete' && document.querySelector('.object.solved')");
+    await check('getSolvedCount()===1', 'Level-3-Erfolg nach Neuladen erhalten');
+    await object('puffer');
+    await click('#bitForm button');
+    await check("document.getElementById('puzzleFeedback').textContent.includes('vier Bits')", 'leere Bitantwort erklärt');
+    await click('[data-bit="7"]'); await fill('#payload','1011'); await click('#bitForm button');
+    await check('getSolvedCount()===1', 'falsche Bitposition abgelehnt');
+    await click('[data-bit="6"]'); await fill('#payload','1111'); await click('#bitForm button');
+    await check("getSolvedCount()===1 && document.getElementById('puzzleFeedback').textContent.includes('Lesereihenfolge')", 'falsche Nutzbits erklärt');
+    await check("document.getElementById('bitPreview').textContent.includes('0110011')", 'repariertes Paket sichtbar');
+    await fill('#payload','1011'); await click('#bitForm button');
+    await check('getSolvedCount()===2', 'Bitposition und Nutzdaten gemeinsam geprüft');
+    await object('route');
+    await click('#glitchButton');
+    await check("[...document.querySelectorAll('#puzzleArea .glitch-hint')].every(e=>getComputedStyle(e).display!=='none')", 'Route zeigt Regeln und Leitungsstatus');
+    for(const node of 'AEZ') await click(`[data-node="${node}"]`);
+    await click('#routeCheck');
+    await check("getSolvedCount()===2 && document.getElementById('puzzleFeedback').textContent.includes('Kontrollpunkt')", 'Route ohne C abgelehnt');
+    for(let i=0;i<3;i++) await click('#routeUndo');
+    for(const node of 'BCEZ') await click(`[data-node="${node}"]`);
+    await click('#routeCheck');
+    await check("getSolvedCount()===2 && document.getElementById('puzzleFeedback').textContent.includes('instabile')", 'Route ohne instabile Leitung abgelehnt');
+    for(let i=0;i<4;i++) await click('#routeUndo');
+    for(const node of 'ACEZ') await click(`[data-node="${node}"]`);
+    await click('#routeCheck');
+    await check("getSolvedCount()===2 && document.getElementById('puzzleFeedback').textContent.includes('günstigeren')", 'zulässige aber langsamere Route abgelehnt');
+    for(let i=0;i<4;i++) await click('#routeUndo');
+    for(const node of 'BCDZ') await click(`[data-node="${node}"]`);
+    await check("document.getElementById('routePreview').textContent.includes('Kosten: 10')", 'Routenkosten korrekt');
+    for(const width of [1440,390,320]) {
+        await cdp('Emulation.setDeviceMetricsOverride',{width,height:900,deviceScaleFactor:1,mobile:false});
+        await pause(150);
+        await check('document.documentElement.scrollWidth<=innerWidth', `Level-3-Routenpult bei ${width}px ohne Überlauf`);
+    }
+    await click('#routeCheck');
+    await check('getSolvedCount()===3', 'alle Level-3-Rätsel über Eingaben gelöst');
     await check("!![...document.styleSheets].find(s=>s.href.endsWith('room3.css')) && document.querySelectorAll('.objects svg').length===4", 'eigenes Level-3-Layout und vier Stationssymbole geladen');
     for(const width of [1440,768,390,320]) {
         await cdp('Emulation.setDeviceMetricsOverride',{width,height:900,deviceScaleFactor:1,mobile:false});
@@ -197,15 +252,6 @@ const server = http.createServer((req,res) => {
             fs.writeFileSync(process.env.SCREENSHOT_PATH.replace(/\.png$/, '-level3-'+width+'.png'),Buffer.from(shot.data,'base64'));
         }
     }
-    await object('zugriff'); await fill('#textInput',await evaluate('levelPuzzles[3].puzzle1')); await click('#textForm button');
-    await check("document.querySelector('[data-object=zugriff]').classList.contains('solved') && document.getElementById('puzzleProgress').value===1 && getComputedStyle(document.querySelector('.just-solved')).animationName==='none'", 'Level-3-Erfolg markiert Station und respektiert reduzierte Bewegung');
-    await cdp('Page.reload');
-    await waitFor("document.readyState==='complete' && document.querySelector('[data-object=zugriff].solved')");
-    await check("getSolvedCount()===1 && document.getElementById('puzzleProgress').value===1", 'Level-3-Erfolg bleibt nach Neuladen sichtbar');
-    for(const [name,id] of [['puffer','puzzle2'],['route','puzzle3']]) {
-        await object(name); await fill('#textInput',await evaluate(`levelPuzzles[3].${id}`)); await click('#textForm button');
-    }
-    await check("getSolvedCount()===3 && document.getElementById('puzzleProgress').value===3 && document.getElementById('puzzleFeedback').textContent.includes('Ausgang ist jetzt freigeschaltet')", 'alle vorhandenen Level-3-Rätsel über Oberfläche lösbar');
     await object('tuer');
     await check("currentState===GameState.WON && !!document.getElementById('winScreen') && getBestTime()>0",'Gewinnbildschirm und Bestzeit');
     await click('#backToMenu'); await waitFor("location.pathname.endsWith('index.html') && document.readyState==='complete'");
@@ -213,7 +259,11 @@ const server = http.createServer((req,res) => {
     await click('#startButton'); await waitFor("location.pathname.endsWith('room.html') && document.readyState==='complete'");
     await check('getSolvedCount()===0','Neustart löscht alten Rätselfortschritt');
     // Ablauf gezielt in Level 2 prüfen, ohne fünf Minuten Wartezeit.
-    await evaluate("currentLevel=2;levelEndTime=Date.now()-1000;saveGameState();location.href='room2.html'");
+    await evaluate("returnToMenu()");
+    await waitFor("location.pathname.endsWith('index.html') && document.readyState==='complete' && document.querySelector('.level-buttons')");
+    await click('[data-level="2"]');
+    await waitFor("location.pathname.endsWith('room2.html') && document.readyState==='complete' && typeof puzzles!=='undefined'");
+    await evaluate("levelEndTime=Date.now()-1000;saveGameState()");
     await waitFor("location.pathname.endsWith('room2.html') && !!document.getElementById('loseScreen')");
     await check("currentState===GameState.LOST && document.getElementById('timer').textContent==='00:00' && document.getElementById('puzzleArea').hidden",'Zeitablauf zeigt Niederlage und schliesst Rätsel');
     await cdp('Page.reload'); await waitFor("document.readyState==='complete' && !!document.getElementById('loseScreen')");
