@@ -98,15 +98,15 @@ function startTimer() {
 const progressDisplay = document.getElementById("progress");
 
 function updateProgress() {
-    let solvedCount = 0;
-
-    // Später mit Kaitos puzzles.js verbunden
-    if (typeof getSolvedCount === "function") {
-        solvedCount = getSolvedCount();
-    }
-
-    progressDisplay.textContent =
-        "Rätsel: " + solvedCount + "/3";
+    const solvedCount = getSolvedCount();
+    const total = Object.keys(puzzles).length;
+    const text = "Rätsel: " + solvedCount + "/" + total;
+    // Gleichen Text nicht wiederholt an Screenreader melden.
+    if (progressDisplay.textContent !== text) progressDisplay.textContent = text;
+    const bar = document.getElementById("puzzleProgress");
+    bar.max = Math.max(1, total);
+    bar.value = solvedCount;
+    bar.setAttribute("aria-valuetext", solvedCount + " von " + total + " Rätseln gelöst");
 }
 
 

@@ -244,7 +244,12 @@ document.addEventListener("keydown", event => {
 
 function showPuzzleFeedback(text, success) {
     const feedback = document.getElementById("puzzleFeedback");
-    feedback.textContent = text;
+    feedback.textContent = (success ? "✓ " : "! ") + text;
+    feedback.setAttribute("aria-atomic", "true");
+    puzzleArea.querySelectorAll('input[type="text"]').forEach(input => {
+        input.setAttribute("aria-invalid", String(!success));
+        input.setAttribute("aria-describedby", "puzzleFeedback");
+    });
     feedback.className = success ? "puzzle-feedback success" : "puzzle-feedback error";
 }
 
@@ -261,7 +266,13 @@ function submitAnswer(puzzleId, answer) {
     const correct = checkPuzzle(puzzleId, answer);
 
     if (correct) {
-        showPuzzleFeedback("Richtig! Rätsel gelöst.", true);
+        const left = Object.keys(puzzles).length - getSolvedCount();
+        showPuzzleFeedback("Richtig! Rätsel gelöst. " + (left > 0
+            ? "Noch " + left + " Rätsel bis zum Ausgang."
+            : "Der Ausgang ist jetzt freigeschaltet."), true);
+        activePuzzleObject?.classList.add("just-solved");
+        const solvedObject = activePuzzleObject;
+        setTimeout(() => solvedObject?.classList.remove("just-solved"), 700);
         lockPuzzleInputs();
         updateProgress();
         updateDoor();
@@ -363,7 +374,28 @@ function setupTextPuzzle(puzzleId) {
 
 // Ausgangstür freischalten, sobald alle Rätsel gelöst sind
 function updateDoor() {
+    for (const [name, puzzleId] of Object.entries(puzzleObjects)) {
+        const object = document.querySelector(`[data-object="${name}"]`);
+        if (!object) continue;
+        const solved = isPuzzleSolved(puzzleId);
+        object.classList.toggle("solved", solved);
+        let status = object.querySelector(".object-status");
+        if (!status) {
+            status = document.createElement("span");
+            status.className = "object-status";
+            object.appendChild(status);
+        }
+        status.textContent = solved ? "Gelöst ✓" : "Untersuchen →";
+    }
     const unlocked = allPuzzlesSolved();
+    let doorStatus = doorObject.querySelector(".object-status");
+    if (!doorStatus) {
+        doorStatus = document.createElement("span");
+        doorStatus.className = "object-status";
+        doorObject.appendChild(doorStatus);
+    }
+    doorStatus.textContent = unlocked ? "Freigeschaltet →" : "Gesperrt";
+    updateProgress();
     doorObject.classList.toggle("unlocked", unlocked);
 
     if (unlocked) {
