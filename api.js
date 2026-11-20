@@ -2,6 +2,77 @@
 // Das Spiel funktioniert auch ohne Server, z.B. direkt als Datei geöffnet.
 
 const apiUrl = "/api";
+const playerIdKey = "glitchPlayerId";
+const playerNameKey = "glitchPlayerName";
+
+// Läuft das Spiel über den Express-Server? (Der Server setzt window.glitchServer)
+function isServerAvailable() {
+    return window.glitchServer === true;
+}
+
+// Zufällige Kennung dieses Browsers, damit der Server den Spielstand zuordnen kann
+function getPlayerId() {
+    try {
+        let playerId = localStorage.getItem(playerIdKey);
+
+        if (!playerId) {
+            playerId = Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+            localStorage.setItem(playerIdKey, playerId);
+        }
+
+        return playerId;
+    } catch (error) {
+        return null;
+    }
+}
+
+// Spielername für die Bestzeiten (die Abfrage folgt mit der Rangliste)
+function getPlayerName() {
+    try {
+        return localStorage.getItem(playerNameKey) || "Anonym";
+    } catch (error) {
+        return "Anonym";
+    }
+}
+
+// Daten an die API senden; keepalive, damit die Anfrage einen Seitenwechsel übersteht
+async function sendToServer(route, body) {
+    if (!isServerAvailable()) return null;
+
+    try {
+        const response = await fetch(apiUrl + route, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+            keepalive: true
+        });
+
+        if (!response.ok) return null;
+
+        return await response.json();
+    } catch (error) {
+        console.warn("Server nicht erreichbar, Daten bleiben lokal gespeichert.");
+        return null;
+    }
+}
+
+// Freigeschaltetes Level und Bestzeit auf dem Server speichern
+function saveProgressOnServer() {
+    const playerId = getPlayerId();
+
+    if (!playerId) return Promise.resolve(null);
+
+    return sendToServer("/spielstand", {
+        playerId: playerId,
+        unlockedLevel: getUnlockedLevel(),
+        bestTime: getBestTime()
+    });
+}
+
+// Zeit eines ganzen Durchgangs an die Bestzeiten auf dem Server senden
+function saveRunOnServer(seconds) {
+    return sendToServer("/bestzeiten", { name: getPlayerName(), seconds: seconds });
+}
 
 // Status des Servers abfragen (null = kein Server erreichbar)
 async function getServerStatus() {
