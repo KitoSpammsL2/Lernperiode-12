@@ -63,6 +63,29 @@ const server = http.createServer((req,res) => {
     await cdp('Page.navigate',{url:base+'/room2.html'}); await waitFor("location.pathname.endsWith('index.html') && document.readyState==='complete'");
     console.log('PASS direkter Levelzugriff führt ins Menü');
     await click('#startButton'); await waitFor("location.pathname.endsWith('room.html') && typeof puzzleArea !== 'undefined'");
+    await object('schrank'); await fill('#codeInput','20');
+    await object('schrank');
+    await check("document.getElementById('codeInput').value==='20' && document.activeElement.id==='codeInput'", 'erneuter Objektklick behält Eingabe und fokussiert Eingabefeld');
+    await click('#puzzleGlitchButton');
+    await check("document.body.classList.contains('glitch-active') && document.getElementById('glitchButton').getAttribute('aria-pressed')==='true' && document.getElementById('puzzleGlitchButton').getAttribute('aria-pressed')==='true'", 'Hinweise direkt im Level-1-Rätsel einschalten');
+    await click('#glitchButton');
+    await check("document.getElementById('puzzleGlitchButton').getAttribute('aria-pressed')==='false' && document.getElementById('codeInput').value==='20'", 'beide Hinweis-Buttons synchron und Eingabe bleibt erhalten');
+    for(const width of [390,320]) {
+        await cdp('Emulation.setDeviceMetricsOverride',{width,height:844,deviceScaleFactor:1,mobile:false});
+        await check('document.documentElement.scrollWidth<=innerWidth', `Level 1 und geöffneter Dialog bei ${width}px ohne Überlauf`);
+    }
+    if(process.env.SCREENSHOT_PATH) {
+        await evaluate('document.getElementById("puzzleArea").scrollIntoView({block:"start"})'); await pause(100);
+        const shot=await cdp('Page.captureScreenshot',{format:'png'});
+        fs.writeFileSync(process.env.SCREENSHOT_PATH.replace(/\.png$/, '-level1-mobile.png'),Buffer.from(shot.data,'base64'));
+    }
+    await click('#backToObjects');
+    await check("document.getElementById('puzzleArea').hidden && document.activeElement.dataset.object==='schrank'", 'Rückweg zu Level-1-Objekten mit Fokus');
+    await object('schrank');
+    await cdp('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});
+    await cdp('Input.dispatchKeyEvent',{type:'keyUp',key:'Escape',code:'Escape',windowsVirtualKeyCode:27});
+    await check("document.getElementById('puzzleArea').hidden && document.querySelector('[data-object=schrank]').getAttribute('aria-expanded')==='false'", 'Escape schliesst Rätsel auch in Level 1');
+    await cdp('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
     await object('schrank'); await fill('#codeInput','2048'); await click('#codeForm button');
     await object('terminal'); for(const letter of 'GLITCH') await click(`[data-letter="${letter}"]`);
     await object('stromkasten'); await click('#switchA'); await click('#switchC'); await click('#switchSubmit');
@@ -100,6 +123,9 @@ const server = http.createServer((req,res) => {
     await object('konsole'); await check("document.getElementById('puzzleFeedback').textContent.includes('bereits gelöst') && getSolvedCount()===1",'gelöstes Rätsel ohne Doppelzählung');
     await object('tresor');
     const hintHidden = "getComputedStyle(document.querySelector('#puzzleArea .glitch-hint')).display==='none'";
+    await fill('#codeInput','68'); await click('#puzzleGlitchButton');
+    await check("document.getElementById('puzzleGlitchButton').getAttribute('aria-pressed')==='true' && document.getElementById('codeInput').value==='68' && document.getElementById('glitchButton').getAttribute('aria-pressed')==='true'", 'lokaler Hinweis-Button in Level 2 erhält Eingabe und schaltet echten Glitch-Modus');
+    await click('#puzzleGlitchButton');
     await check(hintHidden, 'Tresor-Hinweis bei ausgeschaltetem Glitch-Modus verborgen');
     await click('#glitchButton');
     await check(`!(${hintHidden}) && document.querySelector('#puzzleArea .glitch-hint').textContent.includes('C → A → D → B')`, 'Tresor-Hinweis zeigt Lesereihenfolge');
@@ -110,6 +136,7 @@ const server = http.createServer((req,res) => {
     await fill('#codeInput','8264'); await click('#codeForm button');
     await check("getSolvedCount()===1 && document.getElementById('puzzleFeedback').textContent.includes('Reihenfolge')",'Tresor erklärt falschen Code');
     await fill('#codeInput','6842'); await click('#codeForm button');
+    await check("!document.getElementById('backToObjects').disabled && !document.getElementById('puzzleGlitchButton').disabled", 'Navigation und Hinweissteuerung nach Lösung weiter bedienbar');
     await object('server');
     await check(hintHidden, 'Server-Hinweis bei ausgeschaltetem Glitch-Modus verborgen');
     await click('#glitchButton');
@@ -153,6 +180,9 @@ const server = http.createServer((req,res) => {
     await waitFor("location.pathname.endsWith('room3.html') && document.readyState==='complete' && typeof puzzleArea !== 'undefined'");
     await check("currentLevel===3 && getUnlockedLevel()===3 && getSolvedCount()===0 && getTimeLeft()>=295",'Level 2 führt zu Level 3 mit neuem Timer');
     await object('tuer'); await check("currentState===GameState.PLAYING && !document.getElementById('winScreen')",'Level-3-Ausgang bleibt bei 0/3 gesperrt');
+    await object('zugriff'); await click('#puzzleGlitchButton');
+    await check("document.body.classList.contains('glitch-active') && document.getElementById('puzzleGlitchButton').getAttribute('aria-pressed')==='true'", 'gemeinsame Hinweissteuerung funktioniert auch in Level 3');
+    await click('#backToObjects');
     await evaluate("Object.keys(puzzles).forEach(id=>checkPuzzle(id,levelPuzzles[3][id])); updateDoor()"); await object('tuer');
     await check("currentState===GameState.WON && !!document.getElementById('winScreen') && getBestTime()>0",'Gewinnbildschirm und Bestzeit');
     await click('#backToMenu'); await waitFor("location.pathname.endsWith('index.html') && document.readyState==='complete'");

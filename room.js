@@ -46,6 +46,8 @@ glitchButton.addEventListener("click", () => {
         glitchActive
     );
 
+    glitchButton.setAttribute("aria-pressed", String(glitchActive));
+    document.dispatchEvent(new CustomEvent("glitchModeChanged", { detail: { active: glitchActive } }));
     message.textContent = glitchActive
         ? "GLITCH-MODUS AKTIVIERT"
         : "Glitch-Modus deaktiviert.";
