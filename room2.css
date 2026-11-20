@@ -206,3 +206,7 @@
     .level-two.glitch-switching .game-room h1 { animation: none; }
     .level-two .game-room::before { transition: none; }
 }
+/* Gelöste Karten bleiben auch beim Hinweisscan klar erkennbar. */
+.level-two .object.solved, .level-two .object.unlocked {
+    background: linear-gradient(145deg, #102a25, #0c171d);
+}

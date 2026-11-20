@@ -129,19 +129,40 @@ braucht, hat das durchspielbare Spiel Vorrang vor zusätzlichen Funktionen.
 ## 20.11
 
 ### Faruk – CEO & Frontend
-- [ ] Feedback vom Marketplace im Frontend umsetzen. (Rückmeldungen der Tester auswerten, unübersichtliche Elemente verbessern, Bedienung des Spielraums vereinfachen)
-- [ ] Visuelles Feedback für gelöste Rätsel einbauen. (Erfolgreich gelöste Rätsel farblich markieren, Fortschrittsanzeige verbessern, verständliche Erfolgs- und Fehlermeldungen gestalten)
-- [ ] Grunddesign für Level 3 entwickeln. (Neuen Spielraum mit HTML/CSS gestalten, passende Objekte platzieren, einheitliches Design der bisherigen Levels übernehmen)
+- [x] Feedback vom Marketplace im Frontend umsetzen. (Rückmeldungen der Tester auswerten, unübersichtliche Elemente verbessern, Bedienung des Spielraums vereinfachen)
+- [x] Visuelles Feedback für gelöste Rätsel einbauen. (Erfolgreich gelöste Rätsel farblich markieren, Fortschrittsanzeige verbessern, verständliche Erfolgs- und Fehlermeldungen gestalten)
+- [x] Grunddesign für Level 3 entwickeln. (Neuen Spielraum mit HTML/CSS gestalten, passende Objekte platzieren, einheitliches Design der bisherigen Levels übernehmen)
+
+Das Marketplace-Feedback war insgesamt positiv; konkrete Kritikpunkte wurden
+nicht genannt. Das bestehende Design bleibt erhalten. Die Bedienung wurde durch
+einen Hinweis-Button direkt im Rätsel, einen Rückweg zu den Objekten und eine
+einheitliche Tastaturbedienung vereinfacht. Level 1 ist auf kleinen Bildschirmen
+übersichtlicher angeordnet.
+
+Gelöste Objekte werden in allen drei Levels grün und mit „Gelöst ✓“ markiert.
+Ein Fortschrittsbalken ergänzt den Rätselzähler; Erfolgs- und Fehlermeldungen
+sind mit Symbol, Text und Rahmen erkennbar. Gespeicherte Erfolge werden beim
+Neuladen wieder angezeigt.
+
+Level 3 hat ein eigenes Quarantäne-Grunddesign mit Zugriffsterminal, Datenpuffer,
+Routenpult und einem separaten Ausgang. Die Anordnung passt sich an kleine
+Bildschirme an. Die drei Quarantäne-Rätsel sind mit dieser Oberfläche verbunden.
 
 ### Kaito – CTO & Spiellogik
 - [x] Level 3 in die bestehende Levelsteuerung integrieren. (Levelwechsel von Level 2 zu Level 3 ermöglichen, Rätselstatus für das neue Level vorbereiten, Timer korrekt zurücksetzen)
-- [ ] Backend um eine Speicherfunktion erweitern. (Express-API für Bestzeiten und Spielstände vorbereiten, Daten vom Frontend an den Server senden, Speicherung testen)
-- [ ] Spielfortschritt und Levelwechsel auf Fehler überprüfen. (Speicherfunktion, Neustart und Freischaltung der Levels testen, gefundene Fehler beheben)
+- [x] Backend um eine Speicherfunktion erweitern. (Express-API für Bestzeiten und Spielstände vorbereiten, Daten vom Frontend an den Server senden, Speicherung testen)
+- [x] Spielfortschritt und Levelwechsel auf Fehler überprüfen. (Speicherfunktion, Neustart und Freischaltung der Levels testen, gefundene Fehler beheben)
 
 ### Laurentiu – COO & Rätselentwicklung
-- [ ] Rätsel von Level 2 anhand des Feedbacks verbessern. (Schwierigkeit überprüfen, unklare Hinweise überarbeiten, falsche und richtige Eingaben testen)
+- [x] Rätsel von Level 2 anhand des Feedbacks verbessern. (Schwierigkeit überprüfen, unklare Hinweise überarbeiten, falsche und richtige Eingaben testen)
 - [x] Drei unterschiedliche Rätsel für Level 3 entwickeln. (Neue Rätselideen umsetzen, passende Codes und Lösungen definieren, versteckte Glitch-Hinweise integrieren)
-- [ ] Rätsel von Level 3 mit der Spiellogik verbinden. (Neue Rätsel im bestehenden System registrieren, Lösungen überprüfen, Fortschritt speichern und Rätsel testen)
+- [x] Rätsel von Level 3 mit der Spiellogik verbinden. (Neue Rätsel im bestehenden System registrieren, Lösungen überprüfen, Fortschritt speichern und Rätsel testen)
+
+Für Level 2 lagen keine konkreten Kritikpunkte vor. Bei der eigenen Prüfung
+wurden leere Befehle und eine falsche Anzahl aktivierter Servermodule mit
+gezielten Eingabemeldungen ergänzt. Richtige und falsche Antworten sind getestet.
+Level 3 verwendet die gemeinsame Lösungsprüfung, Fortschrittsanzeige,
+Speicherung und Türfreigabe. Neuladen und Level-Neustart sind geprüft.
 
 
 ## 27.11

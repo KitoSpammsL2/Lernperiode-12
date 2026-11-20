@@ -17,7 +17,7 @@
 
         <div class="stats">
             <span class="timer-stat"><span class="stat-label">RESTZEIT</span><span id="timer" role="timer" aria-label="Verbleibende Zeit">05:00</span></span>
-            <span class="progress-stat"><span class="stat-label">FORTSCHRITT</span><span id="progress" role="status">Rätsel: 0/3</span></span>
+            <span class="progress-stat"><span class="stat-label">FORTSCHRITT</span><span id="progress" role="status">Rätsel: 0/3</span><progress id="puzzleProgress" value="0" max="3" aria-label="Gelöste Rätsel"></progress></span>
         </div>
     </header>
 
@@ -75,6 +75,7 @@
 
     <script src="level-transitions.js"></script>
     <script src="script.js"></script>
+    <script src="api.js"></script>
     <script src="puzzles.js"></script>
     <script src="door.js"></script>
     <script src="room.js"></script>

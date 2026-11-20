@@ -124,3 +124,53 @@
     border-color: #5effa6;
     box-shadow: 0 0 25px #5effa655;
 }
+
+/* Gemeinsame Bedienung der Rätselansicht in allen Spielräumen. */
+#puzzleArea[hidden] { display: none; }
+#puzzleArea { scroll-margin-top: 24px; }
+#puzzleArea .puzzle-head { gap: 12px; align-items: flex-start; }
+#puzzleArea .puzzle-head h3 { min-width: 0; overflow-wrap: anywhere; }
+#puzzleArea #closePuzzle { float: none; flex-shrink: 0; min-width: 44px; min-height: 44px; }
+#puzzleArea .puzzle-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin: 16px 0; }
+#puzzleArea .puzzle-tools span { color: #b5c5d5; font-size: 13px; }
+#puzzleArea #puzzleGlitchButton { border-color: #ff00aa; color: #ff91d9; min-height: 44px; }
+#puzzleArea #puzzleGlitchButton:hover,
+#puzzleArea #puzzleGlitchButton[aria-pressed="true"] { background: #ff00aa20; color: #fff; }
+#puzzleArea #backToObjects { min-height: 44px; font-size: 13px; }
+#puzzleArea input { max-width: 100%; }
+#puzzleArea :is(button, input):focus-visible,
+.object:focus-visible, #glitchButton:focus-visible { outline: 3px solid white; outline-offset: 3px; }
+@media (max-width: 600px) {
+    #puzzleArea { padding: 16px; }
+    #puzzleArea .puzzle-head h3 { font-size: 16px; letter-spacing: 1px; }
+    #puzzleArea .puzzle-tools { align-items: stretch; flex-direction: column; }
+    #puzzleArea .puzzle-tools button { align-self: flex-start; }
+}
+
+/* Erfolge sind durch Farbe, Text und Symbol erkennbar. */
+#puzzleProgress { display: block; width: 100%; min-width: 90px; height: 7px; margin-top: 5px; accent-color: #5effa6; border: 0; border-radius: 10px; background: #263344; }
+#puzzleProgress::-webkit-progress-bar { background: #263344; border-radius: 10px; }
+#puzzleProgress::-webkit-progress-value { background: #5effa6; border-radius: 10px; }
+#puzzleProgress::-moz-progress-bar { background: #5effa6; border-radius: 10px; }
+.stats .progress-stat { display: grid; gap: 2px; }
+.object .object-status { font-size: 12px; color: #b5c5d5; }
+.object.solved, .object.solved:hover, .object.unlocked, .object.unlocked:hover {
+    border-color: #5effa6;
+    background: linear-gradient(145deg, #102a25, #0c171d);
+    box-shadow: 0 0 20px #5effa625;
+}
+.object.solved .object-status, .object.unlocked .object-status { color: #5effa6; }
+.object.just-solved { animation: solvedPulse .7s ease-out; }
+#puzzleArea .puzzle-feedback { padding: 0; line-height: 1.6; }
+#puzzleArea .puzzle-feedback.success, #puzzleArea .puzzle-feedback.error {
+    border: 1px solid currentColor;
+    border-left-width: 4px;
+    border-radius: 8px;
+    padding: 12px 14px;
+    background: #071019;
+}
+#puzzleArea .puzzle-feedback.success { color: #83ffc0; }
+#puzzleArea .puzzle-feedback.error { color: #ffaaaa; }
+#puzzleArea input[aria-invalid="true"] { border-color: #ffaaaa; }
+@keyframes solvedPulse { 50% { box-shadow: 0 0 32px #5effa66a; } }
+@media (prefers-reduced-motion: reduce) { .object.just-solved { animation: none; } }

@@ -137,6 +137,11 @@ const puzzleViews = { 1: level1Views, 2: level2Views,
 const puzzleArea = document.createElement("section");
 puzzleArea.id = "puzzleArea";
 puzzleArea.hidden = true;
+puzzleArea.setAttribute("role", "region");
+puzzleArea.setAttribute("aria-labelledby", "puzzleTitle");
+puzzleArea.tabIndex = -1;
+let activePuzzleObject = null;
+let activePuzzleId = null;
 document.querySelector(".game-room").appendChild(puzzleArea);
 
 const doorObject = document.querySelector('[data-object="tuer"]');
@@ -149,20 +154,40 @@ function showRoomMessage(text) {
 function openPuzzle(puzzleId) {
     if (currentState !== GameState.PLAYING || levelChanging) return;
 
+    if (activePuzzleId === puzzleId && !puzzleArea.hidden) {
+        puzzleArea.scrollIntoView({ behavior: "auto", block: "start" });
+        (puzzleArea.querySelector("input:not(:disabled)") || puzzleArea).focus({ preventScroll: true });
+        return;
+    }
+    activePuzzleId = puzzleId;
+    activePuzzleObject = document.querySelector(`[data-object="${Object.keys(puzzleObjects).find(name => puzzleObjects[name] === puzzleId)}"]`);
+    document.querySelectorAll(".object[aria-controls='puzzleArea']").forEach(object => {
+        object.setAttribute("aria-expanded", String(object === activePuzzleObject));
+    });
     const view = puzzleViews[puzzleId];
     const solved = isPuzzleSolved(puzzleId);
 
     puzzleArea.innerHTML = `
         <div class="puzzle-head">
-            <h3>${view.title}</h3>
+            <h3 id="puzzleTitle">${view.title}</h3>
             <button type="button" id="closePuzzle" aria-label="Rätsel schliessen">✕</button>
         </div>
+        ${solved ? "" : `<div class="puzzle-tools">
+            <button type="button" id="puzzleGlitchButton" aria-pressed="false">HINWEISE ANZEIGEN</button>
+            <span>Der Timer läuft weiter.</span>
+        </div>`}
         ${solved ? "" : view.html}
         <p class="puzzle-feedback" id="puzzleFeedback" role="status"></p>
+        <button type="button" id="backToObjects">ZURÜCK ZU DEN OBJEKTEN</button>
     `;
     puzzleArea.hidden = false;
 
     document.getElementById("closePuzzle").addEventListener("click", closePuzzle);
+    document.getElementById("backToObjects").addEventListener("click", closePuzzle);
+    document.getElementById("puzzleGlitchButton")?.addEventListener("click", () => {
+        document.getElementById("glitchButton").click();
+    });
+    syncPuzzleHintButton();
 
     if (solved) {
         showPuzzleFeedback("Dieses Rätsel ist bereits gelöst.", true);
@@ -170,23 +195,49 @@ function openPuzzle(puzzleId) {
         view.setup(puzzleId);
     }
 
-    puzzleArea.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    puzzleArea.scrollIntoView({ behavior: "auto", block: "start" });
+    (puzzleArea.querySelector("input:not(:disabled)") || puzzleArea).focus({ preventScroll: true });
 }
 
 function closePuzzle() {
+    const wasOpen = !puzzleArea.hidden;
     puzzleArea.hidden = true;
     puzzleArea.innerHTML = "";
+    activePuzzleId = null;
+    document.querySelectorAll(".object[aria-controls='puzzleArea']").forEach(object => {
+        object.setAttribute("aria-expanded", "false");
+    });
+    if (wasOpen && currentState === GameState.PLAYING && !levelChanging) {
+        activePuzzleObject?.focus();
+    }
 }
+
+function syncPuzzleHintButton() {
+    const button = document.getElementById("puzzleGlitchButton");
+    if (!button) return;
+    const active = document.body.classList.contains("glitch-active");
+    button.setAttribute("aria-pressed", String(active));
+    button.textContent = active ? "HINWEISE AUSBLENDEN" : "HINWEISE ANZEIGEN";
+}
+document.addEventListener("glitchModeChanged", syncPuzzleHintButton);
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && !puzzleArea.hidden) closePuzzle();
+});
 
 function showPuzzleFeedback(text, success) {
     const feedback = document.getElementById("puzzleFeedback");
-    feedback.textContent = text;
+    feedback.textContent = (success ? "✓ " : "! ") + text;
+    feedback.setAttribute("aria-atomic", "true");
+    puzzleArea.querySelectorAll('input[type="text"]').forEach(input => {
+        input.setAttribute("aria-invalid", String(!success));
+        input.setAttribute("aria-describedby", "puzzleFeedback");
+    });
     feedback.className = success ? "puzzle-feedback success" : "puzzle-feedback error";
 }
 
 // Nach dem Lösen keine weiteren Eingaben zulassen
 function lockPuzzleInputs() {
-    puzzleArea.querySelectorAll("input, button:not(#closePuzzle)")
+    puzzleArea.querySelectorAll("input, button:not(#closePuzzle):not(#backToObjects):not(#puzzleGlitchButton)")
         .forEach(element => element.disabled = true);
 }
 
@@ -197,7 +248,13 @@ function submitAnswer(puzzleId, answer) {
     const correct = checkPuzzle(puzzleId, answer);
 
     if (correct) {
-        showPuzzleFeedback("Richtig! Rätsel gelöst.", true);
+        const left = Object.keys(puzzles).length - getSolvedCount();
+        showPuzzleFeedback("Richtig! Rätsel gelöst. " + (left > 0
+            ? "Noch " + left + " Rätsel bis zum Ausgang."
+            : "Der Ausgang ist jetzt freigeschaltet."), true);
+        activePuzzleObject?.classList.add("just-solved");
+        const solvedObject = activePuzzleObject;
+        setTimeout(() => solvedObject?.classList.remove("just-solved"), 700);
         lockPuzzleInputs();
         updateProgress();
         updateDoor();
@@ -268,6 +325,10 @@ function setupServerPuzzle(puzzleId) {
             .map(name => puzzleArea.querySelector(`[data-module="${name}"]`).checked ? "1" : "0")
             .join("");
 
+        if (answer.split("1").length - 1 !== 2) {
+            showPuzzleFeedback("Schalte genau zwei Module ein. Die anderen beiden müssen ausgeschaltet bleiben.", false);
+            return;
+        }
         submitAnswer(puzzleId, answer);
     });
 }
@@ -293,13 +354,39 @@ function textPuzzle(title, question, hint, incorrect) {
 function setupTextPuzzle(puzzleId) {
     document.getElementById("textForm").addEventListener("submit", (event) => {
         event.preventDefault();
-        submitAnswer(puzzleId, document.getElementById("textInput").value);
+        const answer = document.getElementById("textInput").value.trim();
+        if (answer === "") {
+            showPuzzleFeedback("Gib zuerst einen Befehl ein.", false);
+            return;
+        }
+        submitAnswer(puzzleId, answer);
     });
 }
 
 // Ausgangstür freischalten, sobald alle Rätsel gelöst sind
 function updateDoor() {
+    for (const [name, puzzleId] of Object.entries(puzzleObjects)) {
+        const object = document.querySelector(`[data-object="${name}"]`);
+        if (!object) continue;
+        const solved = isPuzzleSolved(puzzleId);
+        object.classList.toggle("solved", solved);
+        let status = object.querySelector(".object-status");
+        if (!status) {
+            status = document.createElement("span");
+            status.className = "object-status";
+            object.appendChild(status);
+        }
+        status.textContent = solved ? "Gelöst ✓" : "Untersuchen →";
+    }
     const unlocked = allPuzzlesSolved();
+    let doorStatus = doorObject.querySelector(".object-status");
+    if (!doorStatus) {
+        doorStatus = document.createElement("span");
+        doorStatus.className = "object-status";
+        doorObject.appendChild(doorStatus);
+    }
+    doorStatus.textContent = unlocked ? "Freigeschaltet →" : "Gesperrt";
+    updateProgress();
     doorObject.classList.toggle("unlocked", unlocked);
 
     if (unlocked) {
@@ -312,6 +399,8 @@ for (const objectName in puzzleObjects) {
     const object = document.querySelector(`[data-object="${objectName}"]`);
 
     if (object) {
+        object.setAttribute("aria-controls", "puzzleArea");
+        object.setAttribute("aria-expanded", "false");
         object.addEventListener("click", () => openPuzzle(puzzleObjects[objectName]));
     }
 }

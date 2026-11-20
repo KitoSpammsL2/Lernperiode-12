@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="faruk-design.css">
     <link rel="stylesheet" href="room2.css">
     <link rel="stylesheet" href="level-transitions.css">
+    <link rel="stylesheet" href="room3.css">
     <link rel="stylesheet" href="level3-puzzles.css">
 </head>
-<!-- Grundgerüst für Level 3: übernimmt vorerst das Design von Level 2 (Klasse level-two) -->
+<!-- Gemeinsame Raumgestaltung mit eigenem Quarantäne-Layout. -->
 <body class="level-two level-three">
 
     <header class="hud">
@@ -19,47 +20,52 @@
 
         <div class="stats">
             <span class="timer-stat"><span class="stat-label">RESTZEIT</span><span id="timer" role="timer" aria-label="Verbleibende Zeit">05:00</span></span>
-            <span class="progress-stat"><span class="stat-label">FORTSCHRITT</span><span id="progress" role="status">Rätsel: 0/3</span></span>
+            <span class="progress-stat"><span class="stat-label">FORTSCHRITT</span><span id="progress" role="status">Rätsel: 0/3</span><progress id="puzzleProgress" value="0" max="3" aria-label="Gelöste Rätsel"></progress></span>
         </div>
     </header>
 
     <main class="game-room">
 
-        <p class="sector-label">SEKTOR 03 / QUARANTÄNE</p>
-        <h1>DER QUARANTÄNESEKTOR</h1>
+        <p class="sector-label">SEKTOR 03 / ZUGANG BESCHRÄNKT</p>
+        <h1>QUARANTÄNESEKTOR</h1>
         <p class="subtitle">Der Sektor ist isoliert. Stelle die Zugriffsrechte wieder her, repariere die Daten und finde die Route nach draussen.</p>
+
+        <div class="sector-briefing">
+            <span class="quarantine-label">QUARANTÄNE AKTIV</span>
+            <p>Untersuche die drei Stationen. Sobald alle Rätsel gelöst sind, ist der Ausgang frei.</p>
+        </div>
 
         <div class="objects" role="group" aria-label="Interaktive Objekte">
             <button type="button" class="object" data-object="zugriff">
                 <span class="object-index" aria-hidden="true">01 / SYSTEM</span>
-                <span class="symbol" aria-hidden="true">▣</span>
+                <span class="symbol" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="50" height="36" rx="4"/><path d="M23 55h18M32 43v12M16 19l7 6-7 6M29 31h12"/></svg></span>
                 <strong>ZUGRIFFSTERMINAL</strong>
-                <span class="object-description">Berechtigungen sortieren</span>
+                <span class="object-description">Zugriff prüfen</span>
                 <span class="glitch-signal" aria-hidden="true">SIGNAL ENTDECKT</span>
                 <span class="object-status">Untersuchen →</span>
             </button>
 
             <button type="button" class="object" data-object="puffer">
                 <span class="object-index" aria-hidden="true">02 / SYSTEM</span>
-                <span class="symbol" aria-hidden="true">▦</span>
+                <span class="symbol" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="14" width="36" height="36" rx="5"/><path d="M24 23h16v18H24zM22 6v8M32 6v8M42 6v8M22 50v8M32 50v8M42 50v8M6 22h8M6 32h8M6 42h8M50 22h8M50 32h8M50 42h8"/></svg></span>
                 <strong>DATENPUFFER</strong>
-                <span class="object-description">Defektes Bit reparieren</span>
+                <span class="object-description">Daten untersuchen</span>
                 <span class="glitch-signal" aria-hidden="true">SIGNAL ENTDECKT</span>
                 <span class="object-status">Untersuchen →</span>
             </button>
 
             <button type="button" class="object" data-object="route">
                 <span class="object-index" aria-hidden="true">03 / SYSTEM</span>
-                <span class="symbol" aria-hidden="true">▥</span>
+                <span class="symbol" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="15" r="5"/><circle cx="51" cy="49" r="5"/><path d="M13 20v20a9 9 0 009 9h24M51 44V24a9 9 0 00-9-9H30M36 9l-6 6 6 6"/></svg></span>
                 <strong>ROUTENPULT</strong>
-                <span class="object-description">Weg durch die Quarantäne</span>
+                <span class="object-description">Route bestimmen</span>
                 <span class="glitch-signal" aria-hidden="true">SIGNAL ENTDECKT</span>
                 <span class="object-status">Untersuchen →</span>
             </button>
 
             <button type="button" class="object" data-object="tuer">
                 <span class="object-index" aria-hidden="true">04 / EXIT</span>
-                <span class="symbol" aria-hidden="true">🚪</span>
+                <span class="symbol" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 56h40M18 56V8h28v48M37 30v5M25 15h14v34H25"/></svg></span>
                 <strong>AUSGANG</strong>
                 <span class="object-description">Drei Rätsel öffnen die Tür</span>
                 <span class="object-status">Gesperrt</span>
@@ -77,6 +83,7 @@
 
     <script src="level-transitions.js"></script>
     <script src="script.js"></script>
+    <script src="api.js"></script>
     <script src="puzzles.js"></script>
     <script src="door.js"></script>
     <script src="room.js"></script>
