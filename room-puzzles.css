@@ -124,3 +124,25 @@
     border-color: #5effa6;
     box-shadow: 0 0 25px #5effa655;
 }
+
+/* Gemeinsame Bedienung der Rätselansicht in allen Spielräumen. */
+#puzzleArea[hidden] { display: none; }
+#puzzleArea { scroll-margin-top: 24px; }
+#puzzleArea .puzzle-head { gap: 12px; align-items: flex-start; }
+#puzzleArea .puzzle-head h3 { min-width: 0; overflow-wrap: anywhere; }
+#puzzleArea #closePuzzle { float: none; flex-shrink: 0; min-width: 44px; min-height: 44px; }
+#puzzleArea .puzzle-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin: 16px 0; }
+#puzzleArea .puzzle-tools span { color: #b5c5d5; font-size: 13px; }
+#puzzleArea #puzzleGlitchButton { border-color: #ff00aa; color: #ff91d9; min-height: 44px; }
+#puzzleArea #puzzleGlitchButton:hover,
+#puzzleArea #puzzleGlitchButton[aria-pressed="true"] { background: #ff00aa20; color: #fff; }
+#puzzleArea #backToObjects { min-height: 44px; font-size: 13px; }
+#puzzleArea input { max-width: 100%; }
+#puzzleArea :is(button, input):focus-visible,
+.object:focus-visible, #glitchButton:focus-visible { outline: 3px solid white; outline-offset: 3px; }
+@media (max-width: 600px) {
+    #puzzleArea { padding: 16px; }
+    #puzzleArea .puzzle-head h3 { font-size: 16px; letter-spacing: 1px; }
+    #puzzleArea .puzzle-tools { align-items: stretch; flex-direction: column; }
+    #puzzleArea .puzzle-tools button { align-self: flex-start; }
+}

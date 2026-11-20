@@ -129,9 +129,15 @@ braucht, hat das durchspielbare Spiel Vorrang vor zusätzlichen Funktionen.
 ## 20.11
 
 ### Faruk – CEO & Frontend
-- [ ] Feedback vom Marketplace im Frontend umsetzen. (Rückmeldungen der Tester auswerten, unübersichtliche Elemente verbessern, Bedienung des Spielraums vereinfachen)
+- [x] Feedback vom Marketplace im Frontend umsetzen. (Rückmeldungen der Tester auswerten, unübersichtliche Elemente verbessern, Bedienung des Spielraums vereinfachen)
 - [ ] Visuelles Feedback für gelöste Rätsel einbauen. (Erfolgreich gelöste Rätsel farblich markieren, Fortschrittsanzeige verbessern, verständliche Erfolgs- und Fehlermeldungen gestalten)
 - [ ] Grunddesign für Level 3 entwickeln. (Neuen Spielraum mit HTML/CSS gestalten, passende Objekte platzieren, einheitliches Design der bisherigen Levels übernehmen)
+
+Das Marketplace-Feedback war insgesamt positiv; konkrete Kritikpunkte wurden
+nicht genannt. Das bestehende Design bleibt erhalten. Die Bedienung wurde durch
+einen Hinweis-Button direkt im Rätsel, einen Rückweg zu den Objekten und eine
+einheitliche Tastaturbedienung vereinfacht. Level 1 ist auf kleinen Bildschirmen
+übersichtlicher angeordnet.
 
 ### Kaito – CTO & Spiellogik
 - [x] Level 3 in die bestehende Levelsteuerung integrieren. (Levelwechsel von Level 2 zu Level 3 ermöglichen, Rätselstatus für das neue Level vorbereiten, Timer korrekt zurücksetzen)

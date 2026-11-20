@@ -155,6 +155,11 @@ const puzzleViews = { 1: level1Views, 2: level2Views, 3: level3Views }[currentLe
 const puzzleArea = document.createElement("section");
 puzzleArea.id = "puzzleArea";
 puzzleArea.hidden = true;
+puzzleArea.setAttribute("role", "region");
+puzzleArea.setAttribute("aria-labelledby", "puzzleTitle");
+puzzleArea.tabIndex = -1;
+let activePuzzleObject = null;
+let activePuzzleId = null;
 document.querySelector(".game-room").appendChild(puzzleArea);
 
 const doorObject = document.querySelector('[data-object="tuer"]');
@@ -167,20 +172,40 @@ function showRoomMessage(text) {
 function openPuzzle(puzzleId) {
     if (currentState !== GameState.PLAYING || levelChanging) return;
 
+    if (activePuzzleId === puzzleId && !puzzleArea.hidden) {
+        puzzleArea.scrollIntoView({ behavior: "auto", block: "start" });
+        (puzzleArea.querySelector("input:not(:disabled)") || puzzleArea).focus({ preventScroll: true });
+        return;
+    }
+    activePuzzleId = puzzleId;
+    activePuzzleObject = document.querySelector(`[data-object="${Object.keys(puzzleObjects).find(name => puzzleObjects[name] === puzzleId)}"]`);
+    document.querySelectorAll(".object[aria-controls='puzzleArea']").forEach(object => {
+        object.setAttribute("aria-expanded", String(object === activePuzzleObject));
+    });
     const view = puzzleViews[puzzleId];
     const solved = isPuzzleSolved(puzzleId);
 
     puzzleArea.innerHTML = `
         <div class="puzzle-head">
-            <h3>${view.title}</h3>
+            <h3 id="puzzleTitle">${view.title}</h3>
             <button type="button" id="closePuzzle" aria-label="Rätsel schliessen">✕</button>
         </div>
+        ${solved ? "" : `<div class="puzzle-tools">
+            <button type="button" id="puzzleGlitchButton" aria-pressed="false">HINWEISE ANZEIGEN</button>
+            <span>Der Timer läuft weiter.</span>
+        </div>`}
         ${solved ? "" : view.html}
         <p class="puzzle-feedback" id="puzzleFeedback" role="status"></p>
+        <button type="button" id="backToObjects">ZURÜCK ZU DEN OBJEKTEN</button>
     `;
     puzzleArea.hidden = false;
 
     document.getElementById("closePuzzle").addEventListener("click", closePuzzle);
+    document.getElementById("backToObjects").addEventListener("click", closePuzzle);
+    document.getElementById("puzzleGlitchButton")?.addEventListener("click", () => {
+        document.getElementById("glitchButton").click();
+    });
+    syncPuzzleHintButton();
 
     if (solved) {
         showPuzzleFeedback("Dieses Rätsel ist bereits gelöst.", true);
@@ -188,13 +213,34 @@ function openPuzzle(puzzleId) {
         view.setup(puzzleId);
     }
 
-    puzzleArea.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    puzzleArea.scrollIntoView({ behavior: "auto", block: "start" });
+    (puzzleArea.querySelector("input:not(:disabled)") || puzzleArea).focus({ preventScroll: true });
 }
 
 function closePuzzle() {
+    const wasOpen = !puzzleArea.hidden;
     puzzleArea.hidden = true;
     puzzleArea.innerHTML = "";
+    activePuzzleId = null;
+    document.querySelectorAll(".object[aria-controls='puzzleArea']").forEach(object => {
+        object.setAttribute("aria-expanded", "false");
+    });
+    if (wasOpen && currentState === GameState.PLAYING && !levelChanging) {
+        activePuzzleObject?.focus();
+    }
 }
+
+function syncPuzzleHintButton() {
+    const button = document.getElementById("puzzleGlitchButton");
+    if (!button) return;
+    const active = document.body.classList.contains("glitch-active");
+    button.setAttribute("aria-pressed", String(active));
+    button.textContent = active ? "HINWEISE AUSBLENDEN" : "HINWEISE ANZEIGEN";
+}
+document.addEventListener("glitchModeChanged", syncPuzzleHintButton);
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && !puzzleArea.hidden) closePuzzle();
+});
 
 function showPuzzleFeedback(text, success) {
     const feedback = document.getElementById("puzzleFeedback");
@@ -204,7 +250,7 @@ function showPuzzleFeedback(text, success) {
 
 // Nach dem Lösen keine weiteren Eingaben zulassen
 function lockPuzzleInputs() {
-    puzzleArea.querySelectorAll("input, button:not(#closePuzzle)")
+    puzzleArea.querySelectorAll("input, button:not(#closePuzzle):not(#backToObjects):not(#puzzleGlitchButton)")
         .forEach(element => element.disabled = true);
 }
 
@@ -330,6 +376,8 @@ for (const objectName in puzzleObjects) {
     const object = document.querySelector(`[data-object="${objectName}"]`);
 
     if (object) {
+        object.setAttribute("aria-controls", "puzzleArea");
+        object.setAttribute("aria-expanded", "false");
         object.addEventListener("click", () => openPuzzle(puzzleObjects[objectName]));
     }
 }
