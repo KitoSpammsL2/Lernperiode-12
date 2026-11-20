@@ -152,7 +152,7 @@ Laurentius Integration unverändert.
 ### Kaito – CTO & Spiellogik
 - [x] Level 3 in die bestehende Levelsteuerung integrieren. (Levelwechsel von Level 2 zu Level 3 ermöglichen, Rätselstatus für das neue Level vorbereiten, Timer korrekt zurücksetzen)
 - [x] Backend um eine Speicherfunktion erweitern. (Express-API für Bestzeiten und Spielstände vorbereiten, Daten vom Frontend an den Server senden, Speicherung testen)
-- [ ] Spielfortschritt und Levelwechsel auf Fehler überprüfen. (Speicherfunktion, Neustart und Freischaltung der Levels testen, gefundene Fehler beheben)
+- [x] Spielfortschritt und Levelwechsel auf Fehler überprüfen. (Speicherfunktion, Neustart und Freischaltung der Levels testen, gefundene Fehler beheben)
 
 ### Laurentiu – COO & Rätselentwicklung
 - [ ] Rätsel von Level 2 anhand des Feedbacks verbessern. (Schwierigkeit überprüfen, unklare Hinweise überarbeiten, falsche und richtige Eingaben testen)
