@@ -90,6 +90,7 @@ const server = http.createServer((req,res) => {
     await object('terminal'); for(const letter of 'GLITCH') await click(`[data-letter="${letter}"]`);
     await object('stromkasten'); await click('#switchA'); await click('#switchC'); await click('#switchSubmit');
     await check('getSolvedCount()===3','Level 1 weiterhin lösbar');
+    await check("document.querySelectorAll('.object.solved').length===3 && document.getElementById('puzzleProgress').value===3 && document.querySelector('[data-object=tuer] .object-status').textContent.includes('Freigeschaltet')", 'Level 1 zeigt drei gelöste Objekte, vollen Balken und offenen Ausgang');
     await object('tuer');
     await check("!!document.getElementById('levelTransition') && document.querySelector('.game-room').inert && document.activeElement.id==='levelTransition'", 'Abschluss- und Ladebildschirm sperrt den alten Raum');
     await check("currentLevel===2 && JSON.parse(sessionStorage.getItem(stateStorageKey)).level===2 && getUnlockedLevel()===2", 'nächstes Level vor Animation gespeichert und freigeschaltet');
@@ -115,10 +116,13 @@ const server = http.createServer((req,res) => {
     await check("document.getElementById('textInput').value==='UHVHW' && getComputedStyle(document.querySelector('#puzzleArea .glitch-hint')).display==='none' && document.getElementById('glitchStatus').textContent.includes('deaktiviert')", 'Scan ausschalten erhält Eingabe und verbirgt Hinweise');
     await click('#glitchButton'); await click('#textForm button');
     await check("getSolvedCount()===0 && document.getElementById('puzzleFeedback').textContent.includes('Verschiebung')",'Konsole erklärt falschen Befehl');
+    await check("document.getElementById('puzzleFeedback').classList.contains('error') && document.getElementById('textInput').getAttribute('aria-invalid')==='true' && document.getElementById('puzzleProgress').value===0 && !document.querySelector('[data-object=konsole]').classList.contains('solved')", 'falsche Antwort markiert Eingabe und verändert weder Karte noch Fortschritt');
     await fill('#textInput',' reset '); await click('#textForm button');
     await check("getSolvedCount()===1 && document.querySelector('[data-object=konsole]').classList.contains('solved')",'Konsole gelöst und Karte aktualisiert');
+    await check("document.getElementById('puzzleFeedback').classList.contains('success') && document.getElementById('puzzleFeedback').textContent.includes('Noch 2 Rätsel') && document.getElementById('textInput').getAttribute('aria-invalid')==='false' && document.getElementById('puzzleProgress').value===1", 'Erfolgsmeldung zeigt verbleibende Rätsel und aktualisiert Fortschrittsbalken');
     const deadline=await evaluate('levelEndTime');
     await cdp('Page.reload'); await waitFor("document.readyState==='complete' && document.querySelector('.object.solved')");
+    await check("document.getElementById('puzzleProgress').value===1 && document.querySelector('[data-object=konsole] .object-status').textContent.includes('Gelöst')", 'Kartenstatus und Balken nach Neuladen wiederhergestellt');
     assert.equal(await evaluate('levelEndTime'),deadline); console.log('PASS Restzeit und Fortschritt nach Neuladen erhalten');
     await object('konsole'); await check("document.getElementById('puzzleFeedback').textContent.includes('bereits gelöst') && getSolvedCount()===1",'gelöstes Rätsel ohne Doppelzählung');
     await object('tresor');
@@ -183,7 +187,26 @@ const server = http.createServer((req,res) => {
     await object('zugriff'); await click('#puzzleGlitchButton');
     await check("document.body.classList.contains('glitch-active') && document.getElementById('puzzleGlitchButton').getAttribute('aria-pressed')==='true'", 'gemeinsame Hinweissteuerung funktioniert auch in Level 3');
     await click('#backToObjects');
-    await evaluate("Object.keys(puzzles).forEach(id=>checkPuzzle(id,levelPuzzles[3][id])); updateDoor()"); await object('tuer');
+    await check("!![...document.styleSheets].find(s=>s.href.endsWith('room3.css')) && document.querySelectorAll('.objects svg').length===4", 'eigenes Level-3-Layout und vier Stationssymbole geladen');
+    for(const width of [1440,768,390,320]) {
+        await cdp('Emulation.setDeviceMetricsOverride',{width,height:900,deviceScaleFactor:1,mobile:false});
+        await evaluate('window.scrollTo(0,0)');
+        await check("document.documentElement.scrollWidth<=innerWidth && [...document.querySelectorAll('.object')].every(e=>{const r=e.getBoundingClientRect();return r.width>100&&r.left>=0&&r.right<=innerWidth})", `Level 3 bei ${width}px ohne Überlauf und alle Stationen innerhalb der Breite`);
+        if(process.env.SCREENSHOT_PATH && [1440,390].includes(width)) {
+            const shot=await cdp('Page.captureScreenshot',{format:'png',captureBeyondViewport:true});
+            fs.writeFileSync(process.env.SCREENSHOT_PATH.replace(/\.png$/, '-level3-'+width+'.png'),Buffer.from(shot.data,'base64'));
+        }
+    }
+    await object('zugriff'); await fill('#textInput',await evaluate('levelPuzzles[3].puzzle1')); await click('#textForm button');
+    await check("document.querySelector('[data-object=zugriff]').classList.contains('solved') && document.getElementById('puzzleProgress').value===1 && getComputedStyle(document.querySelector('.just-solved')).animationName==='none'", 'Level-3-Erfolg markiert Station und respektiert reduzierte Bewegung');
+    await cdp('Page.reload');
+    await waitFor("document.readyState==='complete' && document.querySelector('[data-object=zugriff].solved')");
+    await check("getSolvedCount()===1 && document.getElementById('puzzleProgress').value===1", 'Level-3-Erfolg bleibt nach Neuladen sichtbar');
+    for(const [name,id] of [['puffer','puzzle2'],['route','puzzle3']]) {
+        await object(name); await fill('#textInput',await evaluate(`levelPuzzles[3].${id}`)); await click('#textForm button');
+    }
+    await check("getSolvedCount()===3 && document.getElementById('puzzleProgress').value===3 && document.getElementById('puzzleFeedback').textContent.includes('Ausgang ist jetzt freigeschaltet')", 'alle vorhandenen Level-3-Rätsel über Oberfläche lösbar');
+    await object('tuer');
     await check("currentState===GameState.WON && !!document.getElementById('winScreen') && getBestTime()>0",'Gewinnbildschirm und Bestzeit');
     await click('#backToMenu'); await waitFor("location.pathname.endsWith('index.html') && document.readyState==='complete'");
     const best=await evaluate('localStorage.getItem("glitchBestTime")');
