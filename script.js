@@ -151,6 +151,18 @@ function saveRunTime() {
     }
 }
 
+// Fortschritt und Zeit an den Server senden, wenn das Spiel über das Backend läuft (api.js)
+function sendProgress() {
+    if (typeof saveProgressOnServer !== "function") return;
+
+    saveProgressOnServer();
+
+    // Nur ein ganzer Durchgang ab Level 1 kommt in die Bestzeiten
+    if (currentState === GameState.WON && runSeconds !== null) {
+        saveRunOnServer(runSeconds);
+    }
+}
+
 // Spielzustand ändern
 function changeState(newState) {
     currentState = newState;
@@ -214,6 +226,7 @@ function completeLevel() {
         currentLevel++;
         levelEndTime = null;
         unlockLevel(currentLevel);
+        sendProgress();
         console.log("Level", currentLevel, "gestartet");
         changeState(GameState.PLAYING);
         const nextPage = levelPages[currentLevel - 1];
@@ -225,6 +238,7 @@ function completeLevel() {
     } else {
         saveRunTime();
         changeState(GameState.WON);
+        sendProgress();
     }
 }
 
