@@ -26,12 +26,40 @@ function getPlayerId() {
     }
 }
 
-// Spielername für die Bestzeiten (die Abfrage folgt mit der Rangliste)
-function getPlayerName() {
+// Gespeicherter Spielername ("" = noch keiner eingegeben)
+function getSavedPlayerName() {
     try {
-        return localStorage.getItem(playerNameKey) || "Anonym";
+        return localStorage.getItem(playerNameKey) || "";
     } catch (error) {
-        return "Anonym";
+        return "";
+    }
+}
+
+// Name für die Rangliste, ohne Eingabe "Anonym"
+function getPlayerName() {
+    return getSavedPlayerName() || "Anonym";
+}
+
+function setPlayerName(name) {
+    try {
+        localStorage.setItem(playerNameKey, name.trim().slice(0, 20));
+    } catch (error) {
+        console.error("Spielername konnte nicht gespeichert werden.", error);
+    }
+}
+
+// Die zehn besten Zeiten vom Server laden (null = kein Server erreichbar)
+async function loadBestTimesFromServer() {
+    if (!isServerAvailable()) return null;
+
+    try {
+        const response = await fetch(apiUrl + "/bestzeiten");
+
+        if (!response.ok) return null;
+
+        return await response.json();
+    } catch (error) {
+        return null;
     }
 }
 
