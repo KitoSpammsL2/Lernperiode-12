@@ -105,6 +105,22 @@ const server = http.createServer((req,res) => {
     await click('.level-buttons [data-level="3"]'); await waitFor(level('room3.html'));
     await loseNow(); await click('#restartGame'); await waitFor(level('room.html'));
     await check("currentLevel===1 && getSolvedCount()===0 && getUnlockedLevel()===maxLevels",'Neues Spiel beginnt in Level 1, Freischaltung bleibt');
+
+    // Inventar: Der Kontrollraum in Level 4 braucht die Zugangskarte aus dem Wartungsschacht.
+    await check("loadInventory().length===0",'neues Spiel beginnt mit leerem Inventar');
+    await cdp('Page.navigate',{url:base+'/index.html'}); await waitFor("document.readyState==='complete' && !!document.querySelector('.level-buttons')");
+    await click('.level-buttons [data-level="4"]'); await waitFor(level('room4.html'));
+    await check("document.getElementById('inventory').textContent.includes('Noch keine Gegenstände')",'Inventar im Raum sichtbar und leer');
+    await object('kontrolle');
+    await check("!document.getElementById('textInput') && document.querySelector('.puzzle-locked').textContent.includes('Zugangskarte')",'Kontrollraum braucht zuerst die Zugangskarte');
+    await object('schacht'); await fill('#textInput','4'); await click('#textForm button');
+    await check("hasItem('zugangskarte') && document.getElementById('inventory').textContent.includes('Zugangskarte') && document.getElementById('puzzleFeedback').textContent.includes('Gefunden')",'gefundene Zugangskarte erscheint im Inventar');
+    await object('kontrolle');
+    await check("!!document.getElementById('textInput')",'mit der Zugangskarte lässt sich der Kontrollraum öffnen');
+    await cdp('Page.reload'); await waitFor(level('room4.html'));
+    await check("hasItem('zugangskarte') && document.getElementById('inventory').textContent.includes('Zugangskarte')",'Inventar bleibt nach dem Neuladen');
+    await loseNow(); await click('#restartLevel'); await waitFor(level('room4.html') + " && currentState===GameState.PLAYING");
+    await check("!hasItem('zugangskarte') && getSolvedCount()===0",'Level-Neustart entfernt die Gegenstände dieses Levels');
     assert.deepEqual(errors,[],'keine Browser- oder Konsolenfehler'); assert.deepEqual(failed,[],'keine fehlgeschlagenen Ressourcen');
     console.log('PASS keine Browserfehler oder fehlgeschlagenen Ressourcen');
 })().catch(err=>{console.error(err);process.exitCode=1;}).finally(async()=>{
