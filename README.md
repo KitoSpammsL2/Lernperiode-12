@@ -175,7 +175,7 @@ Speicherung und Türfreigabe. Neuladen und Level-Neustart sind geprüft.
 ### Kaito – CTO & Spiellogik
 - [x] Level 4 in die Levelsteuerung integrieren. (Levelwechsel von Level 3 zu Level 4 ermöglichen, Rätselstatus vorbereiten, Freischaltung und Timer prüfen)
 - [x] Rangliste mit Bestzeiten einbauen. (Bestzeiten über die Express-API laden und speichern, Spielernamen abfragen, Rangliste im Hauptmenü anzeigen)
-- [ ] Inventarsystem vorbereiten. (Gefundene Gegenstände speichern, Inventar im Spielraum anzeigen, Gegenstände in Rätseln verwenden)
+- [x] Inventarsystem vorbereiten. (Gefundene Gegenstände speichern, Inventar im Spielraum anzeigen, Gegenstände in Rätseln verwenden)
 
 ### Laurentiu – COO & Rätselentwicklung
 - [ ] Level 3 testen und verbessern. (Alle drei Rätsel durchspielen, Hinweise und Schwierigkeit anpassen, Fehler mit dem Team beheben)
