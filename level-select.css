@@ -38,3 +38,69 @@
     margin-top: 12px;
     font-size: 13px;
 }
+
+/* Spielername und Rangliste (rangliste.js), nur mit Server */
+
+.ranking {
+    width: min(90%, 360px);
+    margin-top: 30px;
+}
+
+.player-name {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #ff00aa;
+    font-size: 13px;
+    letter-spacing: 3px;
+}
+
+.player-name input {
+    padding: 10px 14px;
+    background: transparent;
+    border: 2px solid #00ffff;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+}
+
+.ranking h3 {
+    margin: 24px 0 8px;
+    color: #ff00aa;
+    font-size: 16px;
+    letter-spacing: 4px;
+}
+
+#rankingList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: rank;
+}
+
+#rankingList li {
+    display: flex;
+    gap: 12px;
+    padding: 6px 0;
+    border-bottom: 1px solid #ffffff22;
+    color: #cccccc;
+}
+
+#rankingList li::before {
+    counter-increment: rank;
+    content: counter(rank) ".";
+    min-width: 28px;
+    color: #00ffff;
+    text-align: left;
+}
+
+#rankingList li.ranking-empty::before {
+    content: none;
+}
+
+#rankingList .ranking-name {
+    flex: 1;
+    text-align: left;
+    overflow-wrap: anywhere;
+}
