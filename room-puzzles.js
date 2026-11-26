@@ -19,6 +19,11 @@ const levelObjects = {
         zugriff: "puzzle1",
         puffer: "puzzle2",
         route: "puzzle3"
+    },
+    4: {
+        schacht: "puzzle1",
+        verstaerker: "puzzle2",
+        kontrolle: "puzzle3"
     }
 };
 
@@ -130,8 +135,28 @@ const level2Views = {
     }
 };
 
+// Platzhalter, bis Laurentius Rätsel für Level 4 fertig sind
+const level4Views = {
+    puzzle1: textPuzzle(
+        "WARTUNGSSCHACHT",
+        "Der Schacht fragt, in welchem Level du bist.",
+        "Tippe die Zahl ein: 4"
+    ),
+    puzzle2: textPuzzle(
+        "SIGNALVERSTÄRKER",
+        "Der Verstärker wartet auf das Wort, das er senden soll.",
+        "Das Wort heisst SIGNAL"
+    ),
+    puzzle3: textPuzzle(
+        "KONTROLLRAUM",
+        "Das Pult verlangt das Passwort für den Kontrollraum.",
+        "Das Passwort heisst ZUGANG"
+    )
+};
+
 const puzzleViews = { 1: level1Views, 2: level2Views,
-    3: typeof level3Views === "undefined" ? {} : level3Views }[currentLevel] || {};
+    3: typeof level3Views === "undefined" ? {} : level3Views,
+    4: level4Views }[currentLevel] || {};
 
 // Bereich, in dem das geöffnete Rätsel angezeigt wird
 const puzzleArea = document.createElement("section");

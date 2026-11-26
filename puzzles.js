@@ -18,6 +18,12 @@ const levelPuzzles = {
         puzzle1: "97624",
         puzzle2: "6:1011",
         puzzle3: "SBCDZ"
+    },
+    // Platzhalter, bis Laurentius Rätsel für Level 4 fertig sind
+    4: {
+        puzzle1: "4",
+        puzzle2: "SIGNAL",
+        puzzle3: "ZUGANG"
     }
 };
 

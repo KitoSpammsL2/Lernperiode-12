@@ -7,7 +7,7 @@ const GameState = {
 
 // Seiten des Spiels: neue Levels werden hier der Reihe nach eingetragen
 const menuPage = "index.html";
-const levelPages = ["room.html", "room2.html", "room3.html"];
+const levelPages = ["room.html", "room2.html", "room3.html", "room4.html"];
 const maxLevels = levelPages.length;
 
 const stateStorageKey = "glitchGameState";
