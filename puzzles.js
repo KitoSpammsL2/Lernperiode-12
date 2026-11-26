@@ -30,6 +30,9 @@ const levelPuzzles = {
 // Fortschritt aller Levels, z.B. { level1: { puzzle1: true, ... } }
 const progressStorageKey = "glitchProgress";
 
+// Gefundene Gegenstände, z.B. [{ id: "zugangskarte", name: "Zugangskarte", symbol: "▭", level: 4 }]
+const inventoryStorageKey = "glitchInventory";
+
 // Rätsel des aktuellen Levels (currentLevel kommt aus script.js)
 let puzzles = {};
 
@@ -149,6 +152,40 @@ function resetPuzzles() {
     console.log("Rätsel von Level " + currentLevel + " wurden zurückgesetzt.");
 }
 
+// Inventar lesen; beschädigte Einträge werden ignoriert
+function loadInventory() {
+    try {
+        const saved = JSON.parse(localStorage.getItem(inventoryStorageKey));
+        return Array.isArray(saved) ? saved.filter(item => item && typeof item.id === "string") : [];
+    } catch (error) {
+        console.error("Inventar konnte nicht geladen werden.", error);
+        return [];
+    }
+}
+
+function saveInventory(items) {
+    try {
+        localStorage.setItem(inventoryStorageKey, JSON.stringify(items));
+    } catch (error) {
+        console.error("Inventar konnte nicht gespeichert werden.", error);
+    }
+}
+
+// Gegenstand ins Inventar legen; jeder Gegenstand kommt nur einmal vor
+function addItem(item) {
+    const items = loadInventory();
+
+    if (items.some(saved => saved.id === item.id)) return false;
+
+    items.push({ id: item.id, name: item.name, symbol: item.symbol || "◆", level: currentLevel });
+    saveInventory(items);
+    return true;
+}
+
+function hasItem(itemId) {
+    return loadInventory().some(item => item.id === itemId);
+}
+
 // Fortschritt eines einzelnen Levels löschen, z.B. beim Neustart dieses Levels
 function resetLevelProgress(level) {
     const progress = loadProgress();
@@ -160,6 +197,9 @@ function resetLevelProgress(level) {
         console.error("Spielstand konnte nicht gespeichert werden.", error);
     }
 
+    // Gegenstände aus diesem Level gehen beim Neustart ebenfalls verloren
+    saveInventory(loadInventory().filter(item => item.level !== level));
+
     if (level === currentLevel) {
         loadPuzzles();
     }
@@ -169,6 +209,7 @@ function resetLevelProgress(level) {
 function resetAllPuzzles() {
     try {
         localStorage.removeItem(progressStorageKey);
+        localStorage.removeItem(inventoryStorageKey);
     } catch (error) {
         console.error("Spielstand konnte nicht gelöscht werden.", error);
     }
