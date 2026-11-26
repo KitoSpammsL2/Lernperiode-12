@@ -137,21 +137,29 @@ const level2Views = {
 
 // Platzhalter, bis Laurentius Rätsel für Level 4 fertig sind
 const level4Views = {
-    puzzle1: textPuzzle(
-        "WARTUNGSSCHACHT",
-        "Der Schacht fragt, in welchem Level du bist.",
-        "Tippe die Zahl ein: 4"
-    ),
+    puzzle1: {
+        ...textPuzzle(
+            "WARTUNGSSCHACHT",
+            "Der Schacht fragt, in welchem Level du bist.",
+            "Tippe die Zahl ein: 4"
+        ),
+        // Beispiel fürs Inventar: Der Schacht gibt eine Zugangskarte ...
+        reward: { id: "zugangskarte", name: "Zugangskarte", symbol: "▭" }
+    },
     puzzle2: textPuzzle(
         "SIGNALVERSTÄRKER",
         "Der Verstärker wartet auf das Wort, das er senden soll.",
         "Das Wort heisst SIGNAL"
     ),
-    puzzle3: textPuzzle(
-        "KONTROLLRAUM",
-        "Das Pult verlangt das Passwort für den Kontrollraum.",
-        "Das Passwort heisst ZUGANG"
-    )
+    puzzle3: {
+        ...textPuzzle(
+            "KONTROLLRAUM",
+            "Die Zugangskarte passt. Das Pult verlangt jetzt das Passwort.",
+            "Das Passwort heisst ZUGANG"
+        ),
+        // ... und der Kontrollraum lässt sich erst mit dieser Karte öffnen
+        requires: { id: "zugangskarte", name: "Zugangskarte" }
+    }
 };
 
 const puzzleViews = { 1: level1Views, 2: level2Views,
@@ -192,16 +200,22 @@ function openPuzzle(puzzleId) {
     const view = puzzleViews[puzzleId];
     const solved = isPuzzleSolved(puzzleId);
 
+    // Manche Rätsel brauchen zuerst einen Gegenstand aus dem Inventar
+    const missingItem = !solved && view.requires && !hasItem(view.requires.id) ? view.requires : null;
+    const content = missingItem
+        ? `<p class="puzzle-locked">Hier fehlt noch etwas: <strong>${missingItem.name}</strong>. Finde diesen Gegenstand zuerst.</p>`
+        : view.html;
+
     puzzleArea.innerHTML = `
         <div class="puzzle-head">
             <h3 id="puzzleTitle">${view.title}</h3>
             <button type="button" id="closePuzzle" aria-label="Rätsel schliessen">✕</button>
         </div>
-        ${solved ? "" : `<div class="puzzle-tools">
+        ${solved || missingItem ? "" : `<div class="puzzle-tools">
             <button type="button" id="puzzleGlitchButton" aria-pressed="false">HINWEISE ANZEIGEN</button>
             <span>Der Timer läuft weiter.</span>
         </div>`}
-        ${solved ? "" : view.html}
+        ${solved ? "" : content}
         <p class="puzzle-feedback" id="puzzleFeedback" role="status"></p>
         <button type="button" id="backToObjects">ZURÜCK ZU DEN OBJEKTEN</button>
     `;
@@ -216,7 +230,7 @@ function openPuzzle(puzzleId) {
 
     if (solved) {
         showPuzzleFeedback("Dieses Rätsel ist bereits gelöst.", true);
-    } else {
+    } else if (!missingItem) {
         view.setup(puzzleId);
     }
 
@@ -274,9 +288,12 @@ function submitAnswer(puzzleId, answer) {
 
     if (correct) {
         const left = Object.keys(puzzles).length - getSolvedCount();
-        showPuzzleFeedback("Richtig! Rätsel gelöst. " + (left > 0
+        const reward = puzzleViews[puzzleId].reward;
+        const found = reward && addItem(reward) ? " Gefunden: " + reward.name + "." : "";
+        showPuzzleFeedback("Richtig! Rätsel gelöst." + found + " " + (left > 0
             ? "Noch " + left + " Rätsel bis zum Ausgang."
             : "Der Ausgang ist jetzt freigeschaltet."), true);
+        showInventory();
         activePuzzleObject?.classList.add("just-solved");
         const solvedObject = activePuzzleObject;
         setTimeout(() => solvedObject?.classList.remove("just-solved"), 700);
@@ -419,6 +436,35 @@ function updateDoor() {
     }
 }
 
+// Inventar im Raum anzeigen (unter dem Glitch-Knopf)
+function showInventory() {
+    let inventory = document.getElementById("inventory");
+
+    if (!inventory) {
+        inventory = document.createElement("section");
+        inventory.id = "inventory";
+        inventory.setAttribute("aria-label", "Inventar");
+        inventory.innerHTML = "<h3>INVENTAR</h3><ul></ul>";
+        (document.querySelector(".control-panel") || puzzleArea).after(inventory);
+    }
+
+    const list = inventory.querySelector("ul");
+    const items = loadInventory();
+
+    list.replaceChildren(...items.map(item => {
+        const entry = document.createElement("li");
+        entry.textContent = item.symbol + " " + item.name;
+        return entry;
+    }));
+
+    if (items.length === 0) {
+        const empty = document.createElement("li");
+        empty.className = "inventory-empty";
+        empty.textContent = "Noch keine Gegenstände gefunden.";
+        list.appendChild(empty);
+    }
+}
+
 // Gegenstände mit ihren Rätseln verbinden
 for (const objectName in puzzleObjects) {
     const object = document.querySelector(`[data-object="${objectName}"]`);
@@ -446,4 +492,5 @@ document.addEventListener("gameStateChanged", (event) => {
     }
 });
 
+showInventory();
 updateDoor();
