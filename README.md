@@ -173,7 +173,7 @@ Speicherung und Türfreigabe. Neuladen und Level-Neustart sind geprüft.
 - [ ] Rangliste und Inventar gestalten. (Rangliste im Hauptmenü und Inventaranzeige im Spielraum entwerfen, mit der Spiellogik abstimmen)
 
 ### Kaito – CTO & Spiellogik
-- [ ] Level 4 in die Levelsteuerung integrieren. (Levelwechsel von Level 3 zu Level 4 ermöglichen, Rätselstatus vorbereiten, Freischaltung und Timer prüfen)
+- [x] Level 4 in die Levelsteuerung integrieren. (Levelwechsel von Level 3 zu Level 4 ermöglichen, Rätselstatus vorbereiten, Freischaltung und Timer prüfen)
 - [ ] Rangliste mit Bestzeiten einbauen. (Bestzeiten über die Express-API laden und speichern, Spielernamen abfragen, Rangliste im Hauptmenü anzeigen)
 - [ ] Inventarsystem vorbereiten. (Gefundene Gegenstände speichern, Inventar im Spielraum anzeigen, Gegenstände in Rätseln verwenden)
 

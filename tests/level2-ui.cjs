@@ -253,6 +253,9 @@ const server = http.createServer((req,res) => {
         }
     }
     await object('tuer');
+    await waitFor("location.pathname.endsWith('room4.html') && document.readyState==='complete' && typeof puzzleArea !== 'undefined'");
+    await check("currentLevel===4 && getUnlockedLevel()===4 && getSolvedCount()===0 && getTimeLeft()>=295",'Level 3 führt zu Level 4 mit neuem Timer');
+    await evaluate("Object.keys(puzzles).forEach(id=>checkPuzzle(id,levelPuzzles[4][id])); updateDoor()"); await object('tuer');
     await check("currentState===GameState.WON && !!document.getElementById('winScreen') && getBestTime()>0",'Gewinnbildschirm und Bestzeit');
     await click('#backToMenu'); await waitFor("location.pathname.endsWith('index.html') && document.readyState==='complete'");
     const best=await evaluate('localStorage.getItem("glitchBestTime")');

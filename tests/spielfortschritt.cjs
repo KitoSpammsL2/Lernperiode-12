@@ -86,6 +86,8 @@ const server = http.createServer((req,res) => {
     await loseNow(); await click('#restartLevel'); await waitFor(level('room3.html') + " && currentState===GameState.PLAYING");
     await check("getSolvedCount()===0 && !!JSON.parse(localStorage.getItem('glitchProgress')).level2",'Level-Neustart in Level 3 behält Level 2');
 
+    await solve(); await object('tuer'); await waitFor(level('room4.html'));
+    await check("currentLevel===4 && getUnlockedLevel()===4 && getSolvedCount()===0 && getTimeLeft()>=295",'Level 4 startet mit neuem Timer');
     await solve(); await object('tuer');
     await check("currentState===GameState.WON && runSeconds>0 && getBestTime()===runSeconds",'ganzer Durchgang ergibt eine Bestzeit');
     const best = await evaluate('getBestTime()');
@@ -95,13 +97,14 @@ const server = http.createServer((req,res) => {
     await click('.level-buttons [data-level="2"]'); await waitFor(level('room2.html'));
     await check("getSolvedCount()===0 && gameStartTime===null && localStorage.getItem('glitchProgress')===null",'Start in Level 2 beginnt ohne alten Fortschritt');
     await solve(); await object('tuer'); await waitFor(level('room3.html'));
+    await solve(); await object('tuer'); await waitFor(level('room4.html'));
     await solve(); await object('tuer');
     await check(`currentState===GameState.WON && runSeconds===null && getBestTime()===${best}`,'Start in Level 2 verändert die Bestzeit nicht');
 
     await click('#backToMenu'); await waitFor("location.pathname.endsWith('index.html') && document.readyState==='complete'");
     await click('.level-buttons [data-level="3"]'); await waitFor(level('room3.html'));
     await loseNow(); await click('#restartGame'); await waitFor(level('room.html'));
-    await check("currentLevel===1 && getSolvedCount()===0 && getUnlockedLevel()===3",'Neues Spiel beginnt in Level 1, Freischaltung bleibt');
+    await check("currentLevel===1 && getSolvedCount()===0 && getUnlockedLevel()===maxLevels",'Neues Spiel beginnt in Level 1, Freischaltung bleibt');
     assert.deepEqual(errors,[],'keine Browser- oder Konsolenfehler'); assert.deepEqual(failed,[],'keine fehlgeschlagenen Ressourcen');
     console.log('PASS keine Browserfehler oder fehlgeschlagenen Ressourcen');
 })().catch(err=>{console.error(err);process.exitCode=1;}).finally(async()=>{
