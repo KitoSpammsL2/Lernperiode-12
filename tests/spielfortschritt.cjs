@@ -113,10 +113,10 @@ const server = http.createServer((req,res) => {
     await check("document.getElementById('inventory').textContent.includes('Noch keine Gegenstände')",'Inventar im Raum sichtbar und leer');
     await object('kontrolle');
     await check("!document.getElementById('textInput') && document.querySelector('.puzzle-locked').textContent.includes('Zugangskarte')",'Kontrollraum braucht zuerst die Zugangskarte');
-    await object('schacht'); await fill('#textInput','4'); await click('#textForm button');
+    await object('schacht'); await fill('#textInput','7285'); await click('#textForm button');
     await check("hasItem('zugangskarte') && document.getElementById('inventory').textContent.includes('Zugangskarte') && document.getElementById('puzzleFeedback').textContent.includes('Gefunden')",'gefundene Zugangskarte erscheint im Inventar');
     await object('kontrolle');
-    await check("!!document.getElementById('textInput')",'mit der Zugangskarte lässt sich der Kontrollraum öffnen');
+    await check("!!document.getElementById('processForm')",'mit der Zugangskarte lässt sich der Kontrollraum öffnen');
     await cdp('Page.reload'); await waitFor(level('room4.html'));
     await check("hasItem('zugangskarte') && document.getElementById('inventory').textContent.includes('Zugangskarte')",'Inventar bleibt nach dem Neuladen');
     await loseNow(); await click('#restartLevel'); await waitFor(level('room4.html') + " && currentState===GameState.PLAYING");

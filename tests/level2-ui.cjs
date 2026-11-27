@@ -272,7 +272,54 @@ const server = http.createServer((req,res) => {
     await object('tuer');
     await waitFor("location.pathname.endsWith('room4.html') && document.readyState==='complete' && typeof puzzleArea !== 'undefined'");
     await check("currentLevel===4 && getUnlockedLevel()===4 && getSolvedCount()===0 && getTimeLeft()>=295",'Level 3 führt zu Level 4 mit neuem Timer');
-    await evaluate("Object.keys(puzzles).forEach(id=>checkPuzzle(id,levelPuzzles[4][id])); updateDoor()"); await object('tuer');
+    await evaluate("const oldLevel4=loadProgress();oldLevel4.level4={puzzle1:true,puzzle2:true,puzzle3:true};localStorage.setItem(progressStorageKey,JSON.stringify(oldLevel4));addItem({id:'zugangskarte',name:'Zugangskarte'});saveInventory([...loadInventory(),{id:'level3-test-item',name:'Erhalten',level:3}])");
+    await cdp('Page.reload'); await waitFor("document.readyState==='complete' && typeof puzzles!=='undefined'");
+    await check("getSolvedCount()===0 && !hasItem('zugangskarte') && hasItem('level3-test-item') && loadProgress().level3.puzzle1", 'Level-4-Platzhalter migriert und andere Levels erhalten');
+    await object('kontrolle');
+    await check("!!document.querySelector('.puzzle-locked') && !document.getElementById('processForm')", 'Kontrollraum braucht die Zugangskarte');
+    await object('schacht');
+    await check("getComputedStyle(document.querySelector('#puzzleArea .glitch-hint')).display==='none'", 'Level-4-Regeln zunächst verborgen');
+    await click('#puzzleGlitchButton');
+    await check("getComputedStyle(document.querySelector('#puzzleArea .glitch-hint')).display!=='none'", 'Wartungsregeln im Scan sichtbar');
+    for(const answer of ['', '4', 'abcd', '728']) {
+        await fill('#textInput',answer); await click('#textForm button');
+        await check("getSolvedCount()===0 && document.getElementById('puzzleFeedback').textContent.includes('vier Ziffern')", 'ungültiger Wartungscode erklärt');
+    }
+    await fill('#textInput','2578'); await click('#textForm button');
+    await check('getSolvedCount()===0 && !hasItem("zugangskarte")', 'falsche Radreihenfolge gibt keine Karte');
+    await fill('#textInput','7285'); await click('#textForm button');
+    await check('getSolvedCount()===1 && hasItem("zugangskarte")', 'richtiger Wartungscode gibt Zugangskarte');
+    await cdp('Page.reload'); await waitFor("document.readyState==='complete' && document.querySelector('.object.solved')");
+    await check('getSolvedCount()===1 && hasItem("zugangskarte")', 'Level-4-Fortschritt und Karte bleiben gespeichert');
+    await object('verstaerker');
+    await check("getComputedStyle(document.querySelector('#puzzleArea .glitch-hint')).display==='none'", 'XOR-Hinweis zunächst verborgen');
+    await click('#puzzleGlitchButton');
+    await check("getComputedStyle(document.querySelector('#puzzleArea .glitch-hint')).display!=='none'", 'XOR-Regeln im Scan sichtbar');
+    await click('#signalCheck');
+    await check('getSolvedCount()===1', 'falsches XOR-Signal abgelehnt');
+    await click('[data-signal-bit="1"]'); await click('#signalReset');
+    await check("document.getElementById('signalPreview').textContent.includes('000000')", 'XOR-Eingabe zurückgesetzt');
+    await click('[data-signal-bit="4"]'); await click('#signalCheck');
+    await check('getSolvedCount()===2 && document.getElementById("signalReset").disabled', 'XOR-Signal akzeptiert und Eingaben gesperrt');
+    await object('kontrolle');
+    await click('#processForm button');
+    await check("getSolvedCount()===2 && document.getElementById('puzzleFeedback').textContent.includes('ganzen Zahlen')", 'leerer Prozessplan erklärt');
+    for(const invalid of ['-1','1.5','ABC']) {
+        await fill('#processC',invalid); await fill('#processE','10'); await fill('#processEnd','12');
+        await click('#processForm button');
+        await check("getSolvedCount()===2 && document.getElementById('puzzleFeedback').textContent.includes('ganzen Zahlen')", 'ungültige Prozesszeit erklärt');
+    }
+    for(const [id,value] of [['processC','8'],['processE','19'],['processEnd','21']]) await fill('#'+id,value);
+    await click('#processForm button'); await check('getSolvedCount()===2', 'sequentieller statt paralleler Prozessplan abgelehnt');
+    for(const [id,value] of [['processC','5'],['processE','10'],['processEnd','12']]) await fill('#'+id,value);
+    for(const width of [1440,390,320]) {
+        await cdp('Emulation.setDeviceMetricsOverride',{width,height:900,deviceScaleFactor:1,mobile:false});
+        await pause(150);
+        await check('document.documentElement.scrollWidth<=innerWidth', `Level-4-Prozessplan bei ${width}px ohne Überlauf`);
+    }
+    await click('#processForm button');
+    await check('getSolvedCount()===3', 'alle drei neuen Level-4-Rätsel über die Oberfläche gelöst');
+    await object('tuer');
     await check("currentState===GameState.WON && !!document.getElementById('winScreen') && getBestTime()>0",'Gewinnbildschirm und Bestzeit');
     await click('#backToMenu'); await waitFor("location.pathname.endsWith('index.html') && document.readyState==='complete'");
     const best=await evaluate('localStorage.getItem("glitchBestTime")');
