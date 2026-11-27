@@ -179,7 +179,92 @@ Speicherung und Türfreigabe. Neuladen und Level-Neustart sind geprüft.
 
 ### Laurentiu – COO & Rätselentwicklung
 - [x] Level 3 testen und verbessern. (Alle drei Rätsel durchspielen, Hinweise und Schwierigkeit anpassen, Fehler mit dem Team beheben)
-- [ ] Drei Rätsel für Level 4 entwickeln und integrieren. (Rätsel planen und programmieren, Glitch-Hinweise einbauen, mit der Spiellogik verbinden)
-- [ ] Rätselkonzept für Level 5 entwickeln. (Drei abschliessende Rätsel planen, Lösungen und Hinweise definieren, Schwierigkeit weiter steigern)
+- [x] Drei Rätsel für Level 4 entwickeln und integrieren. (Rätsel planen und programmieren, Glitch-Hinweise einbauen, mit der Spiellogik verbinden)
+- [x] Rätselkonzept für Level 5 entwickeln. (Drei abschliessende Rätsel planen, Lösungen und Hinweise definieren, Schwierigkeit weiter steigern)
+
+### Level 4 – Rätsel im Systemkern
+
+Der Wartungsschacht enthält vier Zehnerräder. Die Anfangswerte A=7, B=2,
+C=9 und D=4 sind sichtbar. Der Glitch-Hinweis nennt die Drehungen +5, −7,
++8 und −6 sowie die Lesereihenfolge C, A, D, B. Nach dem Umlauf auf den
+Ziffern 0 bis 9 stehen die Räder auf A=2, B=5, C=7 und D=8.
+Der Code **7285** öffnet den Schacht und gibt die Zugangskarte ins Inventar.
+
+Beim Signalverstärker werden Signal 110010 und Maske 101101 angezeigt.
+Der Glitch-Hinweis erklärt die zyklische Linksverschiebung der Maske um zwei
+Stellen sowie XOR. Aus der Maske wird 110110. Unterschiedliche Bits ergeben
+1, gleiche Bits 0. Die richtige Ausgabe ist **000100**. Die sechs Bits lassen
+sich einzeln umschalten und zurücksetzen.
+
+Der Kontrollraum benötigt die Zugangskarte. Fünf Prozesse A bis E dauern
+3, 5, 4, 7 und 2 Recheneinheiten. Im Glitch-Modus sind ihre Abhängigkeiten
+sichtbar. A und B starten bei 0, C wartet auf A und B, D auf A und E auf C
+und D. Prozesse laufen parallel. C startet bei **5**, D endet bei **10**,
+E startet bei **10** und endet bei **12**. Einzutragen sind somit **5, 10, 12**.
+Die Recheneinheiten sind unabhängig vom Spieltimer.
+
+Die Rätsel verwenden den vorhandenen Fortschritt, Glitch-Modus und Ausgang.
+Alte Erfolge und Gegenstände der Level-4-Platzhalter werden beim ersten Laden
+der neuen Rätsel zurückgesetzt. Andere Levels behalten ihren Fortschritt.
+
+### Level 5 – Konzept für den letzten Sektor
+
+Der geplante letzte Raum heisst „Der Ausstieg“. Drei Aufgaben verbinden
+Logik, Ressourcenplanung und Programmablauf. Jede liefert einen Baustein
+für die nächste. Die Hinweise erklären die Regeln und lassen sich jederzeit
+über den Glitch-Modus wieder lesen. Fehlversuche bleiben korrigierbar.
+Der Timer und das Inventar werden aus der vorhandenen Spiellogik übernommen.
+
+**1. Schlüsselkern – Vier unbekannte Ziffern**
+
+Der Spieler belegt vier Felder A, B, C und D mit unterschiedlichen Ziffern
+zwischen 1 und 6. Nur der Glitch-Modus zeigt alle Bedingungen:
+A+B=7, C+D=7, A×C=12, B>D und A<C. Die einzige Lösung ist **2561**.
+Das geprüfte Ergebnis liefert einen Schlüssel mit Startwert **25** ins Inventar.
+Die Oberfläche soll doppelte oder unvollständige Belegungen erklären und bei
+falscher Lösung auf die verletzten Bedingungen verweisen.
+
+**2. Notversorgung – Drei Module optimal kombinieren**
+
+Der Spieler wählt genau drei Module. Leistungen und Wärme sind sichtbar,
+die Glitch-Ansicht ergänzt Signalstärken und Grenzen. Insgesamt sind höchstens
+10 Leistungseinheiten und 8 Wärmeeinheiten erlaubt. Mindestens eines der
+Gateway-Module B oder E muss gewählt werden. Gesucht ist die Kombination
+mit der höchsten Signalstärke.
+
+| Modul | Leistung | Wärme | Signal |
+|---|---:|---:|---:|
+| A | 4 | 3 | 7 |
+| B | 3 | 2 | 6 |
+| C | 5 | 5 | 10 |
+| D | 2 | 1 | 3 |
+| E | 4 | 4 | 8 |
+| F | 1 | 3 | 2 |
+
+Die eindeutige optimale Auswahl ist **B+C+D**, mit Leistung **10**, Wärme **8**
+und Signal **19**. A+D+E ist zulässig, erreicht aber nur Signal 18.
+Das Ergebnis liefert ein Signalmodul mit Wert **19** ins Inventar. Die
+Rückmeldung soll zwischen falscher Anzahl, fehlendem Gateway, überschrittenen
+Grenzen und einer zulässigen, aber schwächeren Kombination unterscheiden.
+
+**3. Ausstiegsprogramm – Fehlerhafte Anweisung reparieren**
+
+Schlüssel und Signalmodul werden benötigt. Aus ihren Werten 25 und 19 entsteht
+der Startwert x=44. Der Bildschirm zeigt ein Programm mit genau sechs
+Durchläufen. Bei geradem x wird x halbiert, bei ungeradem x wird x durch
+3×x−1 ersetzt. Die Glitch-Diagnose sagt, dass nur die Konstante in der
+ungeraden Anweisung beschädigt ist. Erlaubte Reparaturen sind −3, −1, +1 oder
++3. Das Programm muss nach sechs Durchläufen den Zielwert 26 erreichen.
+
+Der Spieler wählt die Reparatur und trägt den Registerwert nach dem dritten
+Durchlauf ein. Die Lösung ist **3×x+1** und Zwischenwert **34**.
+Die korrekte Spur lautet **44 → 22 → 11 → 34 → 17 → 52 → 26**.
+Die anderen Konstanten führen nach sechs Durchläufen zu 21, 4 oder 30.
+Nach erfolgreicher Prüfung öffnet sich der endgültige Ausgang.
+
+Beim Testen von Level 5 werden Verständlichkeit und benötigte Zeit erfasst.
+Zunächst gilt das bestehende Zeitlimit. Hinweise oder Zeit werden anhand der
+beobachteten Spielzeiten angepasst. Die Implementierung von Level 5 ist für
+den nächsten Termin vorgesehen.
 
 

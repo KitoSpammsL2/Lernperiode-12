@@ -1,0 +1,18 @@
+.level-four .game-room h1 { overflow-wrap: anywhere; }
+.level-four #processForm { display: grid; gap: 10px; }
+.level-four #processForm input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #00ffff;
+    border-radius: 8px;
+    font: inherit;
+}
+.level-four #puzzleArea .symbol-buttons button {
+    min-width: 44px;
+    font-size: 20px;
+}
+.level-four #puzzleArea [aria-pressed="true"] {
+    outline: 2px solid #ff78cf;
+    outline-offset: 2px;
+}
