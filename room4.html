@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="room2.css">
     <link rel="stylesheet" href="level-transitions.css">
     <link rel="stylesheet" href="level4-puzzles.css">
+    <link rel="stylesheet" href="room4.css">
 </head>
-<!-- Grundgerüst für Level 4: übernimmt vorerst das Design von Level 2 (Klasse level-two) -->
+<!-- Systemkern: gemeinsame Spielfunktionen mit eigenem Wartungsdesign. -->
 <body class="level-two level-four">
 
     <header class="hud">
@@ -25,41 +26,43 @@
 
     <main class="game-room">
 
-        <p class="sector-label">SEKTOR 04 / SYSTEMKERN</p>
-        <h1>DER SYSTEMKERN</h1>
+        <p class="sector-label">SEKTOR 04 / WARTUNG AKTIV</p>
+        <h1>SYSTEMKERN</h1>
         <p class="subtitle">Der Kern der Simulation ist gesperrt. Finde die Zugangskarte, verstärke das Signal und öffne den Kontrollraum.</p>
+
+        <div class="core-briefing"><span>SYSTEMZUGRIFF</span><p>Wartung, Signal und Prozesse steuern den Kern. Gefundene Gegenstände erscheinen im Inventar und werden bei passenden Rätseln automatisch verwendet.</p></div>
 
         <div class="objects" role="group" aria-label="Interaktive Objekte">
             <button type="button" class="object" data-object="schacht">
-                <span class="object-index" aria-hidden="true">01 / SYSTEM</span>
-                <span class="symbol" aria-hidden="true">▣</span>
+                <span class="object-index" aria-hidden="true">01 / WARTUNG</span>
+                <span class="symbol" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="21"/><path d="M32 5v8M32 51v8M5 32h8M51 32h8M13 13l6 6M45 45l6 6M13 51l6-6M45 19l6-6"/><circle cx="32" cy="32" r="8"/></svg></span>
                 <strong>WARTUNGSSCHACHT</strong>
-                <span class="object-description">Verschlossene Wartung</span>
+                <span class="object-description">Zehnerräder prüfen und Zugangskarte finden</span>
                 <span class="glitch-signal" aria-hidden="true">SIGNAL ENTDECKT</span>
                 <span class="object-status">Untersuchen →</span>
             </button>
 
             <button type="button" class="object" data-object="verstaerker">
-                <span class="object-index" aria-hidden="true">02 / SYSTEM</span>
-                <span class="symbol" aria-hidden="true">▦</span>
+                <span class="object-index" aria-hidden="true">02 / SIGNAL</span>
+                <span class="symbol" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 27v29M20 56h24M21 21a16 16 0 010-11M43 10a16 16 0 010 22M14 5a26 26 0 000 33M50 5a26 26 0 010 33"/><circle cx="32" cy="21" r="5"/></svg></span>
                 <strong>SIGNALVERSTÄRKER</strong>
-                <span class="object-description">Schwaches Signal</span>
+                <span class="object-description">Filtermaske verschieben und XOR-Signal einstellen</span>
                 <span class="glitch-signal" aria-hidden="true">SIGNAL ENTDECKT</span>
                 <span class="object-status">Untersuchen →</span>
             </button>
 
             <button type="button" class="object" data-object="kontrolle">
-                <span class="object-index" aria-hidden="true">03 / SYSTEM</span>
-                <span class="symbol" aria-hidden="true">▥</span>
+                <span class="object-index" aria-hidden="true">03 / PROZESSE</span>
+                <span class="symbol" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="6" width="17" height="17" rx="3"/><rect x="42" y="6" width="17" height="17" rx="3"/><rect x="24" y="42" width="17" height="17" rx="3"/><path d="M14 23v9h37v-9M32 32v10"/></svg></span>
                 <strong>KONTROLLRAUM</strong>
-                <span class="object-description">Gesicherter Zugang</span>
+                <span class="object-description">Mit der Zugangskarte den Prozessplan untersuchen</span>
                 <span class="glitch-signal" aria-hidden="true">SIGNAL ENTDECKT</span>
                 <span class="object-status">Untersuchen →</span>
             </button>
 
             <button type="button" class="object" data-object="tuer">
                 <span class="object-index" aria-hidden="true">04 / EXIT</span>
-                <span class="symbol" aria-hidden="true">🚪</span>
+                <span class="symbol" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 56h40M18 56V8h28v48M37 30v5M25 15h14v34H25"/></svg></span>
                 <strong>AUSGANG</strong>
                 <span class="object-description">Drei Rätsel öffnen die Tür</span>
                 <span class="object-status">Gesperrt</span>
