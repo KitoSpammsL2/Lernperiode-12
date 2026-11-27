@@ -89,7 +89,7 @@ vom 13.11 verwendet Level 2 ausschliesslich diesen Hauptspielraum; die zusätzli
 Objektgruppe wurde entfernt.
 
 
-## Zeitplan bis 18.12.2026
+## Zeitplan bis 11.12.2026
 
 Planung von Laurentiu vom 06.11.2026. Wir arbeiten jeden Freitag. Die folgenden
 Meilensteine sind der Zeitplan für die weitere Entwicklung; spätere Aufgaben
@@ -101,12 +101,13 @@ werden im Team verteilt. Die bestehenden persönlichen Arbeitspakete bleiben bes
 | 13.11.2026 | Level 2 gemeinsam fertigstellen; Level 3 planen | Endgültige Oberfläche, Rätsel, Timer und Levelwechsel sind zusammen getestet; drei Rätselideen für Level 3 sind dokumentiert. |
 | 20.11.2026 | Level 3 fertigstellen; Level 4 planen | Raum und drei Rätsel sind spielbar und getestet; der Übergang von Level 2 funktioniert. |
 | 27.11.2026 | Level 4 fertigstellen; Level 5 planen | Drei weitere Rätsel, Glitch-Hinweise und Levelwechsel funktionieren; Konzept für das letzte Level steht. |
-| 04.12.2026 | Level 5 fertigstellen | Alle fünf Levels sind vom Hauptmenü bis zum letzten Ausgang durchspielbar. |
-| 11.12.2026 | Gesamttest und Fehlerbehebung; Zusatzfunktionen abschliessen | Speicherstand, Bestzeit, Neustart, Timer und geplantes Inventar sind geprüft; keine neuen grossen Funktionen mehr beginnen. |
-| 18.12.2026 | Abschlusstest und Abgabe | Kritische Fehler behoben, README aktuell, Präsentation und lauffähige Endversion bereit. |
+| 04.12.2026 | Level 5 fertigstellen, Gesamttest und Fehlerbehebung (dezentral) | Alle fünf Levels sind vom Hauptmenü bis zum letzten Ausgang durchspielbar; Speicherstand, Bestzeit, Neustart, Timer, Inventar und Rangliste sind geprüft. |
+| 11.12.2026 | Abschluss: Product Launch an der BBB | Kritische Fehler behoben, README aktuell, Präsentation und lauffähige Endversion bereit. |
 
-Ab 11.12 reservieren wir Zeit für Fehler und die Abgabe. Falls ein Level länger
-braucht, hat das durchspielbare Spiel Vorrang vor zusätzlichen Funktionen.
+Am 27.11 angepasst: Laut Herrn Colic ist der 04.12 dezentral und am 11.12 der
+Abschluss („Product Launch“) an der BBB. Der 18.12 entfällt. Nach dem 04.12
+beginnen wir keine neuen Funktionen mehr. Falls ein Level länger braucht, hat
+das durchspielbare Spiel Vorrang vor zusätzlichen Funktionen.
 
 ## 13.11
 
@@ -203,6 +204,14 @@ API-Testdaten geprüft; echte Bestzeiten werden dabei nicht verändert.
 - [x] Rangliste mit Bestzeiten einbauen. (Bestzeiten über die Express-API laden und speichern, Spielernamen abfragen, Rangliste im Hauptmenü anzeigen)
 - [x] Inventarsystem vorbereiten. (Gefundene Gegenstände speichern, Inventar im Spielraum anzeigen, Gegenstände in Rätseln verwenden)
 
+Level 4 ist als viertes Level in der Levelsteuerung eingetragen. Freischaltung,
+Timer und der Wechsel von Level 3 zu Level 4 funktionieren. Die Rangliste lädt
+die zehn besten Zeiten über `/api/bestzeiten` und erscheint nur, wenn das Spiel
+über den Express-Server läuft. Eingetragen wird nur ein ganzer Durchgang ab
+Level 1. Das Inventar speichert Gegenstände im Browser; Rätsel können einen
+Gegenstand vergeben oder voraussetzen. Beim Neustart eines Levels verschwinden
+die Gegenstände dieses Levels.
+
 ### Laurentiu – COO & Rätselentwicklung
 - [x] Level 3 testen und verbessern. (Alle drei Rätsel durchspielen, Hinweise und Schwierigkeit anpassen, Fehler mit dem Team beheben)
 - [x] Drei Rätsel für Level 4 entwickeln und integrieren. (Rätsel planen und programmieren, Glitch-Hinweise einbauen, mit der Spiellogik verbinden)
@@ -292,5 +301,34 @@ Beim Testen von Level 5 werden Verständlichkeit und benötigte Zeit erfasst.
 Zunächst gilt das bestehende Zeitlimit. Hinweise oder Zeit werden anhand der
 beobachteten Spielzeiten angepasst. Die Implementierung von Level 5 ist für
 den nächsten Termin vorgesehen.
+
+
+## 04.12 (dezentral)
+
+Vorgabe von Herrn Colic: fünf Arbeitspakete pro Person. Das erste ist bis
+04.12 um 08:30 erledigt, die anderen vier bearbeiten wir dezentral am 04.12.
+Am 11.12 ist der Abschluss („Product Launch“) an der BBB. Bis dann muss das
+Spiel fertig und vorführbar sein.
+
+### Faruk – CEO & Frontend
+- [ ] Startbildschirm und Spielanleitung gestalten. (Kurze Einleitung zur Geschichte und Bedienungshinweise im Hauptmenü, einheitliches Design, Darstellung auf dem Handy prüfen)
+- [ ] Grunddesign für Level 5 entwickeln. (Letzten Raum „Der Ausstieg“ mit HTML/CSS gestalten, passende Objekte platzieren, einheitliches Design übernehmen)
+- [ ] Design von Level 5 fertigstellen. (Spielraum an Laurentius Rätsel anpassen, Glitch-Effekte und Hinweise abstimmen, Darstellung auf dem Handy prüfen)
+- [ ] Gewinn- und Abschlussbildschirm gestalten. (Ende der Geschichte zeigen, Zeit und Ranglistenplatz darstellen, Übergang nach dem letzten Ausgang)
+- [ ] Product Launch vorbereiten. (Präsentation mit Idee, Team und Demo-Ablauf erstellen, Aufgaben für die Vorführung verteilen, Plakat aktualisieren)
+
+### Kaito – CTO & Spiellogik
+- [ ] Level 5 in die Levelsteuerung integrieren. (Levelwechsel von Level 4 zu Level 5 ermöglichen, Level 5 als letztes Level festlegen, Grundgerüst für Faruk und Laurentiu bereitstellen)
+- [ ] Eigenen Platz in der Rangliste anzeigen. (Platz nach einem ganzen Durchgang vom Server zurückgeben, im Gewinnbildschirm anzeigen, Rangliste im Menü aktualisieren)
+- [ ] Spielstand für neue Spieler zurücksetzen. (Knopf im Hauptmenü, Fortschritt, Inventar und Freischaltung löschen, Bestzeiten auf dem Server behalten)
+- [ ] Alle fünf Levels gesamthaft testen. (Browser-Tests auf Level 5 erweitern, Durchgang von Level 1 bis 5 prüfen, gefundene Fehler beheben)
+- [ ] Vorführversion vorbereiten. (Startanleitung im README ergänzen, Server mit einem Befehl starten, Spiel auf einem anderen Laptop testen)
+
+### Laurentiu – COO & Rätselentwicklung
+- [ ] Level 4 testen und verbessern. (Alle drei Rätsel durchspielen, Hinweise und Schwierigkeit anpassen, Ablauf mit der Zugangskarte prüfen)
+- [ ] Erste zwei Rätsel von Level 5 entwickeln. (Schlüsselkern und Notversorgung programmieren, Glitch-Hinweise einbauen, Gegenstände ins Inventar legen)
+- [ ] Drittes Rätsel von Level 5 entwickeln und integrieren. (Ausstiegsprogramm programmieren, Schlüssel und Signalmodul voraussetzen, letzten Ausgang freigeben)
+- [ ] Schwierigkeit und Spielzeit abstimmen. (Alle fünf Levels durchspielen, Zeitlimit und Hinweise anpassen, zu schwere Stellen entschärfen)
+- [ ] Rätsel für den Abschluss dokumentieren. (Rätsel und Lösungen aller Levels übersichtlich im README festhalten, Lösungsblatt für die Vorführung erstellen)
 
 
