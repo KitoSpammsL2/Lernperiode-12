@@ -59,6 +59,33 @@ const server = http.createServer((req,res) => {
     const fill=async(selector,value)=>evaluate(`document.querySelector(${JSON.stringify(selector)}).value=${JSON.stringify(value)}`);
     const object=name=>click(`[data-object="${name}"]`);
     const check=async(expression,label)=>{assert.ok(await evaluate(expression),label); console.log('PASS '+label);};
+    const checkStationLayout = async name => {
+        const initialScan = await evaluate("document.body.classList.contains('glitch-active')");
+        const initialProgress = await evaluate('getSolvedCount()');
+        for(const width of [1440,768,390,320]) {
+            await cdp('Emulation.setDeviceMetricsOverride',{width,height:844,deviceScaleFactor:1,mobile:width<=390});
+            await evaluate('document.getElementById("puzzleArea").scrollIntoView({block:"start"})');
+            await check("document.documentElement.scrollWidth<=innerWidth && [...document.querySelectorAll('#puzzleArea button')].every(e=>{const r=e.getBoundingClientRect();return r.width>=44&&r.height>=44&&r.right<=innerWidth&&r.left>=0})", `${name}: bedienbare Schaltflächen ohne Überlauf bei ${width}px`);
+            await check("['timer','progress'].every(id=>{const r=document.getElementById(id).getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight})", `${name}: Timer und Fortschritt sichtbar bei ${width}px`);
+            if(process.env.SCREENSHOT_PATH && [1440,390].includes(width)) {
+                const shot=await cdp('Page.captureScreenshot',{format:'png',captureBeyondViewport:true});
+                fs.writeFileSync(process.env.SCREENSHOT_PATH.replace(/\.png$/, '-'+name+'-'+width+'.png'),Buffer.from(shot.data,'base64'));
+            }
+        }
+        await click('#puzzleGlitchButton');
+        await check(initialScan
+            ? "[...document.querySelectorAll('#puzzleArea .glitch-hint')].every(e=>getComputedStyle(e).display==='none')"
+            : "[...document.querySelectorAll('#puzzleArea .glitch-hint')].every(e=>getComputedStyle(e).display!=='none')", `${name}: Scan blendet sämtliche Regeln und Zustände um`);
+        await click('#puzzleGlitchButton');
+        assert.equal(await evaluate('getSolvedCount()'),initialProgress);
+    };
+    const touchTap = async selector => {
+        await cdp('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
+        await cdp('Emulation.setTouchEmulationEnabled',{enabled:true});
+        const point=await evaluate(`(()=>{const e=document.querySelector(${JSON.stringify(selector)});e.scrollIntoView({block:'center'});const r=e.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()`);
+        await cdp('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{...point,radiusX:2,radiusY:2,force:1,id:1}]});
+        await cdp('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+    };
     await cdp('Runtime.enable'); await cdp('Page.enable'); await cdp('Network.enable');
     await cdp('Page.navigate',{url:base+'/room2.html'}); await waitFor("location.pathname.endsWith('index.html') && document.readyState==='complete'");
     console.log('PASS direkter Levelzugriff führt ins Menü');
@@ -196,6 +223,7 @@ const server = http.createServer((req,res) => {
     await check("getComputedStyle(document.querySelector('#puzzleArea .glitch-hint')).display==='none'", 'Level-3-Regeln zunächst verborgen');
     await click('#glitchButton');
     await check("getComputedStyle(document.querySelector('#puzzleArea .glitch-hint')).display!=='none'", 'Level-3-Regeln im Scan sichtbar');
+    await checkStationLayout('chipfolge');
     await click('#chipCheck');
     await check("getSolvedCount()===0 && document.getElementById('puzzleFeedback').textContent.includes('fünf')", 'unvollständige Chipfolge abgelehnt');
     for(const chip of '69742') await click(`[data-chip="${chip}"]`);
@@ -209,9 +237,12 @@ const server = http.createServer((req,res) => {
     await waitFor("document.readyState==='complete' && document.querySelector('.object.solved')");
     await check('getSolvedCount()===1', 'Level-3-Erfolg nach Neuladen erhalten');
     await object('puffer');
+    await checkStationLayout('bitreparatur');
     await click('#bitForm button');
     await check("document.getElementById('puzzleFeedback').textContent.includes('vier Bits')", 'leere Bitantwort erklärt');
-    await click('[data-bit="7"]'); await fill('#payload','1011'); await click('#bitForm button');
+    await touchTap('[data-bit="7"]');
+    await check("document.querySelector('[data-bit=\"7\"]').getAttribute('aria-pressed')==='true'", 'Bitposition per Touch ausgewählt');
+    await fill('#payload','1011'); await click('#bitForm button');
     await check('getSolvedCount()===1', 'falsche Bitposition abgelehnt');
     await click('[data-bit="6"]'); await fill('#payload','1111'); await click('#bitForm button');
     await check("getSolvedCount()===1 && document.getElementById('puzzleFeedback').textContent.includes('Lesereihenfolge')", 'falsche Nutzbits erklärt');
@@ -221,6 +252,8 @@ const server = http.createServer((req,res) => {
     await object('route');
     await click('#glitchButton');
     await check("[...document.querySelectorAll('#puzzleArea .glitch-hint')].every(e=>getComputedStyle(e).display!=='none')", 'Route zeigt Regeln und Leitungsstatus');
+    await checkStationLayout('routenpult');
+    await check("document.querySelectorAll('.route-connections li').length===quarantineEdges.length && document.querySelectorAll('.route-connections [data-unstable=\"true\"]').length===quarantineEdges.filter(e=>e.unstable).length", 'Verbindungsübersicht zeigt alle echten Leitungen');
     for(const node of 'AEZ') await click(`[data-node="${node}"]`);
     await click('#routeCheck');
     await check("getSolvedCount()===2 && document.getElementById('puzzleFeedback').textContent.includes('Kontrollpunkt')", 'Route ohne C abgelehnt');

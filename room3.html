@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="faruk-design.css">
     <link rel="stylesheet" href="room2.css">
     <link rel="stylesheet" href="level-transitions.css">
-    <link rel="stylesheet" href="room3.css">
     <link rel="stylesheet" href="level3-puzzles.css">
+    <link rel="stylesheet" href="room3.css">
 </head>
 <!-- Gemeinsame Raumgestaltung mit eigenem Quarantäne-Layout. -->
 <body class="level-two level-three">
@@ -32,33 +32,33 @@
 
         <div class="sector-briefing">
             <span class="quarantine-label">QUARANTÄNE AKTIV</span>
-            <p>Untersuche die drei Stationen. Sobald alle Rätsel gelöst sind, ist der Ausgang frei.</p>
+            <p>Ordne die Chips, repariere das Datenpaket und plane die Route. Im Hinweisscan findest du die Regeln jeder Station.</p>
         </div>
 
         <div class="objects" role="group" aria-label="Interaktive Objekte">
             <button type="button" class="object" data-object="zugriff">
-                <span class="object-index" aria-hidden="true">01 / SYSTEM</span>
+                <span class="object-index" aria-hidden="true">01 / CHIPREIHENFOLGE</span>
                 <span class="symbol" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="50" height="36" rx="4"/><path d="M23 55h18M32 43v12M16 19l7 6-7 6M29 31h12"/></svg></span>
                 <strong>ZUGRIFFSTERMINAL</strong>
-                <span class="object-description">Zugriff prüfen</span>
+                <span class="object-description">Fünf Chips in die richtige Reihenfolge bringen</span>
                 <span class="glitch-signal" aria-hidden="true">SIGNAL ENTDECKT</span>
                 <span class="object-status">Untersuchen →</span>
             </button>
 
             <button type="button" class="object" data-object="puffer">
-                <span class="object-index" aria-hidden="true">02 / SYSTEM</span>
+                <span class="object-index" aria-hidden="true">02 / BITREPARATUR</span>
                 <span class="symbol" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="14" width="36" height="36" rx="5"/><path d="M24 23h16v18H24zM22 6v8M32 6v8M42 6v8M22 50v8M32 50v8M42 50v8M6 22h8M6 32h8M6 42h8M50 22h8M50 32h8M50 42h8"/></svg></span>
                 <strong>DATENPUFFER</strong>
-                <span class="object-description">Daten untersuchen</span>
+                <span class="object-description">Ein Bit reparieren und die Nutzbits lesen</span>
                 <span class="glitch-signal" aria-hidden="true">SIGNAL ENTDECKT</span>
                 <span class="object-status">Untersuchen →</span>
             </button>
 
             <button type="button" class="object" data-object="route">
-                <span class="object-index" aria-hidden="true">03 / SYSTEM</span>
+                <span class="object-index" aria-hidden="true">03 / ROUTENPLANUNG</span>
                 <span class="symbol" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="15" r="5"/><circle cx="51" cy="49" r="5"/><path d="M13 20v20a9 9 0 009 9h24M51 44V24a9 9 0 00-9-9H30M36 9l-6 6 6 6"/></svg></span>
                 <strong>ROUTENPULT</strong>
-                <span class="object-description">Route bestimmen</span>
+                <span class="object-description">Die günstigste zulässige Route finden</span>
                 <span class="glitch-signal" aria-hidden="true">SIGNAL ENTDECKT</span>
                 <span class="object-status">Untersuchen →</span>
             </button>
@@ -75,7 +75,7 @@
         <div class="control-panel">
             <button type="button" id="glitchButton" aria-pressed="false">GLITCH-MODUS</button>
             <p id="glitchStatus" class="scan-status" role="status">NORMALANSICHT · Hinweisscan deaktiviert</p>
-            <p class="control-hint">Untersuche ein Objekt und aktiviere den Scan für seine verborgenen Hinweise.</p>
+            <p class="control-hint">Der Hinweisscan zeigt Chipregeln, Prüfgruppen und den Leitungsstatus. Du kannst ihn auch direkt im Rätsel umschalten.</p>
         </div>
 
         <p id="message" role="status">System bereit. Untersuche den Raum.</p>

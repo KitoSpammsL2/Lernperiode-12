@@ -17,14 +17,15 @@ const level3Views = {
         title: "ZUGRIFF – CHIPREIHENFOLGE",
         html: `
             <p>Setze jeden Chip genau einmal ein. Klicke die Chips in der gewünschten Reihenfolge an.</p>
-            <p class="glitch-hint">9 steckt direkt links von 7. Zwischen 9 und 2 liegen genau zwei Chips.
+            <p class="glitch-hint"><span class="scan-hint-label">SCAN / CHIPREGELN</span>9 steckt direkt links von 7. Zwischen 9 und 2 liegen genau zwei Chips.
                 4 steckt rechts von 7 und rechts von 6. 6 steckt direkt neben 2.</p>
-            <div class="symbol-buttons" aria-label="Verfügbare Chips">
-                ${[2, 4, 6, 7, 9].map(chip => `<button type="button" data-chip="${chip}">${chip}</button>`).join("")}
+            <p class="puzzle-section-label">CHIPS AUSWÄHLEN</p>
+            <div class="symbol-buttons chip-palette" role="group" aria-label="Verfügbare Chips">
+                ${[2, 4, 6, 7, 9].map(chip => `<button type="button" data-chip="${chip}" aria-label="Chip ${chip} einsetzen">${chip}</button>`).join("")}
             </div>
-            <p id="chipOrder" role="status">Belegung: leer</p>
-            <button type="button" id="chipUndo">LETZTEN ENTFERNEN</button>
-            <button type="button" id="chipCheck">PRÜFEN</button>`,
+            <p id="chipOrder" class="station-preview" role="status" aria-atomic="true">Belegung: leer</p>
+            <div class="station-actions"><button type="button" id="chipUndo">LETZTEN ENTFERNEN</button>
+            <button type="button" id="chipCheck">PRÜFEN</button></div>`,
         setup: setupChipPuzzle,
         incorrect: "Mindestens eine Regel ist verletzt. Prüfe die Abstände und Nachbarn."
     },
@@ -33,14 +34,15 @@ const level3Views = {
         html: `
             <p>Empfangenes Paket: <strong>0110001</strong>. Genau ein Bit ist falsch.
                 Markiere seine Position und lies nach der Reparatur die vier Nutzbits ab.</p>
-            <p class="glitch-hint">Jede Prüfgruppe braucht eine gerade Anzahl Einsen (101 enthält zwei).
+            <p class="glitch-hint"><span class="scan-hint-label">SCAN / PRÜFGRUPPEN</span>Jede Prüfgruppe braucht eine gerade Anzahl Einsen (101 enthält zwei).
                 A prüft 1, 3, 5, 7: in Ordnung. B prüft 2, 3, 6, 7: Fehler.
                 C prüft 4, 5, 6, 7: Fehler. Lies die Nutzbits an Position 3, 5, 6, 7.
                 Die Diagnose gilt für das ursprünglich empfangene Paket.</p>
-            <div class="symbol-buttons" aria-label="Bitposition zum Reparieren wählen">
-                ${[..."0110001"].map((bit, i) => `<button type="button" data-bit="${i + 1}" aria-pressed="false">${i + 1}: ${bit}</button>`).join("")}
+            <p class="puzzle-section-label">BITPOSITION WÄHLEN · EINE AUSWAHL</p>
+            <div class="symbol-buttons bit-palette" role="group" aria-label="Bitposition zum Reparieren wählen">
+                ${[..."0110001"].map((bit, i) => `<button type="button" data-bit="${i + 1}" aria-pressed="false" aria-label="Bit an Position ${i + 1} umdrehen, empfangen: ${bit}"><span class="bit-position">POS ${i + 1}</span><span class="bit-value">${bit}</span></button>`).join("")}
             </div>
-            <p id="bitPreview" role="status">Noch kein Bit ausgewählt.</p>
+            <p id="bitPreview" class="station-preview" role="status" aria-atomic="true">Noch kein Bit ausgewählt.</p>
             <form id="bitForm">
                 <label for="payload">Nutzbits nach der Reparatur</label>
                 <input id="payload" type="text" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="Vier Bits">
@@ -54,16 +56,20 @@ const level3Views = {
         html: `
             <p>Finde die günstigste zulässige Route von S nach Z. Jede Station darf nur einmal besucht werden.
                 Die Leitungen sind in beide Richtungen nutzbar. Klicke die nächste Station an.</p>
-            <p class="glitch-hint">Besuche Kontrollpunkt C. Nutze genau eine instabile Leitung.
+            <p class="glitch-hint"><span class="scan-hint-label">SCAN / ROUTENREGELN</span>Besuche Kontrollpunkt C. Nutze genau eine instabile Leitung.
                 Budget: 11. Unter allen zulässigen Wegen zählt der mit den geringsten Kosten.</p>
-            <ul>${quarantineEdges.map(edge => `<li>${edge.from}–${edge.to}: ${edge.cost}
+            <p class="puzzle-section-label" id="connectionLabel">VERBINDUNGEN UND KOSTEN</p>
+            <ul class="route-connections" aria-labelledby="connectionLabel">${quarantineEdges.map(edge => `<li data-unstable="${edge.unstable}">
+                <span class="connection-nodes">${edge.from} ↔ ${edge.to}</span>
+                <span class="connection-cost">Kosten: ${edge.cost}</span>
                 <b class="glitch-hint">${edge.unstable ? "instabil" : "normal"}</b></li>`).join("")}</ul>
-            <div class="symbol-buttons" aria-label="Nächste Station">
-                ${[..."ABCDEZ"].map(node => `<button type="button" data-node="${node}">${node}</button>`).join("")}
+            <p class="puzzle-section-label">NÄCHSTE STATION WÄHLEN</p>
+            <div class="symbol-buttons node-palette" role="group" aria-label="Nächste Station">
+                ${[..."ABCDEZ"].map(node => `<button type="button" data-node="${node}" aria-label="Station ${node} ansteuern">${node}</button>`).join("")}
             </div>
-            <p id="routePreview" role="status">Route: S · Kosten: 0</p>
-            <button type="button" id="routeUndo">SCHRITT ZURÜCK</button>
-            <button type="button" id="routeCheck">PRÜFEN</button>`,
+            <p id="routePreview" class="station-preview" role="status" aria-atomic="true">Route: S · Kosten: 0</p>
+            <div class="station-actions"><button type="button" id="routeUndo">SCHRITT ZURÜCK</button>
+            <button type="button" id="routeCheck">PRÜFEN</button></div>`,
         setup: setupRoutePuzzle,
         incorrect: "Die Route ist zulässig, aber es gibt einen günstigeren Weg."
     }
