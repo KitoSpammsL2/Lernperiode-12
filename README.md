@@ -169,8 +169,34 @@ Speicherung und Türfreigabe. Neuladen und Level-Neustart sind geprüft.
 
 ### Faruk – CEO & Frontend
 - [x] Design von Level 3 fertigstellen. (Spielraum an Laurentius Rätsel anpassen, Glitch-Effekte und Hinweise abstimmen, Darstellung auf dem Handy prüfen)
-- [ ] Grunddesign für Level 4 entwickeln. (Neuen Spielraum mit HTML/CSS gestalten, passende Objekte platzieren, einheitliches Design übernehmen)
-- [ ] Rangliste und Inventar gestalten. (Rangliste im Hauptmenü und Inventaranzeige im Spielraum entwerfen, mit der Spiellogik abstimmen)
+- [x] Grunddesign für Level 4 entwickeln. (Neuen Spielraum mit HTML/CSS gestalten, passende Objekte platzieren, einheitliches Design übernehmen)
+- [x] Rangliste und Inventar gestalten. (Rangliste im Hauptmenü und Inventaranzeige im Spielraum entwerfen, mit der Spiellogik abstimmen)
+
+Level 3 ist an Laurentius Chipreihenfolge, Bitreparatur und Routenplanung
+angepasst. Die Stationen beschreiben ihre Aufgaben; Auswahlfelder, Vorschauen
+und die Verbindungsübersicht haben ein einheitliches Design. Chipregeln,
+Prüfgruppen und Leitungsstatus erscheinen nur im Hinweisscan. Die bestehende
+Rätselsteuerung und die Lösungen bleiben unverändert.
+
+Die Handyansicht wurde im Browser bei 320 und 390 Pixeln Breite sowie mit
+simulierter Touch-Eingabe geprüft; zusätzlich bei 768 und 1440 Pixeln.
+Beide vorhandenen Browser-Tests (`tests/level2-ui.cjs` und
+`tests/spielfortschritt.cjs`) bestehen inklusive Levelwechsel, Timer,
+Speicherung, Neustart und Inventar.
+
+Der Systemkern in Level 4 hat ein eigenes responsives Wartungsdesign mit
+passenden Symbolen für Wartungsschacht, Signalverstärker, Kontrollraum und
+Ausgang. Die vorhandenen Rätsel und die Zugangskarten-Bedingung bleiben erhalten.
+
+Die Rangliste zeigt Spielerprofil, Platzierungen und formatierte Bestzeiten
+in einer eigenen Karte. Lade-, Leer- und Fehlerzustand sind erkennbar; die Liste
+lässt sich erneut laden. Das Inventar zeigt die Anzahl und verfügbare Gegenstände.
+Der Kontrollraum kennzeichnet eine noch fehlende Zugangskarte.
+
+Die Ansichten sind bei 320, 390, 768 und 1440 Pixeln geprüft. Die Browser-Tests
+`tests/level2-ui.cjs`, `tests/spielfortschritt.cjs` und
+`tests/frontend-panels.cjs` bestehen. Ranglisten-Ladezustände werden mit isolierten
+API-Testdaten geprüft; echte Bestzeiten werden dabei nicht verändert.
 
 ### Kaito – CTO & Spiellogik
 - [x] Level 4 in die Levelsteuerung integrieren. (Levelwechsel von Level 3 zu Level 4 ermöglichen, Rätselstatus vorbereiten, Freischaltung und Timer prüfen)

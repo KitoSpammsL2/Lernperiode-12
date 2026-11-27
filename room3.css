@@ -59,3 +59,71 @@
     .level-three .object[data-object="tuer"] .object-status { grid-column: 2; grid-row: 3; }
     .level-three .object[data-object="tuer"] .symbol { width: 40px; height: 40px; }
 }
+
+/* Abgestimmte Stationsansichten für Chips, Bitreparatur und Route. */
+.level-three #puzzleArea { max-width: 820px; line-height: 1.65; }
+.level-three #puzzleArea .puzzle-head { padding-bottom: 14px; border-bottom: 1px solid #294352; }
+.level-three #puzzleArea .puzzle-section-label { margin: 22px 0 10px; color: #b5c5d5; font-size: 11px; letter-spacing: 1px; }
+.level-three .scan-hint-label { display: block; margin-bottom: 8px; font-size: 10px; letter-spacing: 1.5px; color: #ffb2e6; }
+.level-three #puzzleArea .station-preview {
+    margin: 18px 0;
+    padding: 14px 16px;
+    border: 1px solid #00ffff55;
+    border-left: 3px solid #00ffff;
+    border-radius: 8px;
+    color: #e4fcff;
+    background: #00ffff08;
+    font-family: Consolas, monospace;
+    font-size: 15px;
+    overflow-wrap: anywhere;
+}
+.level-three #puzzleArea .symbol-buttons { display: grid; gap: 10px; margin: 12px 0; }
+.level-three #puzzleArea .chip-palette { grid-template-columns: repeat(5, minmax(44px, 1fr)); }
+.level-three #puzzleArea .bit-palette { grid-template-columns: repeat(7, minmax(44px, 1fr)); }
+.level-three #puzzleArea .node-palette { grid-template-columns: repeat(6, minmax(44px, 1fr)); }
+.level-three #puzzleArea .symbol-buttons button { min-width: 44px; min-height: 56px; margin: 0; padding: 10px 4px; background: #101f2e; font-size: 22px; }
+.level-three #puzzleArea .symbol-buttons button:hover:not(:disabled) { background: #00ffff; color: #070910; }
+.level-three #puzzleArea .symbol-buttons button:disabled { opacity: .5; background: #111925; border-style: dashed; }
+.level-three #puzzleArea .bit-palette button { display: grid; justify-items: center; gap: 4px; }
+.level-three .bit-position { font: 10px Arial, sans-serif; letter-spacing: .5px; color: #c4d6e5; }
+.level-three .bit-value { font: 24px Consolas, monospace; }
+.level-three #puzzleArea .bit-palette [aria-pressed="true"] { background: #ff00aa20; border-color: #ff78cf; color: #fff; }
+.level-three #puzzleArea .station-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.level-three #puzzleArea .station-actions button { margin: 0; min-height: 44px; }
+.level-three #puzzleArea .station-actions button:last-child { background: #00ffff; color: #070910; }
+.level-three #puzzleArea .route-connections {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 0;
+    margin: 12px 0 20px;
+    list-style: none;
+}
+.level-three .route-connections li { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; padding: 10px 12px; border: 1px solid #294352; border-radius: 8px; background: #0a121d; }
+.level-three .connection-nodes { color: #edf5ff; font-weight: bold; }
+.level-three .connection-cost { color: #b5c5d5; font-size: 13px; }
+.level-three .route-connections .glitch-hint { grid-column: 1 / -1; font-size: 11px; letter-spacing: .5px; text-shadow: none; }
+.level-three.glitch-active .route-connections [data-unstable="true"] { border-color: #ff78cf; }
+.level-three #puzzleArea #payload { min-height: 48px; }
+@media (max-width: 600px) {
+    .level-three #puzzleArea .bit-palette { grid-template-columns: repeat(4, minmax(44px, 1fr)); }
+    .level-three #puzzleArea .node-palette { grid-template-columns: repeat(3, minmax(44px, 1fr)); }
+    .level-three .object:not([data-object="tuer"]) {
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr);
+        gap: 6px 14px;
+        min-height: 160px;
+        padding: 16px;
+        text-align: left;
+    }
+    .level-three .object:not([data-object="tuer"]) .symbol { grid-column: 1; grid-row: 1 / 6; width: 44px; height: 44px; }
+    .level-three .object:not([data-object="tuer"]) .object-index { grid-column: 2; grid-row: 1; font-size: 9px; letter-spacing: 1px; }
+    .level-three .object:not([data-object="tuer"]) strong { grid-column: 2; grid-row: 2; font-size: 14px; }
+    .level-three .object:not([data-object="tuer"]) .object-description { grid-column: 2; grid-row: 3; }
+    .level-three .object:not([data-object="tuer"]) .glitch-signal { grid-column: 2; grid-row: 4; }
+    .level-three .object:not([data-object="tuer"]) .object-status { grid-column: 2; grid-row: 5; margin: 0; }
+}
+@media (max-width: 380px) {
+    .level-three #puzzleArea .chip-palette { grid-template-columns: repeat(3, minmax(44px, 1fr)); }
+    .level-three #puzzleArea .route-connections { grid-template-columns: 1fr; }
+}

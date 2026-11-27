@@ -391,7 +391,10 @@ function updateDoor() {
             status.className = "object-status";
             object.appendChild(status);
         }
-        status.textContent = solved ? "Gelöst ✓" : "Untersuchen →";
+        const required = puzzleViews[puzzleId].requires;
+        const missing = !solved && required && !hasItem(required.id);
+        object.classList.toggle("item-required", Boolean(missing));
+        status.textContent = solved ? "Gelöst ✓" : missing ? required.name + " benötigt" : "Untersuchen →";
     }
     const unlocked = allPuzzlesSolved();
     let doorStatus = doorObject.querySelector(".object-status");
@@ -417,16 +420,30 @@ function showInventory() {
         inventory = document.createElement("section");
         inventory.id = "inventory";
         inventory.setAttribute("aria-label", "Inventar");
-        inventory.innerHTML = "<h3>INVENTAR</h3><ul></ul>";
+        inventory.innerHTML = `<div class="inventory-head"><h3>INVENTAR</h3><span id="inventoryCount"></span></div>
+            <p class="inventory-help">Gefundene Gegenstände werden bei passenden Rätseln automatisch verwendet.</p>
+            <ul aria-live="polite" aria-label="Gefundene Gegenstände"></ul>`;
         (document.querySelector(".control-panel") || puzzleArea).after(inventory);
     }
 
     const list = inventory.querySelector("ul");
     const items = loadInventory();
+    document.getElementById("inventoryCount").textContent = items.length + (items.length === 1 ? " Gegenstand" : " Gegenstände");
 
     list.replaceChildren(...items.map(item => {
         const entry = document.createElement("li");
-        entry.textContent = item.symbol + " " + item.name;
+        entry.className = "inventory-item";
+        const symbol = document.createElement("span");
+        symbol.className = "inventory-symbol";
+        symbol.setAttribute("aria-hidden", "true");
+        symbol.textContent = item.symbol || "◆";
+        const name = document.createElement("strong");
+        name.className = "inventory-name";
+        name.textContent = item.name;
+        const status = document.createElement("span");
+        status.className = "inventory-item-status";
+        status.textContent = "Verfügbar";
+        entry.append(symbol, name, status);
         return entry;
     }));
 
