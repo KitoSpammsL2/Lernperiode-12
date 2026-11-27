@@ -168,7 +168,7 @@ Speicherung und Türfreigabe. Neuladen und Level-Neustart sind geprüft.
 ## 27.11
 
 ### Faruk – CEO & Frontend
-- [ ] Design von Level 3 fertigstellen. (Spielraum an Laurentius Rätsel anpassen, Glitch-Effekte und Hinweise abstimmen, Darstellung auf dem Handy prüfen)
+- [x] Design von Level 3 fertigstellen. (Spielraum an Laurentius Rätsel anpassen, Glitch-Effekte und Hinweise abstimmen, Darstellung auf dem Handy prüfen)
 - [ ] Grunddesign für Level 4 entwickeln. (Neuen Spielraum mit HTML/CSS gestalten, passende Objekte platzieren, einheitliches Design übernehmen)
 - [ ] Rangliste und Inventar gestalten. (Rangliste im Hauptmenü und Inventaranzeige im Spielraum entwerfen, mit der Spiellogik abstimmen)
 
