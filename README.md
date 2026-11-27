@@ -303,32 +303,37 @@ beobachteten Spielzeiten angepasst. Die Implementierung von Level 5 ist für
 den nächsten Termin vorgesehen.
 
 
-## 04.12 (dezentral)
+## 04.12 
 
-Vorgabe von Herrn Colic: fünf Arbeitspakete pro Person. Das erste ist bis
-04.12 um 08:30 erledigt, die anderen vier bearbeiten wir dezentral am 04.12.
-Am 11.12 ist der Abschluss („Product Launch“) an der BBB. Bis dann muss das
-Spiel fertig und vorführbar sein.
+
 
 ### Faruk – CEO & Frontend
 - [ ] Startbildschirm und Spielanleitung gestalten. (Kurze Einleitung zur Geschichte und Bedienungshinweise im Hauptmenü, einheitliches Design, Darstellung auf dem Handy prüfen)
 - [ ] Grunddesign für Level 5 entwickeln. (Letzten Raum „Der Ausstieg“ mit HTML/CSS gestalten, passende Objekte platzieren, einheitliches Design übernehmen)
 - [ ] Design von Level 5 fertigstellen. (Spielraum an Laurentius Rätsel anpassen, Glitch-Effekte und Hinweise abstimmen, Darstellung auf dem Handy prüfen)
 - [ ] Gewinn- und Abschlussbildschirm gestalten. (Ende der Geschichte zeigen, Zeit und Ranglistenplatz darstellen, Übergang nach dem letzten Ausgang)
-- [ ] Product Launch vorbereiten. (Präsentation mit Idee, Team und Demo-Ablauf erstellen, Aufgaben für die Vorführung verteilen, Plakat aktualisieren)
+
 
 ### Kaito – CTO & Spiellogik
 - [ ] Level 5 in die Levelsteuerung integrieren. (Levelwechsel von Level 4 zu Level 5 ermöglichen, Level 5 als letztes Level festlegen, Grundgerüst für Faruk und Laurentiu bereitstellen)
 - [ ] Eigenen Platz in der Rangliste anzeigen. (Platz nach einem ganzen Durchgang vom Server zurückgeben, im Gewinnbildschirm anzeigen, Rangliste im Menü aktualisieren)
 - [ ] Spielstand für neue Spieler zurücksetzen. (Knopf im Hauptmenü, Fortschritt, Inventar und Freischaltung löschen, Bestzeiten auf dem Server behalten)
 - [ ] Alle fünf Levels gesamthaft testen. (Browser-Tests auf Level 5 erweitern, Durchgang von Level 1 bis 5 prüfen, gefundene Fehler beheben)
-- [ ] Vorführversion vorbereiten. (Startanleitung im README ergänzen, Server mit einem Befehl starten, Spiel auf einem anderen Laptop testen)
 
 ### Laurentiu – COO & Rätselentwicklung
 - [ ] Level 4 testen und verbessern. (Alle drei Rätsel durchspielen, Hinweise und Schwierigkeit anpassen, Ablauf mit der Zugangskarte prüfen)
 - [ ] Erste zwei Rätsel von Level 5 entwickeln. (Schlüsselkern und Notversorgung programmieren, Glitch-Hinweise einbauen, Gegenstände ins Inventar legen)
 - [ ] Drittes Rätsel von Level 5 entwickeln und integrieren. (Ausstiegsprogramm programmieren, Schlüssel und Signalmodul voraussetzen, letzten Ausgang freigeben)
 - [ ] Schwierigkeit und Spielzeit abstimmen. (Alle fünf Levels durchspielen, Zeitlimit und Hinweise anpassen, zu schwere Stellen entschärfen)
+
+## 11.12
+
+
+### Faruk – CEO & Frontend
+- [ ] Product Launch vorbereiten. (Präsentation mit Idee, Team und Demo-Ablauf erstellen, Aufgaben für die Vorführung verteilen, Plakat aktualisieren)
+
+### Kaito – CTO & Spiellogik
+- [ ] Vorführversion vorbereiten. (Startanleitung im README ergänzen, Server mit einem Befehl starten, Spiel auf einem anderen Laptop testen)
+
+ ### Laurentiu – COO & Rätselentwicklung   
 - [ ] Rätsel für den Abschluss dokumentieren. (Rätsel und Lösungen aller Levels übersichtlich im README festhalten, Lösungsblatt für die Vorführung erstellen)
-
-
