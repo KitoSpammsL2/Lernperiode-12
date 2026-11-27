@@ -178,7 +178,7 @@ Speicherung und Türfreigabe. Neuladen und Level-Neustart sind geprüft.
 - [x] Inventarsystem vorbereiten. (Gefundene Gegenstände speichern, Inventar im Spielraum anzeigen, Gegenstände in Rätseln verwenden)
 
 ### Laurentiu – COO & Rätselentwicklung
-- [ ] Level 3 testen und verbessern. (Alle drei Rätsel durchspielen, Hinweise und Schwierigkeit anpassen, Fehler mit dem Team beheben)
+- [x] Level 3 testen und verbessern. (Alle drei Rätsel durchspielen, Hinweise und Schwierigkeit anpassen, Fehler mit dem Team beheben)
 - [ ] Drei Rätsel für Level 4 entwickeln und integrieren. (Rätsel planen und programmieren, Glitch-Hinweise einbauen, mit der Spiellogik verbinden)
 - [ ] Rätselkonzept für Level 5 entwickeln. (Drei abschliessende Rätsel planen, Lösungen und Hinweise definieren, Schwierigkeit weiter steigern)
 

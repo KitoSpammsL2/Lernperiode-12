@@ -210,7 +210,16 @@ const server = http.createServer((req,res) => {
     await check('getSolvedCount()===1', 'Level-3-Erfolg nach Neuladen erhalten');
     await object('puffer');
     await click('#bitForm button');
-    await check("document.getElementById('puzzleFeedback').textContent.includes('vier Bits')", 'leere Bitantwort erklärt');
+    await check("document.getElementById('puzzleFeedback').textContent.includes('Wähle zuerst')", 'fehlende Bitposition erklärt');
+    for(const position of [1,2,3,4,5,7]) {
+        await click(`[data-bit="${position}"]`);
+        await fill('#payload','1011'); await click('#bitForm button');
+        await check('getSolvedCount()===1', `falsche Bitposition ${position} abgelehnt`);
+    }
+    for(const payload of ['', '101', '1012', 'abcd']) {
+        await fill('#payload',payload); await click('#bitForm button');
+        await check("getSolvedCount()===1 && document.getElementById('puzzleFeedback').textContent.includes('vier Bits')", 'ungültige Nutzbits mit Formatmeldung abgelehnt');
+    }
     await click('[data-bit="7"]'); await fill('#payload','1011'); await click('#bitForm button');
     await check('getSolvedCount()===1', 'falsche Bitposition abgelehnt');
     await click('[data-bit="6"]'); await fill('#payload','1111'); await click('#bitForm button');
@@ -229,6 +238,14 @@ const server = http.createServer((req,res) => {
     await click('#routeCheck');
     await check("getSolvedCount()===2 && document.getElementById('puzzleFeedback').textContent.includes('instabile')", 'Route ohne instabile Leitung abgelehnt');
     for(let i=0;i<4;i++) await click('#routeUndo');
+    for(const node of 'ACDZ') await click(`[data-node="${node}"]`);
+    await click('#routeCheck');
+    await check("getSolvedCount()===2 && document.getElementById('puzzleFeedback').textContent.includes('instabile')", 'Route mit zwei instabilen Leitungen abgelehnt');
+    for(let i=0;i<4;i++) await click('#routeUndo');
+    for(const node of 'AECDZ') await click(`[data-node="${node}"]`);
+    await click('#routeCheck');
+    await check("getSolvedCount()===2 && document.getElementById('puzzleFeedback').textContent.includes('Budget')", 'Route über Budget abgelehnt');
+    for(let i=0;i<5;i++) await click('#routeUndo');
     for(const node of 'ACEZ') await click(`[data-node="${node}"]`);
     await click('#routeCheck');
     await check("getSolvedCount()===2 && document.getElementById('puzzleFeedback').textContent.includes('günstigeren')", 'zulässige aber langsamere Route abgelehnt');
