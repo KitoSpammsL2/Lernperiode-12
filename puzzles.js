@@ -19,11 +19,11 @@ const levelPuzzles = {
         puzzle2: "6:1011",
         puzzle3: "SBCDZ"
     },
-    // Platzhalter, bis Laurentius Rätsel für Level 4 fertig sind
+    // Systemkern: Zehnerräder, XOR-Filter und parallele Prozesse
     4: {
-        puzzle1: "4",
-        puzzle2: "SIGNAL",
-        puzzle3: "ZUGANG"
+        puzzle1: "7285",
+        puzzle2: "000100",
+        puzzle3: "5:10:12"
     }
 };
 
@@ -61,6 +61,12 @@ function loadPuzzles() {
     // Erfolge der Level-3-Platzhalter zählen nicht für die neuen Aufgaben.
     if (currentLevel === 3 && levelProgress.version !== 1) {
         levelProgress = {};
+    }
+
+    // Die Zugangskarte aus dem alten Platzhalter muss neu erspielt werden.
+    if (currentLevel === 4 && levelProgress.version !== 1) {
+        levelProgress = {};
+        saveInventory(loadInventory().filter(item => item.level !== 4));
     }
 
     puzzles = {};
@@ -114,6 +120,10 @@ function savePuzzles() {
     }
 
     if (currentLevel === 3) {
+        levelProgress.version = 1;
+    }
+
+    if (currentLevel === 4) {
         levelProgress.version = 1;
     }
 

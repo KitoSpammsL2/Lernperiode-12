@@ -112,8 +112,12 @@ function setupBitPuzzle(puzzleId) {
     document.getElementById("bitForm").addEventListener("submit", event => {
         event.preventDefault();
         const payload = document.getElementById("payload").value.trim();
-        if (position === null || !/^[01]{4}$/.test(payload)) {
-            showPuzzleFeedback("Wähle eine Bitposition und gib genau vier Bits (0 oder 1) ein.", false);
+        if (position === null) {
+            showPuzzleFeedback("Wähle zuerst die Position des fehlerhaften Bits (1 bis 7).", false);
+            return;
+        }
+        if (!/^[01]{4}$/.test(payload)) {
+            showPuzzleFeedback("Gib genau vier Bits ein. Erlaubt sind nur 0 und 1.", false);
             return;
         }
         const correct = submitAnswer(puzzleId, position + ":" + payload);
