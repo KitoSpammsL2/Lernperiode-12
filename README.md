@@ -168,9 +168,21 @@ Speicherung und Türfreigabe. Neuladen und Level-Neustart sind geprüft.
 ## 27.11
 
 ### Faruk – CEO & Frontend
-- [ ] Design von Level 3 fertigstellen. (Spielraum an Laurentius Rätsel anpassen, Glitch-Effekte und Hinweise abstimmen, Darstellung auf dem Handy prüfen)
+- [x] Design von Level 3 fertigstellen. (Spielraum an Laurentius Rätsel anpassen, Glitch-Effekte und Hinweise abstimmen, Darstellung auf dem Handy prüfen)
 - [ ] Grunddesign für Level 4 entwickeln. (Neuen Spielraum mit HTML/CSS gestalten, passende Objekte platzieren, einheitliches Design übernehmen)
 - [ ] Rangliste und Inventar gestalten. (Rangliste im Hauptmenü und Inventaranzeige im Spielraum entwerfen, mit der Spiellogik abstimmen)
+
+Level 3 ist an Laurentius Chipreihenfolge, Bitreparatur und Routenplanung
+angepasst. Die Stationen beschreiben ihre Aufgaben; Auswahlfelder, Vorschauen
+und die Verbindungsübersicht haben ein einheitliches Design. Chipregeln,
+Prüfgruppen und Leitungsstatus erscheinen nur im Hinweisscan. Die bestehende
+Rätselsteuerung und die Lösungen bleiben unverändert.
+
+Die Handyansicht wurde im Browser bei 320 und 390 Pixeln Breite sowie mit
+simulierter Touch-Eingabe geprüft; zusätzlich bei 768 und 1440 Pixeln.
+Beide vorhandenen Browser-Tests (`tests/level2-ui.cjs` und
+`tests/spielfortschritt.cjs`) bestehen inklusive Levelwechsel, Timer,
+Speicherung, Neustart und Inventar.
 
 ### Kaito – CTO & Spiellogik
 - [x] Level 4 in die Levelsteuerung integrieren. (Levelwechsel von Level 3 zu Level 4 ermöglichen, Rätselstatus vorbereiten, Freischaltung und Timer prüfen)
